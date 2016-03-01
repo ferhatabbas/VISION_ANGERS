@@ -1,0 +1,71 @@
+{
+"Monuments":[
+  {
+    "Id": 1,
+    "Name": "Chateau1",
+    "Lat": 45.568888,
+    "Lng": -104.666666,
+    "Desc": "blablabla",
+    "Informations": " ",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:00-18:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:00-18:00"
+      }
+    ]
+  },
+  {
+    "Id": 2,
+    "Name": "Chateau2",
+    "Lat": 40.568888,
+    "Lng": -108.666666,
+    "Desc": "blablabla",
+    "Informations": " ",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:00-18:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:00-18:00"
+      }
+    ]
+  }
+
+],
+  "Parcours":[
+    {
+      "Id": 1,
+      "Name": "Chateau1",
+      "Duree": 30,
+      "Evalutation" : 2,
+      "Monuments": [
+        {
+          "Id_monument": 1
+        },
+        {
+          "Id_monument": 2
+        }
+      ]
+    }
+
+  ]
+  
+}
