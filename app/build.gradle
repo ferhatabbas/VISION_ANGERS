@@ -21,6 +21,7 @@ android {
 repositories {
 
     mavenCentral()
+    maven { url "https://jitpack.io" }
 
 }
 dependencies {
@@ -28,4 +29,7 @@ dependencies {
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.google.code.gson:gson:2.2.4'
+    compile 'org.osmdroid:osmdroid-android:5.1@aar'
+    compile 'com.github.MKergall.osmbonuspack:OSMBonusPack:v5.7'
+    compile 'com.android.support:design:23.1.1'
 }

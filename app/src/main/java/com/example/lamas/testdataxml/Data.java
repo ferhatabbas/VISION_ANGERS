@@ -60,8 +60,6 @@ public class Data {
         long duree;
         Evaluation eval;
 
-        ArrayList<String> Accessibilite =new ArrayList<>() ;
-        ArrayList<String> Horaires =new ArrayList<>() ;
         ArrayList<Monument> tempsMonum = new ArrayList<>();
 
         JSONArray Monuments = obj.getJSONArray(Constants.BALISE_MONUMENTS);
@@ -69,6 +67,8 @@ public class Data {
 
 
         for(int i=0 ; i< Monuments.length() ; i++) {
+            ArrayList<String> Accessibilite =new ArrayList<>();
+            ArrayList<String> Horaires =new ArrayList<>();
             JSONObject objs = Monuments.getJSONObject(i);
             Id =  objs.getInt(Constants.ID_MONUMENT);
             lat = objs.getDouble(Constants.LATITUDE);
