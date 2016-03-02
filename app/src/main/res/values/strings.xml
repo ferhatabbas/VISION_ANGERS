@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">TestDataXML</string>
+    <string name="app_name">Projet VISION</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="title_activity_poidetails">POIDetails</string>
 </resources>

@@ -2,11 +2,11 @@
 "Monuments":[
   {
     "Id": 1,
-    "Name": "Chateau1",
-    "Lat": 45.568888,
-    "Lng": -104.666666,
-    "Desc": "blablabla",
-    "Informations": " ",
+    "Name": "Faculté de droit",
+    "Lat": 45.3782892,
+    "Lng": -71.9314862,
+    "Desc": "Fondation de la Faculté de droit en 1954, grâce entre autres à Me Albert Leblanc, qui sera le premier doyen de cette Faculté. La première cohorte compte 18 étudiants. Les ressources financières sont alors relativement limitées. Les cours sont offerts bénévolement par des praticiens de la région jusqu'en 1961 et se donnent pendant quelques années dans les locaux du Palais de Justice, alors situé rue Wellington nord.",
+    "Informations": "1957 Les 13 premiers diplômés de la Faculté arrivent sur le marché du travail. ",
     "Accessibilites": [
       {
         "Accessibilite": "mal voyant"
@@ -17,34 +17,339 @@
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:00-18:00"
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
       },
       {
-        "Horaire": "mardi 08:00-12:00 13:00-18:00"
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
       }
     ]
   },
   {
     "Id": 2,
-    "Name": "Chateau2",
-    "Lat": 40.568888,
-    "Lng": -108.666666,
-    "Desc": "blablabla",
-    "Informations": " ",
+    "Name": "Faculté des lettres et sciences humaines",
+    "Lat": 45.3795022,
+    "Lng": -71.931661,
+    "Desc": "La Faculté des lettres et sciences humaines offre 14 programmes de formations initiales, dont quatre suivant le régime coopératif, pouvant mener à des carrières en politique, en géomatique, en musique, en psychologie, en communication et en marketing, en littérature, en travail social, en traduction, en histoire, et bien d’autres.",
+    "Informations": "super naze leur site",
+    "Accessibilites": [
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 3,
+    "Name": "Clinique de Médecine et Sport",
+    "Lat": 45.3765122,
+    "Lng": -71.9299439,
+    "Desc": "Clinique médicale ouverte à tous, professionnels spécialisés dans les problèmes d'articulations et de muscles, de tendons, de ligaments et des os.",
+    "Informations": "La clinique est située au deuxième étage du pavillon Univestrie, à l'entrée du stade intérieur.",
     "Accessibilites": [
       {
         "Accessibilite": "mal voyant"
       },
       {
         "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
       }
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:00-18:00"
+        "Horaire": "lundi 08:00-12:00 13:30-18:00"
       },
       {
-        "Horaire": "mardi 08:00-12:00 13:00-18:00"
+        "Horaire": "mardi 08:00-12:00 13:30-18:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-18:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-18:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-18:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 4,
+    "Name": "Faculté des sciences",
+    "Lat": 45.3799777,
+    "Lng": -71.9266425,
+    "Desc": "La Faculté des sciences est la seul fac cool et importante de l'université.",
+    "Informations": "chuck norris",
+    "Accessibilites": [
+
+  {
+    "Accessibilite": "pour tous"
+  },
+  {
+    "Accessibilite": "don't stop believing"
+  }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 5,
+    "Name": "Centre de services du Campus principal",
+    "Lat": 45.37943,
+    "Lng": -71.9275856,
+    "Desc": "Le centre administratif de l'université.",
+    "Informations": "More than a feeling",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 6,
+    "Name": "Cafétéria - Faculté De Sciences",
+    "Lat": 45.379975,
+    "Lng": -71.9253012,
+    "Desc": "c'est la ou les gens mangents.",
+    "Informations": "ne jamais prendre de spaghetti",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-15:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 7,
+    "Name": "Faculté de Genie ",
+    "Lat": 45.378236,
+    "Lng": -71.926189,
+    "Desc": "l'usine a ingenieurs et d'alcoolic .",
+    "Informations": "",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-20:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-17:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 8,
+    "Name": "Faculté d'administration",
+    "Lat": 45.3768764,
+    "Lng": -71.9254576,
+    "Desc": "Les riches sortent de là !",
+    "Informations": "super isolé ",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-15:00"
+      }
+    ]
+  }
+,
+  {
+    "Id": 9,
+    "Name": "Résidence G",
+    "Lat": 45.3798074,
+    "Lng": -71.9229192,
+    "Desc": "residence universitaire G",
+    "Informations": "super isolé mais cool ",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-15:00"
+      }
+    ]
+  },
+  {
+    "Id": 10,
+    "Name": "Résidence E",
+    "Lat": 45.380114,
+    "Lng":  -71.928613,
+    "Desc": "residence universitaire G",
+    "Informations": "super isolé mais cool",
+    "Accessibilites": [
+      {
+        "Accessibilite": "mal voyant"
+      },
+      {
+        "Accessibilite": "handicap motor"
+      },
+      {
+        "Accessibilite": "non-voyant"
+      }
+    ],
+    "Horaires": [
+      {
+        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
+      },
+      {
+        "Horaire": "vendredi 08:00-12:00 13:30-15:00"
       }
     ]
   }
@@ -53,15 +358,87 @@
   "Parcours":[
     {
       "Id": 1,
-      "Name": "Chateau1",
+      "Name": "sciences",
+      "Duree": 45,
+      "Evalutation" : 4,
+      "Monuments": [
+        {
+          "Id_monument": 2
+        },
+        {
+          "Id_monument": 4
+        },
+        {
+          "Id_monument": 6
+        },
+        {
+          "Id_monument": 7
+        }
+      ]
+    }, {
+      "Id": 2,
+      "Name": "vrai science",
       "Duree": 30,
-      "Evalutation" : 2,
+      "Evalutation" : 5,
+      "Monuments": [
+        {
+          "Id_monument": 4
+        },
+        {
+          "Id_monument": 6
+        },
+        {
+          "Id_monument": 7
+        }
+      ]
+    }, {
+      "Id": 3,
+      "Name": "residence",
+      "Duree": 30,
+      "Evalutation" : 3,
+      "Monuments": [
+        {
+          "Id_monument": 9
+        },
+        {
+          "Id_monument": 10
+        }
+      ]
+    }, {
+      "Id": 4,
+      "Name": "tout",
+      "Duree": 90,
+      "Evalutation" : 5,
       "Monuments": [
         {
           "Id_monument": 1
         },
         {
           "Id_monument": 2
+        },
+        {
+          "Id_monument": 3
+        },
+        {
+          "Id_monument": 4
+        },
+        {
+          "Id_monument": 5
+        },
+        {
+          "Id_monument": 6
+        },
+        {
+          "Id_monument": 7
+        },
+        {
+          "Id_monument": 8
+        },
+        {
+          "Id_monument": 9
+        },
+        {
+          "Id_monument": 10
         }
       ]
     }
