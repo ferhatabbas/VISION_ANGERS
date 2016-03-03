@@ -18,7 +18,7 @@ import java.util.Map;
 public class Data {
     private static Data instance;
     private Map<Integer, Monument> monuments = new HashMap<>();
-    private Map<Integer, Parcours> parcourses = new HashMap<>();
+    private Map<Integer, ParcoursABC> parcourses = new HashMap<>();
     private Parameters parameters = new Parameters();
 
 
@@ -129,7 +129,7 @@ public class Data {
                 }
             }
 
-            parcourses.put(Id, new Parcours(Id, name, duree, eval, tempsMonum));
+            parcourses.put(Id, new ParcoursABC(Id, name, duree, eval, tempsMonum));
         }
 
     }
@@ -138,7 +138,7 @@ public class Data {
         return monuments;
     }
 
-    public Map<Integer, Parcours> getParcourses() {
+    public Map<Integer, ParcoursABC> getParcourses() {
         return parcourses;
     }
 
