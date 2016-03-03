@@ -19,6 +19,7 @@ public class Data {
     private static Data instance;
     private Map<Integer, Monument> monuments = new HashMap<>();
     private Map<Integer, Parcours> parcourses = new HashMap<>();
+    private Parameters parameters = new Parameters();
 
 
     public static Data getInstance(Context context) {
@@ -139,6 +140,10 @@ public class Data {
 
     public Map<Integer, Parcours> getParcourses() {
         return parcourses;
+    }
+
+    public Parameters getParameters() {
+        return parameters;
     }
 }
 

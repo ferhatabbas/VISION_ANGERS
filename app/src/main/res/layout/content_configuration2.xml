@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Les prochaines questions permettront de personnaliser l'application en fonction de vos préférences visuelles au niveau de la police et des couleurs."
+        android:id="@+id/textView"
+        android:layout_weight="0.20"
+        android:textSize="35dp"
+        android:layout_marginTop="15dp" />
+
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Continuer"
+        android:id="@+id/button1"
+        android:layout_weight="0.20"
+        android:textSize="30dp"/>
+</LinearLayout>
