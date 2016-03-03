@@ -45,7 +45,25 @@
         <activity
             android:name=".Activite_test"
             android:label="@string/title_activity_activite_test"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ParcoursActivity"
+            android:label="ParcoursActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lamas.testdataxml.Activite_test" />
+        </activity>
+        <activity
+            android:name=".LieuxActivity"
+            android:label="LieuxActivity"
+            android:parentActivityName=".ParcoursActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lamas.testdataxml.ParcoursActivity" />
+        </activity>
     </application>
 
 </manifest>

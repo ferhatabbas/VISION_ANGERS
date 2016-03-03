@@ -22,7 +22,7 @@ public class Constants {
     public static final String HORAIRE="Horaire";
 
     /* les balises des parcours*/
-    public static final String BALISE_PARCOURS= "Parcours";
+    public static final String BALISE_PARCOURS= "ParcoursABC";
     public static final String ID_PARCOURS = "Id";
     public static final String NOM_PARCOURS = "Name";
     public static final String DUREE = "Duree";

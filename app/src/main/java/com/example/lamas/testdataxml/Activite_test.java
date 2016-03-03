@@ -1,15 +1,12 @@
 package com.example.lamas.testdataxml;
 
-import android.graphics.Color;
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 
-public class Activite_test extends AppCompatActivity {
+public class Activite_test extends Activity {
 
     private Button bouton;
 
@@ -27,8 +24,17 @@ public class Activite_test extends AppCompatActivity {
         bouton.setBackgroundColor(data.getParameters().getCouleurBackground());
         bouton.setTextColor(data.getParameters().getCouleurTexte());
 
-        getWindow().getDecorView().setBackgroundColor(data.getParameters().getCouleurBackground());
+        bouton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                //String toSpeak = bouton.getText().toString();
+                //convertTextToSpeech(toSpeak);
+
+                Intent secondeActivite = new Intent(Activite_test.this, ParcoursActivity.class);
+                startActivity(secondeActivite);
+            }
+
+        });
 
     }
-
 }

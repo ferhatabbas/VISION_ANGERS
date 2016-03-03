@@ -1,85 +1,36 @@
 package com.example.lamas.testdataxml;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
- * Created by abbf2501 on 2016-02-10.
+ * Created by rocj2405 on 2016-03-02.
  */
 public class Parcours {
-    private int Id;
-    private String name ;
-    private ArrayList<Integer> tempsMonum;
-    private ArrayList<Monument> monuments;
-    private long duree;
-    private int evaltemp;
-    private Evaluation eval;
 
+    private String name;
+    private String description;
 
+    private List<Lieu> listLieux = new ArrayList<>();
 
-
-//don't expose
-
-    public Parcours(int id, String name, long duree, Evaluation eval, ArrayList<Monument> monuments) {
-        Id = id;
+    public Parcours (String name, String description) {
         this.name = name;
-        this.monuments = monuments;
-        this.duree = duree;
-        this.eval = eval;
+        this.description = description;
     }
 
-    public int getId() {
-        return Id;
-    }
-
-    public void setId(int id) {
-        Id = id;
+    public String getDescription() {
+        return description;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void addLieu(Lieu lieu) {
+        listLieux.add(lieu);
     }
 
-    public ArrayList<Integer> getTempsMonum() {
-        return tempsMonum;
-    }
-
-    public void setTempsMonum(ArrayList<Integer> tempsMonum) {
-        this.tempsMonum = tempsMonum;
-    }
-
-    public ArrayList<Monument> getMonuments() {
-        return monuments;
-    }
-
-    public void setMonuments(ArrayList<Monument> monuments) {
-        this.monuments = monuments;
-    }
-
-    public long getDuree() {
-        return duree;
-    }
-
-    public void setDuree(long duree) {
-        this.duree = duree;
-    }
-
-    public int getEvaltemp() {
-        return evaltemp;
-    }
-
-    public void setEvaltemp(int evaltemp) {
-        this.evaltemp = evaltemp;
-    }
-
-    public Evaluation getEval() {
-        return eval;
-    }
-
-    public void setEval(Evaluation eval) {
-        this.eval = eval;
+    public List<Lieu> getLieux(){
+        return listLieux;
     }
 }
