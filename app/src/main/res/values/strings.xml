@@ -2,4 +2,12 @@
     <string name="app_name">Projet VISION</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="title_activity_poidetails">POIDetails</string>
+    <string name="title_activity_configuratoin1">Configuratoin1</string>
+    <string name="title_activity_configuration2">Configuration2</string>
+    <string name="title_activity_configuration3">Configuration3</string>
+    <string name="title_activity_configuration1">Configuration1</string>
+    <string name="title_activity_configuration4">Configuration4</string>
+    <string name="title_activity_configuration5">Configuration5</string>
+    <string name="title_activity_configuration6">Configuration6</string>
+    <string name="title_activity_activite_test">Activite_test</string>
 </resources>
