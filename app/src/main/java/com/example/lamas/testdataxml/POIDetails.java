@@ -13,7 +13,7 @@ public class POIDetails extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         int id = b.getInt("id");
 
-        //Access informations about the poi
+        //Access poi' informations
         Data data = Data.getInstance(getApplicationContext());
         Monument poi = data.getMonuments().get(id);
 

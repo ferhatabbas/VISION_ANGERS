@@ -19,6 +19,8 @@ public class Data {
     private static Data instance;
     private Map<Integer, Monument> monuments = new HashMap<>();
     private Map<Integer, Parcours> parcourses = new HashMap<>();
+    private ArrayList<Monument> monumentsWithproximityAlerts = new ArrayList<>();
+    private ArrayList<Monument> alreadySeenMonuments = new ArrayList<>();
 
 
     public static Data getInstance(Context context) {
@@ -139,6 +141,14 @@ public class Data {
 
     public Map<Integer, Parcours> getParcourses() {
         return parcourses;
+    }
+
+    public ArrayList<Monument> getMonumentsWithproximityAlerts() {
+        return monumentsWithproximityAlerts;
+    }
+
+    public ArrayList<Monument> getAlreadySeenMonuments() {
+        return alreadySeenMonuments;
     }
 }
 

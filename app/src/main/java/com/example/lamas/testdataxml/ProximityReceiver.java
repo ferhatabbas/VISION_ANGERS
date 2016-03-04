@@ -12,6 +12,8 @@ import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 
+import java.security.Provider;
+
 /**
  * Created by Maxence on 16-02-09.
  */
@@ -23,7 +25,6 @@ public class ProximityReceiver extends BroadcastReceiver {
         String key = LocationManager.KEY_PROXIMITY_ENTERING;
         String name = intent.getStringExtra("name");
         int id_poi = intent.getIntExtra("id", 0);
-
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder notification = new Notification.Builder(context);
         notification.setSmallIcon(R.drawable.direction_arrow);
@@ -35,20 +36,20 @@ public class ProximityReceiver extends BroadcastReceiver {
         boolean state = intent.getBooleanExtra(key, false);
 
         if(state){
-            // Call the Notification Service or anything else that you would like to do here
-            Intent next_activity = new Intent(context, POIDetails.class);
-            next_activity.putExtra("id", id_poi);
-            PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, next_activity, 0);
-            notification.setContentIntent(pendingIntent);
+                    // Call the Notification Service or anything else that you would like to do here
+                    //Intent next_activity = new Intent(context, POIDetails.class);
+                    //next_activity.putExtra("id", id_poi);
+                    //PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, next_activity, 0);
+                    //notification.setContentIntent(pendingIntent);
             notificationManager.notify(1, notification.build());
-            context.startActivity(next_activity);
-            //notificationManager.cancel(1);
+                    //context.startActivity(next_activity);
+                    //notificationManager.cancel(1);
             Toast.makeText(context, "Welcome to my Area: "+name, Toast.LENGTH_SHORT).show();
         }else{
             //Other custom Notification
-            Toast.makeText(context, "Thank you for visiting my Area,come back again !!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(context, "Thank you for visiting "+name, Toast.LENGTH_SHORT).show();
         }
     }
 
-
 }
+
