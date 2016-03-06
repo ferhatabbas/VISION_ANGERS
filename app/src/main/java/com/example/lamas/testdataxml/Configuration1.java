@@ -78,6 +78,21 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     }
 
     @Override
+    public void onPause() {
+        super.onPause();
+        if(textToSpeech != null ){
+            textToSpeech.stop();
+
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(textToSpeech != null){
+            convertTextToSpeech("Êtes-vous non-voyant ou malvoyant?");
+        }
+    }
+    @Override
     public void onDestroy() {
         super.onDestroy();
         textToSpeech.shutdown();

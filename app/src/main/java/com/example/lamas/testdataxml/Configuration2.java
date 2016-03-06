@@ -65,6 +65,22 @@ public class Configuration2 extends Activity implements TextToSpeech.OnInitListe
             Log.e("error", "Initilization Failed!");
         }
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(textToSpeech != null ){
+            textToSpeech.stop();
+
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(textToSpeech != null){
+            convertTextToSpeech("Les prochaines questions permettront de personnaliser l'application en fonction de vos préférences visuelles au niveau de la police et des couleurs");
+
+        }
+    }
 
     @Override
     public void onDestroy() {

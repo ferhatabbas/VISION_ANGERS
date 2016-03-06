@@ -104,7 +104,21 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
             Log.e("error", "Initilization Failed!");
         }
     }
+    @Override
+    public void onPause() {
+        super.onPause();
+        if(textToSpeech != null ){
+            textToSpeech.stop();
 
+        }
+    }
+    @Override
+    public void onResume() {
+        super.onResume();
+        if(textToSpeech != null){
+            convertTextToSpeech("Parmi les quatre lignes ci-dessous, quelle est la plus petite que vous pouvez lire?");
+        }
+    }
     @Override
     public void onDestroy() {
         super.onDestroy();
