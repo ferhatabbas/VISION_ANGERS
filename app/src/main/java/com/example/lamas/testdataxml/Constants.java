@@ -22,12 +22,13 @@ public class Constants {
   public static final String HORAIRES="Horaires";
   public static final String HORAIRE="Horaire";
 
-  /* les balises des parcours*/
-  public static final String BALISE_PARCOURS= "Parcours";
-  public static final String ID_PARCOURS = "Id";
-  public static final String NOM_PARCOURS = "Name";
-  public static final String DUREE = "Duree";
-  public static final String EVALUATION = "Evalutation";
-  public static final String LIST_MONUMENTS = "Monuments";
-  public static final String UN_MONUMENT = "Id_monument";
+    /* les balises des parcours*/
+    public static final String BALISE_PARCOURS= "Parcours";
+    public static final String DESCRIPTION_PARCOURS = "Description";
+    public static final String ID_PARCOURS = "Id";
+    public static final String NOM_PARCOURS = "Name";
+    public static final String DUREE = "Duree";
+    public static final String EVALUATION = "Evalutation";
+    public static final String LIST_MONUMENTS = "Monuments";
+    public static final String UN_MONUMENT = "Id_monument";
 }

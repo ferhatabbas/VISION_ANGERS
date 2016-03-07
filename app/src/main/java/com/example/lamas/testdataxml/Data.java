@@ -18,9 +18,8 @@ import java.util.Map;
 public class Data {
     private static Data instance;
     private Map<Integer, Monument> monuments = new HashMap<>();
-    private Map<Integer, Parcours> parcourses = new HashMap<>();
-    private ArrayList<Monument> monumentsWithproximityAlerts = new ArrayList<>();
-    private ArrayList<Monument> alreadySeenMonuments = new ArrayList<>();
+    private Map<Integer, ParcoursABC> parcourses = new HashMap<>();
+    private Parameters parameters = new Parameters();
 
 
     public static Data getInstance(Context context) {
@@ -96,10 +95,11 @@ public class Data {
         }
 
         for(int i=0 ; i< Parcours.length() ; i++) {
-            JSONObject objs = Parcours.getJSONObject(i);
+             JSONObject objs = Parcours.getJSONObject(i);
              Id = objs.getInt(Constants.ID_PARCOURS);
              name = objs.getString(Constants.NOM_PARCOURS);
              duree = objs.getLong(Constants.DUREE);
+             desc = objs.getString(Constants.DESCRIPTION_PARCOURS);
             switch ( objs.getInt(Constants.EVALUATION)) {
                 case 1:
                     eval = Evaluation.PASBON;
@@ -130,7 +130,7 @@ public class Data {
                 }
             }
 
-            parcourses.put(Id, new Parcours(Id, name, duree, eval, tempsMonum));
+            parcourses.put(Id, new ParcoursABC(Id, name, duree, eval, desc, tempsMonum));
         }
 
     }
@@ -139,16 +139,12 @@ public class Data {
         return monuments;
     }
 
-    public Map<Integer, Parcours> getParcourses() {
+    public Map<Integer, ParcoursABC> getParcourses() {
         return parcourses;
     }
 
-    public ArrayList<Monument> getMonumentsWithproximityAlerts() {
-        return monumentsWithproximityAlerts;
-    }
-
-    public ArrayList<Monument> getAlreadySeenMonuments() {
-        return alreadySeenMonuments;
+    public Parameters getParameters() {
+        return parameters;
     }
 }
 

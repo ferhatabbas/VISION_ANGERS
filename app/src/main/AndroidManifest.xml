@@ -11,15 +11,58 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".POIDetails"
+            android:label="@string/title_activity_poidetails"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Configuration2"
+            android:label="@string/title_activity_configuration2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Configuration3"
+            android:label="@string/title_activity_configuration3"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Configuration4"
+            android:label="@string/title_activity_configuration4"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Configuration5"
+            android:label="@string/title_activity_configuration5"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Configuration1"
+            android:label="@string/title_activity_configuration1"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name=".POIDetails"
-            android:label="@string/title_activity_poidetails"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:name=".Activite_test"
+            android:label="@string/title_activity_activite_test"
+            android:theme="@style/AppTheme.NoActionBar"/>
+        <activity
+            android:name=".ParcoursActivity"
+            android:label="ParcoursActivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lamas.testdataxml.Activite_test" />
+        </activity>
+        <activity
+            android:name=".LieuxActivity"
+            android:label="LieuxActivity"
+            android:parentActivityName=".ParcoursActivity"
+            android:theme="@style/AppTheme.NoActionBar">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.example.lamas.testdataxml.ParcoursActivity" />
+        </activity>
     </application>
 </manifest>

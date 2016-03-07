@@ -96,7 +96,6 @@ public class MainActivity extends Activity {
             map.getOverlays().add(temp);
             Polygon circle = createCircle(geo, Color.RED, radius);
             map.getOverlays().add(circle);
-            data.getMonumentsWithproximityAlerts().add(entry.getValue());
 
         }
 
