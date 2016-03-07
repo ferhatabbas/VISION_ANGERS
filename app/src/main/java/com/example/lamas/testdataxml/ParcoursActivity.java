@@ -7,12 +7,13 @@ import android.widget.ExpandableListView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ParcoursActivity extends Activity {
     ParcoursAdapter parcoursAdapter;
     ExpandableListView expListView;
-    List<String> listDataHeader;
-    HashMap<String, List<String>> listDataChild;
+    List<String> listDataHeader = new ArrayList<>();
+    HashMap<String, List<String>> listDataChild = new HashMap<>();
     Data data;
 
     // TEST
@@ -24,9 +25,8 @@ public class ParcoursActivity extends Activity {
         setContentView(R.layout.content_parcours);
 
         // TEST
-        prepareData();
-        //data = Data.getInstance(getApplicationContext());
-        //for(data.getParcourses()
+        //prepareData();
+
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.expandableListView);
@@ -36,7 +36,7 @@ public class ParcoursActivity extends Activity {
         //int id = b.getInt("id");
 
         // preparing list data
-        prepareListData(1);
+        prepareListData();
 
         parcoursAdapter = new ParcoursAdapter(getApplicationContext(), listDataHeader, listDataChild);
 
@@ -48,18 +48,28 @@ public class ParcoursActivity extends Activity {
        * Preparing the list data
        */
 
-    private void prepareListData(int id) {
-        listDataHeader = new ArrayList<String>();
-        listDataChild = new HashMap<String, List<String>>();
-
-
-        for (int i = 0; i < listParcours.size(); i++) {
-            Parcours parcours = listParcours.get(i);
-            listDataHeader.add(parcours.getName());
+    private void prepareListData() {
+        Data data = Data.getInstance(getApplicationContext());
+        for(Map.Entry<Integer, ParcoursABC> entry : data.getParcourses().entrySet()){
+            listDataHeader.add(entry.getValue().getName());
+            String monuments = "";
+            for(Monument temp: entry.getValue().getMonuments()){
+                monuments = monuments+temp.getName()+"\n";
+            }
             List<String> description = new ArrayList<String>();
-            description.add(parcours.getDescription());
-            listDataChild.put(parcours.getName(), description );
+            description.add(entry.getValue().getDescription()+"\n\n"+
+                    "Durée "+entry.getValue().getDuree()+" min\n\n"+
+                    "Évaluation "+entry.getValue().getEval().name()+"\n\n"+
+                     monuments);
+            listDataChild.put(entry.getValue().getName(), description);
         }
+        //for (int i = 0; i < listParcours.size(); i++) {
+        //    Parcours parcours = listParcours.get(i);
+        //    listDataHeader.add(parcours.getName());
+        //    List<String> description = new ArrayList<String>();
+        //    description.add(parcours.getDescription());
+        //    listDataChild.put(parcours.getName(), description );
+        //}
     }
 
     public void prepareData() {

@@ -13,18 +13,20 @@ public class ParcoursABC {
     private long duree;
     private int evaltemp;
     private Evaluation eval;
+    private String description;
 
 
 
 
 //don't expose
 
-    public ParcoursABC(int id, String name, long duree, Evaluation eval, ArrayList<Monument> monuments) {
+    public ParcoursABC(int id, String name, long duree, Evaluation eval, String description, ArrayList<Monument> monuments) {
         Id = id;
         this.name = name;
         this.monuments = monuments;
         this.duree = duree;
         this.eval = eval;
+        this.description = description;
     }
 
     public int getId() {
@@ -81,5 +83,9 @@ public class ParcoursABC {
 
     public void setEval(Evaluation eval) {
         this.eval = eval;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

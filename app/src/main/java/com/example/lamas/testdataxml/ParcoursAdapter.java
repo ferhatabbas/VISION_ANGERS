@@ -33,7 +33,7 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
     public ParcoursAdapter(Context context, List<String> listDataHeader,
                            HashMap<String, List<String>> listChildData) {
         // TEST
-        prepareData();
+        //prepareData();
 
         this._context = context;
         this._listDataHeader = listDataHeader;
@@ -74,7 +74,7 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
         TextView txtListLieu = (TextView) convertView.findViewById(R.id.liste_ordonnee);
         String listeLieux = new String();
 
-        prepareLieuxListData(groupPosition);
+        //prepareLieuxListData(groupPosition);
         //System.out.println("GP :" + groupPosition);
         for (int i = 0 ; i < lieuxListData.size() ; i++){
             listeLieux = listeLieux.concat((i+1) + ". " + lieuxListData.get(i) + "\n");
@@ -87,7 +87,7 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(_context, LieuxActivity.class);
-                intent.putExtra("id", groupPosition);
+                intent.putExtra("id", groupPosition+1);
                 intent.putExtra("nameParcours", _listDataHeader.get(groupPosition));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 _context.startActivity(intent);

@@ -65,5 +65,4 @@
                 android:value="com.example.lamas.testdataxml.ParcoursActivity" />
         </activity>
     </application>
-
 </manifest>

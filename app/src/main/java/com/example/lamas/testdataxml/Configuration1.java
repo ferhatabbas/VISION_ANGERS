@@ -31,7 +31,6 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_configuration1);
-
         bNonVoyant = (Button) findViewById(R.id.button1);
         bMalVoyant = (Button) findViewById(R.id.button2);
 

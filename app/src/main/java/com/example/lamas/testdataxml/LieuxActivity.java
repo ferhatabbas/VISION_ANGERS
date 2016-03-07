@@ -52,15 +52,26 @@ public class LieuxActivity extends Activity {
        */
 
     private void prepareListData(int id) {
-        Parcours parcours = listParcours.get(id);
+        //Parcours parcours = listParcours.get(id);
         //listDataHeader.add(parcours.getName());
-        List<Lieu> listLieux = parcours.getLieux();
-        List<String> lieux = new ArrayList<>();
-
-        for (int i = 0; i < listLieux.size(); i++) {
-            listDataHeader.add(listLieux.get(i).getName());
-            listDataChild.put(listLieux.get(i).getName(), prepareResume(listLieux.get(i)));
+        //List<Lieu> listLieux = parcours.getLieux();
+        //List<String> lieux = new ArrayList<>();
+        Data data = Data.getInstance(getApplicationContext());
+        ParcoursABC parcours_temp = data.getParcourses().get(id);
+        for(Monument monument: parcours_temp.getMonuments()){
+            listDataHeader.add(monument.getName());
+            List<String> resume = new ArrayList<>();
+            resume.add("Description\n\n"+monument.getDescription());
+            resume.add("Accessibilités\n\n"+monument.getAccessibiliteString());
+            resume.add("Horaires\n\n"+monument.getHorairesString());
+            listDataChild.put(monument.getName(), resume);
         }
+        /*for (int i = 0; i < listLieux.size(); i++) {
+            List<String> resume = new ArrayList<>();
+            listDataHeader.add(listLieux.get(i).getName());
+            resume.add()
+            listDataChild.put(listLieux.get(i).getName(), prepareResume(listLieux.get(i)));
+        }*/
     }
 
     private List<String> prepareResume(Lieu lieu){
