@@ -95,10 +95,11 @@ public class Data {
         }
 
         for(int i=0 ; i< Parcours.length() ; i++) {
-            JSONObject objs = Parcours.getJSONObject(i);
+             JSONObject objs = Parcours.getJSONObject(i);
              Id = objs.getInt(Constants.ID_PARCOURS);
              name = objs.getString(Constants.NOM_PARCOURS);
              duree = objs.getLong(Constants.DUREE);
+             desc = objs.getString(Constants.DESCRIPTION_PARCOURS);
             switch ( objs.getInt(Constants.EVALUATION)) {
                 case 1:
                     eval = Evaluation.PASBON;
@@ -129,7 +130,7 @@ public class Data {
                 }
             }
 
-            parcourses.put(Id, new ParcoursABC(Id, name, duree, eval, tempsMonum));
+            parcourses.put(Id, new ParcoursABC(Id, name, duree, eval, desc, tempsMonum));
         }
 
     }

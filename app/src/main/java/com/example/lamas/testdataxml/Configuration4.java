@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -55,7 +56,7 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bCombinaison1.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 //Backgroung noir et lettrage blanc
                 couleurBackground = Color.BLACK;
                 data.getParameters().setCouleurBackground(couleurBackground );
@@ -73,7 +74,7 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bCombinaison2.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 //Backgroung jaune et lettrage noir
                 couleurBackground = Color.YELLOW;
                 data.getParameters().setCouleurBackground(couleurBackground );
@@ -91,7 +92,7 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bCombinaison3.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 //Backgroung rouge et lettrage blanc
                 couleurBackground = Color.RED;
                 data.getParameters().setCouleurBackground(couleurBackground );
@@ -109,7 +110,7 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bCombinaison4.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 //Backgroung blanc et lettrage noir
                 couleurBackground = Color.WHITE;
                 data.getParameters().setCouleurBackground(couleurBackground );
@@ -127,7 +128,7 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bCombinaison5.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 //Backgroung jaune et lettrage rouge
                 couleurBackground = Color.YELLOW;
                 data.getParameters().setCouleurBackground(couleurBackground );

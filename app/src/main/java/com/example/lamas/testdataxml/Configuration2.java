@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Message;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -42,7 +43,7 @@ public class Configuration2 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bAccepter.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration2.this, Configuration3.class);
                 startActivity(secondeActivite);
             }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -85,7 +86,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = bPolice1.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
                 startActivity(secondeActivite);
             }
@@ -99,7 +100,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = bPolice2.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
                 startActivity(secondeActivite);
             }
@@ -113,7 +114,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = bPolice3.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
                 startActivity(secondeActivite);
             }
@@ -127,7 +128,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = bPolice4.getText().toString();
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
                 startActivity(secondeActivite);
             }
