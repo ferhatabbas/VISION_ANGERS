@@ -16,19 +16,15 @@
     <TextView
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="20dip"
-        android:paddingTop="10dp"
-        android:paddingBottom="10dp"
-        android:paddingLeft="25dp"
+        android:textSize="35dip"
+        android:padding="10dp"
         android:textColor="#ffffff"
         android:background="#0047AB"
         android:textStyle="bold"
         android:id="@+id/parcoursTitle"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"
-        android:layout_alignRight="@+id/expandableListView2"
-        android:layout_alignEnd="@+id/expandableListView2" />
+        android:layout_alignParentTop="true" />
 
     <ExpandableListView
         android:layout_width="wrap_content"
@@ -36,18 +32,18 @@
         android:id="@+id/expandableListView2"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_below="@+id/parcoursTitle" />
+        android:layout_below="@+id/parcoursTitle"
+        android:layout_above="@+id/buttonNavigation" />
 
     <Button
-        android:layout_width="wrap_content"
-        android:layout_height="fill_parent"
-        android:background="#B0E0E6"
-        android:textColor="#000000"
-        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:text="Lancer la navigation"
-        android:id="@+id/button"
+        android:id="@+id/buttonNavigation"
+        android:textSize="20dp"
+        android:padding="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_below="@+id/expandableListView2"/>
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
