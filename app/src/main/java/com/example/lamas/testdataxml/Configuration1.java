@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -53,8 +54,8 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View arg0) {
                 String toSpeak = bMalVoyant.getText().toString();
                 convertTextToSpeech(toSpeak);
-
-                Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
+                    Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
                 startActivity(secondeActivite);
             }
 
@@ -80,7 +81,8 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onPause() {
         super.onPause();
-        if(textToSpeech != null ){
+
+        if(textToSpeech != null && !textToSpeech.isSpeaking() ){
             textToSpeech.stop();
 
         }

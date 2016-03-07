@@ -4,6 +4,7 @@ package com.example.lamas.testdataxml;
 import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.speech.tts.TextToSpeech;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -46,7 +47,7 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = "Taille 1";
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration3.this, Configuration4.class);
                 startActivity(secondeActivite);
             }
@@ -58,7 +59,7 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = "Taille 2";
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration3.this, Configuration4.class);
                 startActivity(secondeActivite);
             }
@@ -71,7 +72,7 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = "Taille 3";
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration3.this, Configuration4.class);
                 startActivity(secondeActivite);
             }
@@ -83,7 +84,7 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
 
                 String toSpeak = "Taille 4";
                 convertTextToSpeech(toSpeak);
-
+                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration3.this, Configuration4.class);
                 startActivity(secondeActivite);
             }
