@@ -1,10 +1,11 @@
 package com.example.lamas.testdataxml;
 
+import android.app.Activity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-public class POIDetails extends AppCompatActivity {
+public class POIDetails extends Activity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -13,7 +14,7 @@ public class POIDetails extends AppCompatActivity {
         Bundle b = getIntent().getExtras();
         int id = b.getInt("id");
 
-        //Access informations about the poi
+        //Access poi' informations
         Data data = Data.getInstance(getApplicationContext());
         Monument poi = data.getMonuments().get(id);
 

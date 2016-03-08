@@ -358,7 +358,8 @@
   "Parcours":[
     {
       "Id": 1,
-      "Name": "sciences",
+      "Name": "Les sciences à l'UdeS",
+      "Description": "Découverte des sciences à l'Université de Sherbrooke",
       "Duree": 45,
       "Evalutation" : 4,
       "Monuments": [
@@ -377,7 +378,8 @@
       ]
     }, {
       "Id": 2,
-      "Name": "vrai science",
+      "Name": "Parcours complet sciences à l'UdeS",
+      "Description" : "Découverte de toutes les sciences à l'Université de Sherbrooke",
       "Duree": 30,
       "Evalutation" : 5,
       "Monuments": [
@@ -393,7 +395,8 @@
       ]
     }, {
       "Id": 3,
-      "Name": "residence",
+      "Name": "Où loger à l'UdeS ?",
+      "Description": "Les meilleurs endroits pour se loger sur le campus de l'UdeS",
       "Duree": 30,
       "Evalutation" : 3,
       "Monuments": [
@@ -406,7 +409,8 @@
       ]
     }, {
       "Id": 4,
-      "Name": "tout",
+      "Name": "Découverte de l'UdeS",
+      "Description": "Venez découvrir l'intégralité de l'Université de Sherbrooke au travers de ce parcous incroyable",
       "Duree": 90,
       "Evalutation" : 5,
       "Monuments": [

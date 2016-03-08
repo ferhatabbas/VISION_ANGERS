@@ -41,6 +41,14 @@ public class Monument  {
         return horaires;
     }
 
+    public String getHorairesString(){
+        String result = "";
+        for(String horaire: this.horaires){
+            result = result+horaire+"\n";
+        }
+        return result;
+    }
+
     public void setHoraires(ArrayList<String> horaires) {
         this.horaires = horaires;
     }
@@ -84,6 +92,14 @@ public class Monument  {
 
     public ArrayList<String> getAccessibilite() {
         return accessibilite;
+    }
+
+    public String getAccessibiliteString(){
+        String result = "";
+        for(String acces: this.accessibilite){
+            result = result+acces+"\n";
+        }
+        return result;
     }
 
     public void setAccessibilite(ArrayList<String> accessibilite) {
