@@ -16,6 +16,8 @@ import java.util.List;
  * Created by rocj2405 on 2016-03-02.
  */
 public class LieuxAdapter extends BaseExpandableListAdapter {
+
+    private Data data;
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
@@ -62,8 +64,15 @@ public class LieuxAdapter extends BaseExpandableListAdapter {
         TextView txtListChild = (TextView) convertView
                 .findViewById(R.id.lblListItem);
         txtListChild.setText(childText);
-        txtListChild.setBackgroundColor(0xFFB0E0E6);
-        txtListChild.setTextColor(0xFF000000);
+
+        //Personnalisation de l'application
+        data = Data.getInstance(_context);
+        txtListChild.setTextColor(data.getParameters().getCouleurTexte());
+        txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
+        txtListChild.setTypeface(data.getParameters().getTypeface());
+
+        convertView.setBackgroundColor(data.getParameters().getCouleurBackground());
+
         return convertView;
     }
 
@@ -102,6 +111,14 @@ public class LieuxAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
+        //Personnalisation de l'application
+        data = Data.getInstance(_context);
+        lblListHeader.setTextColor(data.getParameters().getCouleurBackground());
+        lblListHeader.setBackgroundColor(data.getParameters().getCouleurTexte());
+        lblListHeader.setTypeface(data.getParameters().getTypeface());
+
+        //convertView.setBackgroundColor(data.getParameters().getCouleurBackground());
 
         return convertView;
     }
