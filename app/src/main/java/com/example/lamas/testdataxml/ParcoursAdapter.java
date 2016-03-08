@@ -19,6 +19,7 @@ import java.util.List;
  */
 public class ParcoursAdapter extends BaseExpandableListAdapter {
 
+    private Data data;
     private Context _context;
     private List<String> _listDataHeader; // header titles
     // child data in format of header title, child title
@@ -94,6 +95,20 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
             }
         });
 
+        //Personnalisation de l'application
+        data = Data.getInstance(_context);
+        txtListChild.setTextColor(data.getParameters().getCouleurTexte());
+        txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
+        txtListChild.setTypeface(data.getParameters().getTypeface());
+        txtListLieu.setTextColor(data.getParameters().getCouleurBackground());
+        txtListLieu.setBackgroundColor(data.getParameters().getCouleurTexte());
+        txtListLieu.setTypeface(data.getParameters().getTypeface());
+        parcours_btn.setTextColor(data.getParameters().getCouleurBackground());
+        parcours_btn.setBackgroundColor(data.getParameters().getCouleurTexte());
+        parcours_btn.setTypeface(data.getParameters().getTypeface());
+
+        convertView.setBackgroundColor(data.getParameters().getCouleurBackground());
+
         return convertView;
     }
 
@@ -132,6 +147,14 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
                 .findViewById(R.id.lblListHeader);
         lblListHeader.setTypeface(null, Typeface.BOLD);
         lblListHeader.setText(headerTitle);
+
+        //Personnalisation de l'application
+        data = Data.getInstance(_context);
+        lblListHeader.setTextColor(data.getParameters().getCouleurBackground());
+        lblListHeader.setBackgroundColor(data.getParameters().getCouleurTexte());
+        lblListHeader.setTypeface(data.getParameters().getTypeface());
+
+        //convertView.setBackgroundColor(data.getParameters().getCouleurBackground());
 
         return convertView;
     }

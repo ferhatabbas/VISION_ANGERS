@@ -2,14 +2,23 @@ package com.example.lamas.testdataxml;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 
-public class LieuxActivity extends Activity {
+public class LieuxActivity extends Activity implements
+        TextToSpeech.OnInitListener{
+
+    private TextToSpeech textToSpeech;
+    private Data data;
+
     LieuxAdapter lieuxAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
@@ -22,6 +31,8 @@ public class LieuxActivity extends Activity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_lieux);
+
+        textToSpeech = new TextToSpeech(this, this);
 
         // TEST
         prepareData();
@@ -37,6 +48,12 @@ public class LieuxActivity extends Activity {
         TextView txtListChild = (TextView) findViewById(R.id.parcoursTitle);
         txtListChild.setText(nameParcours);
 
+        //Personnalisation de l'application
+        data = Data.getInstance(getApplicationContext());
+        txtListChild.setTextColor(data.getParameters().getCouleurTexte());
+        txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
+        txtListChild.setTypeface(data.getParameters().getTypeface());
+
         // preparing list data
         prepareListData(id);
 
@@ -45,6 +62,28 @@ public class LieuxActivity extends Activity {
         // setting list adapter
         expListView.setAdapter(lieuxAdapter);
         //expListView.expandGroup(0);
+
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                String toSpeak = listDataHeader.get(groupPosition).toString();
+                convertTextToSpeech(toSpeak);
+            }
+        });
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                String toSpeak = listDataChild.get(listDataHeader.get(groupPosition)).get(
+                        childPosition).toString();
+                convertTextToSpeech(toSpeak);
+                return false;
+            }
+        });
+
+
     }
 
     /*
@@ -61,9 +100,9 @@ public class LieuxActivity extends Activity {
         for(Monument monument: parcours_temp.getMonuments()){
             listDataHeader.add(monument.getName());
             List<String> resume = new ArrayList<>();
-            resume.add("Description\n\n"+monument.getDescription());
-            resume.add("Accessibilités\n\n"+monument.getAccessibiliteString());
-            resume.add("Horaires\n\n"+monument.getHorairesString());
+            resume.add("Description:\n"+monument.getDescription());
+            resume.add("Accessibilités:\n"+monument.getAccessibiliteString());
+            resume.add("Horaires:\n"+monument.getHorairesString());
             listDataChild.put(monument.getName(), resume);
         }
         /*for (int i = 0; i < listLieux.size(); i++) {
@@ -163,6 +202,34 @@ public class LieuxActivity extends Activity {
         listParcours.add(musiqueDuKing);
 
 
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.CANADA_FRENCH);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("error", "This Language is not supported");
+            } else {
+                Bundle b = getIntent().getExtras();
+                int id = b.getInt("id");
+                String nameParcours = b.getString("nameParcours");
+                convertTextToSpeech(nameParcours);
+            }
+        } else {
+            Log.e("error", "Initilization Failed!");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        textToSpeech.shutdown();
+    }
+
+    private void convertTextToSpeech(String text) {
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
 }
