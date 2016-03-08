@@ -9,7 +9,7 @@
         android:id="@+id/lblListItem"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textSize="17dip"
+        android:textSize="15dp"
         android:paddingTop="10dp"
         android:paddingBottom="10dp"
         android:paddingLeft="25dp"

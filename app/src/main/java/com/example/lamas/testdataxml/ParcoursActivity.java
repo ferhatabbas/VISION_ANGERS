@@ -2,14 +2,22 @@ package com.example.lamas.testdataxml;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
-public class ParcoursActivity extends Activity {
+public class ParcoursActivity extends Activity implements
+        TextToSpeech.OnInitListener {
+
+    private TextToSpeech textToSpeech;
+
     ParcoursAdapter parcoursAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
@@ -23,6 +31,8 @@ public class ParcoursActivity extends Activity {
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_parcours);
+
+        textToSpeech = new TextToSpeech(this, this);
 
         // TEST
         //prepareData();
@@ -42,6 +52,30 @@ public class ParcoursActivity extends Activity {
 
         // setting list adapter
         expListView.setAdapter(parcoursAdapter);
+
+        //Personnalisation de l'application
+        data = Data.getInstance(getApplicationContext());
+
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+                String toSpeak = listDataHeader.get(groupPosition).toString();
+                convertTextToSpeech(toSpeak);
+            }
+        });
+
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                // TODO Auto-generated method stub
+                String toSpeak = listDataChild.get(listDataHeader.get(groupPosition)).get(
+                        childPosition).toString();
+                convertTextToSpeech(toSpeak);
+                return false;
+            }
+        });
+
     }
 
     /*
@@ -142,6 +176,31 @@ public class ParcoursActivity extends Activity {
         listParcours.add(chateauEtHistoire);
         listParcours.add(jardinEtSalade);
         listParcours.add(musiqueDuKing);
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.CANADA_FRENCH);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("error", "This Language is not supported");
+            } else {
+                convertTextToSpeech("Parcours");
+            }
+        } else {
+            Log.e("error", "Initilization Failed!");
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        textToSpeech.shutdown();
+    }
+
+    private void convertTextToSpeech(String text) {
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
 
 }
