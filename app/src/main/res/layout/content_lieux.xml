@@ -9,7 +9,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="rocj2405.angers2k16.LieuxActivity"
+    tools:context="com.example.lamas.testdataxml.LieuxActivity"
     tools:showIn="@layout/activity_lieux">
 
 

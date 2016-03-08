@@ -10,4 +10,5 @@
     <string name="title_activity_configuration5">Configuration5</string>
     <string name="title_activity_configuration6">Configuration6</string>
     <string name="title_activity_activite_test">Activite_test</string>
+    <string name="title_activity_information">InformationActivity</string>
 </resources>

@@ -5,18 +5,19 @@
     android:weightSum="1">
 
     <TextView
-        android:layout_width="match_parent"
+        android:id="@+id/nom_lieu"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="#960018"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textSize="35dp"
         android:textColor="#ffffff"
-        android:id="@+id/type_info" />
+        android:background="#960018"
+        android:padding="20dp"/>
 
-    <TextView
+    <ExpandableListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:id="@+id/information"
-        android:background="#DDA0DD"
-        android:layout_weight="0.20" />
+        android:id="@+id/expandableListView3"
+        android:layout_gravity="center_horizontal" />
+
 </LinearLayout>

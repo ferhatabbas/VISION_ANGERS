@@ -38,6 +38,7 @@ public class ParcoursActivity extends Activity {
         // preparing list data
         prepareListData();
 
+
         parcoursAdapter = new ParcoursAdapter(getApplicationContext(), listDataHeader, listDataChild);
 
         // setting list adapter

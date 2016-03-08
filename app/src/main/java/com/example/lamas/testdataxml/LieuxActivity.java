@@ -34,6 +34,8 @@ public class LieuxActivity extends Activity {
         int id = b.getInt("id");
         String nameParcours = b.getString("nameParcours");
 
+        System.out.println("ID parcours: " + id);
+
         TextView txtListChild = (TextView) findViewById(R.id.parcoursTitle);
         txtListChild.setText(nameParcours);
 
@@ -41,6 +43,21 @@ public class LieuxActivity extends Activity {
         prepareListData(id);
 
         lieuxAdapter = new LieuxAdapter(getApplicationContext(), listDataHeader, listDataChild);
+
+//        Button parcours_btn = (Button) findViewById(R.id.buttonNavigation);
+//        parcours_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<String> listHeaders = prepareInformationHeader();
+//                HashMap<String, List<String>> listInformationChild = prepareInformationChild(0, 0);
+//                Intent intent = new Intent(getApplicationContext(), InformationActivity.class);
+//                intent.putExtra("nomMonument", "Faculté des lettres et sciences humaines" );
+//                intent.putStringArrayListExtra("headers", (ArrayList<String>) listHeaders);
+//                intent.putExtra("information", listInformationChild);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//            }
+//        });
 
         // setting list adapter
         expListView.setAdapter(lieuxAdapter);
@@ -57,7 +74,7 @@ public class LieuxActivity extends Activity {
         //List<Lieu> listLieux = parcours.getLieux();
         //List<String> lieux = new ArrayList<>();
         Data data = Data.getInstance(getApplicationContext());
-        ParcoursABC parcours_temp = data.getParcourses().get(id);
+        ParcoursABC parcours_temp = data.getParcourses().get(id+1);
         for(Monument monument: parcours_temp.getMonuments()){
             listDataHeader.add(monument.getName());
             List<String> resume = new ArrayList<>();
@@ -72,6 +89,36 @@ public class LieuxActivity extends Activity {
             resume.add()
             listDataChild.put(listLieux.get(i).getName(), prepareResume(listLieux.get(i)));
         }*/
+    }
+
+    private List<String> prepareInformationHeader(){
+        List<String> headers = new ArrayList<>();
+        headers.add("Description");
+        headers.add("Accessibilités");
+        headers.add("Horaires");
+
+        return headers;
+    }
+
+    private HashMap<String, List<String>> prepareInformationChild(int groupID, int monumentID){
+        Data data = Data.getInstance(getApplicationContext());
+        ParcoursABC parcours_temp = data.getParcourses().get(groupID + 1);
+        ArrayList<Monument> monuments = parcours_temp.getMonuments();
+        Monument monument = monuments.get(monumentID);
+
+        HashMap<String, List<String>> informations = new HashMap<>();
+        List<String> descriptions = new ArrayList<>();
+        descriptions.add(monument.getDescription());
+        List<String> accessibilités = new ArrayList<>();
+        accessibilités.add(monument.getAccessibiliteString());
+        List<String> horaires = new ArrayList<>();
+        horaires.add(monument.getHorairesString());
+
+        informations.put("Description", descriptions);
+        informations.put("Accessibilités", accessibilités);
+        informations.put("Horaires", horaires);
+
+        return informations;
     }
 
     private List<String> prepareResume(Lieu lieu){
