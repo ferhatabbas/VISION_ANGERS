@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    tools:context="rocj2405.angers2k16.LieuxActivity">
+    tools:context="com.example.lamas.testdataxml.LieuxActivity">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

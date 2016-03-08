@@ -88,7 +88,7 @@ public class ParcoursAdapter extends BaseExpandableListAdapter {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(_context, LieuxActivity.class);
-                intent.putExtra("id", groupPosition+1);
+                intent.putExtra("id", groupPosition);
                 intent.putExtra("nameParcours", _listDataHeader.get(groupPosition));
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 _context.startActivity(intent);
