@@ -1,10 +1,12 @@
 package com.example.lamas.testdataxml;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -23,6 +25,7 @@ public class LieuxActivity extends Activity implements
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
     HashMap<String, List<String>> listDataChild = new HashMap<>();
+    Button bNavigation;
 
     // TEST
     public List<Parcours> listParcours = new ArrayList<>();
@@ -39,6 +42,8 @@ public class LieuxActivity extends Activity implements
 
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.expandableListView2);
+
+        bNavigation = (Button) findViewById(R.id.buttonNavigation);
 
         // TEST : Passage d'un paramètre
         Bundle b = getIntent().getExtras();
@@ -83,6 +88,14 @@ public class LieuxActivity extends Activity implements
             }
         });
 
+        bNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent ActiviteNavigation = new Intent(LieuxActivity.this, MainActivity.class);
+                startActivity(ActiviteNavigation);
+            }
+
+        });
 
     }
 
