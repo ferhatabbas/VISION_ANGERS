@@ -116,7 +116,7 @@ public class MainActivity extends Activity {
             startActivity(intent);
         }*/
         // location updates: at least 1 meter and 200millsecs change
-        locationManager.requestLocationUpdates(provider, 2000, 15, mylistener);
+        locationManager.requestLocationUpdates(provider, 200, 1, mylistener);
 
         //Add proximity alerts
         for(Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()){
@@ -142,8 +142,8 @@ public class MainActivity extends Activity {
 
         @Override
         public void onLocationChanged(Location location) {
-            //Toast.makeText(MainActivity.this, "Changement de position avec précision de "+location.getAccuracy(),
-            //				Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainActivity.this, "Changement de position avec précision de "+location.getAccuracy(),
+            				Toast.LENGTH_SHORT).show();
             if(instantMarker == null){
                 instantMarker = new Marker(map);
             }
@@ -153,15 +153,22 @@ public class MainActivity extends Activity {
 
             GeoPoint instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
             if(location.hasAccuracy()){
-                if(location.getAccuracy() > 19){
+                if(location.getAccuracy() > 21){
                     if(receiverIsRegistered) {
+                        Toast.makeText(MainActivity.this, "Désenregistrement du receiver!",
+                                Toast.LENGTH_SHORT).show();
                         unregisterReceiver(proximityReceiver);
                         receiverIsRegistered = false;
                     }
                 }
                 else{
-                    registerReceiver(proximityReceiver, mIntentFilter);
-                    receiverIsRegistered = true;
+                    if(!receiverIsRegistered){
+                        Toast.makeText(MainActivity.this, "Enregistrement du receiver !",
+                                Toast.LENGTH_SHORT).show();
+                        registerReceiver(proximityReceiver, mIntentFilter);
+                        receiverIsRegistered = true;
+                    }
+
                 }
                 //else {
                 //    if(proximityReceiver!=null){

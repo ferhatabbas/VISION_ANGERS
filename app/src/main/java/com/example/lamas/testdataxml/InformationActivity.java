@@ -1,15 +1,16 @@
 package com.example.lamas.testdataxml;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-public class InformationActivity extends AppCompatActivity {
+public class InformationActivity extends Activity {
     LieuxAdapter lieuxAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
@@ -26,12 +27,20 @@ public class InformationActivity extends AppCompatActivity {
         expListView = (ExpandableListView) findViewById(R.id.expandableListView3);
 
         Bundle b = getIntent().getExtras();
-        listDataHeader = b.getStringArrayList("headers");
-        listDataChild = (HashMap<String, List<String>>) b.getSerializable("information");
-        String nomMonument = b.getString("nomMonument");
+        int id = b.getInt("id");
+        Data data = Data.getInstance(getApplicationContext());
+        Monument monument = data.getMonuments().get(id);
+        listDataHeader.add("Description");
+        listDataHeader.add("Accessibilité");
+        listDataHeader.add("Horaires");
+        //listDataHeader = b.getStringArrayList("headers");
+        //listDataChild = (HashMap<String, List<String>>) b.getSerializable("information");
+        listDataChild.put("Description", new ArrayList<>(Arrays.asList(monument.getDescription())));
+        listDataChild.put("Accessibilité", monument.getAccessibilite());
+        listDataChild.put("Horaires", monument.getHoraires());
 
         TextView txtListChild = (TextView) findViewById(R.id.nom_lieu);
-        txtListChild.setText(nomMonument);
+        txtListChild.setText(monument.getName());
 
         lieuxAdapter = new LieuxAdapter(getApplicationContext(), listDataHeader, listDataChild);
 
