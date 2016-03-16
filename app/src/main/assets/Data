@@ -9,10 +9,10 @@
     "Informations": "1957 Les 13 premiers diplômés de la Faculté arrivent sur le marché du travail. ",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "Guide audio"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "Accessibles aux personnes handicapés moteur."
       }
     ],
     "Horaires": [
@@ -175,17 +175,14 @@
     "Name": "Cafétéria - Faculté De Sciences",
     "Lat": 45.379975,
     "Lng": -71.9253012,
-    "Desc": "c'est la ou les gens mangents.",
+    "Desc": "Service de délicieux mets qui font la renommée gastronomique de Sherbrooke",
     "Informations": "ne jamais prendre de spaghetti",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "Présence d'un ascenseur"
       },
       {
-        "Accessibilite": "handicap motor"
-      },
-      {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "Rampe d'accès au bâitiment"
       }
     ],
     "Horaires": [
@@ -378,8 +375,8 @@
       ]
     }, {
       "Id": 2,
-      "Name": "Parcours complet sciences à l'UdeS",
-      "Description" : "Découverte de toutes les sciences à l'Université de Sherbrooke",
+      "Name": "Parcours complet de l'Université",
+      "Description" : "Découverte de tous les programmes à l'Université de Sherbrooke",
       "Duree": 30,
       "Evalutation" : 5,
       "Monuments": [
@@ -395,7 +392,7 @@
       ]
     }, {
       "Id": 3,
-      "Name": "Où loger à l'UdeS ?",
+      "Name": "Où loger à l'Université ?",
       "Description": "Les meilleurs endroits pour se loger sur le campus de l'UdeS",
       "Duree": 30,
       "Evalutation" : 3,
@@ -409,8 +406,8 @@
       ]
     }, {
       "Id": 4,
-      "Name": "Découverte de l'UdeS",
-      "Description": "Venez découvrir l'intégralité de l'Université de Sherbrooke au travers de ce parcous incroyable",
+      "Name": "Découverte de l'Université de Sherbrooke",
+      "Description": "Venez découvrir l'intégralité de l'Université de Sherbrooke au travers de ce parcours incroyable",
       "Duree": 90,
       "Evalutation" : 5,
       "Monuments": [

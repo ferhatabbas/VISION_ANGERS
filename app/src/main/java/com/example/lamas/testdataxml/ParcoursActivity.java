@@ -94,8 +94,7 @@ public class ParcoursActivity extends Activity implements
             List<String> description = new ArrayList<String>();
             description.add(entry.getValue().getDescription()+"\n\n"+
                     "Durée "+entry.getValue().getDuree()+" min\n\n"+
-                    "Évaluation "+entry.getValue().getEval().name()+"\n\n"+
-                     monuments);
+                    "Évaluation "+entry.getValue().getEval().name());
             listDataChild.put(entry.getValue().getName(), description);
         }
         //for (int i = 0; i < listParcours.size(); i++) {
