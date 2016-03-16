@@ -1,4 +1,4 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.list_activities;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,6 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+
+import com.example.lamas.testdataxml.R;
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Lieu;
+import com.example.lamas.testdataxml.data.Parcours;
+import com.example.lamas.testdataxml.list_activities.LieuxActivity;
 
 import java.util.ArrayList;
 import java.util.HashMap;

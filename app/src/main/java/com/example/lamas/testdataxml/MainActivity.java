@@ -17,6 +17,9 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.widget.Toast;
 
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Monument;
+
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.overlays.Marker;
 import org.osmdroid.bonuspack.overlays.Polygon;

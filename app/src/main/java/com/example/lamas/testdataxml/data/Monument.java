@@ -1,4 +1,4 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.data;
 
 /**
  * Created by abbf2501 on 2016-02-08.
