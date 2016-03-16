@@ -1,28 +1,40 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.list_activities;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
+
+import com.example.lamas.testdataxml.MainActivity;
+import com.example.lamas.testdataxml.R;
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Information;
+import com.example.lamas.testdataxml.data.Lieu;
+import com.example.lamas.testdataxml.data.Monument;
+import com.example.lamas.testdataxml.data.Parcours;
+import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
-public class ParcoursActivity extends Activity implements
-        TextToSpeech.OnInitListener {
+public class LieuxActivity extends Activity implements
+        TextToSpeech.OnInitListener{
 
     private TextToSpeech textToSpeech;
+    private Data data;
 
-    ParcoursAdapter parcoursAdapter;
+    LieuxAdapter lieuxAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
     HashMap<String, List<String>> listDataChild = new HashMap<>();
-    Data data;
+    Button bNavigation;
 
     // TEST
     public List<Parcours> listParcours = new ArrayList<>();
@@ -30,32 +42,57 @@ public class ParcoursActivity extends Activity implements
     @Override
     protected void onCreate (Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.content_parcours);
+        setContentView(R.layout.content_lieux);
 
         textToSpeech = new TextToSpeech(this, this);
 
         // TEST
-        //prepareData();
-
+        prepareData();
 
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        expListView = (ExpandableListView) findViewById(R.id.expandableListView2);
+
+        bNavigation = (Button) findViewById(R.id.buttonNavigation);
 
         // TEST : Passage d'un paramètre
-        //Bundle b = getIntent().getExtras();
-        //int id = b.getInt("id");
+        Bundle b = getIntent().getExtras();
+        int id = b.getInt("id");
+        String nameParcours = b.getString("nameParcours");
 
-        // preparing list data
-        prepareListData();
+        System.out.println("ID parcours: " + id);
 
-
-        parcoursAdapter = new ParcoursAdapter(getApplicationContext(), listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(parcoursAdapter);
+        TextView txtListChild = (TextView) findViewById(R.id.parcoursTitle);
+        txtListChild.setText(nameParcours);
 
         //Personnalisation de l'application
         data = Data.getInstance(getApplicationContext());
+        txtListChild.setTextColor(data.getParameters().getCouleurTexte());
+        txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
+        txtListChild.setTypeface(data.getParameters().getTypeface());
+
+        // preparing list data
+        prepareListData(id);
+
+        lieuxAdapter = new LieuxAdapter(getApplicationContext(), listDataHeader, listDataChild);
+
+//        Button parcours_btn = (Button) findViewById(R.id.buttonNavigation);
+//        parcours_btn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                List<String> listHeaders = prepareInformationHeader();
+//                HashMap<String, List<String>> listInformationChild = prepareInformationChild(0, 0);
+//                Intent intent = new Intent(getApplicationContext(), InformationActivity.class);
+//                intent.putExtra("nomMonument", "Faculté des lettres et sciences humaines" );
+//                intent.putStringArrayListExtra("headers", (ArrayList<String>) listHeaders);
+//                intent.putExtra("information", listInformationChild);
+//                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                startActivity(intent);
+//            }
+//        });
+
+        // setting list adapter
+        expListView.setAdapter(lieuxAdapter);
+        //expListView.expandGroup(0);
 
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
@@ -77,34 +114,90 @@ public class ParcoursActivity extends Activity implements
             }
         });
 
+        bNavigation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                Intent ActiviteNavigation = new Intent(LieuxActivity.this, MainActivity.class);
+                startActivity(ActiviteNavigation);
+            }
+
+        });
+
     }
 
     /*
        * Preparing the list data
        */
 
-    private void prepareListData() {
+    private void prepareListData(int id) {
+        //Parcours parcours = listParcours.get(id);
+        //listDataHeader.add(parcours.getName());
+        //List<Lieu> listLieux = parcours.getLieux();
+        //List<String> lieux = new ArrayList<>();
         Data data = Data.getInstance(getApplicationContext());
-        for(Map.Entry<Integer, ParcoursABC> entry : data.getParcourses().entrySet()){
-            listDataHeader.add(entry.getValue().getName());
-            String monuments = "";
-            for(Monument temp: entry.getValue().getMonuments()){
-                monuments = monuments+temp.getName()+"\n";
-            }
-            List<String> description = new ArrayList<String>();
-            description.add(entry.getValue().getDescription()+"\n\n"+
-                    "Durée "+entry.getValue().getDuree()+" min\n\n"+
-                    "Évaluation "+entry.getValue().getEval().name());
-            listDataChild.put(entry.getValue().getName(), description);
+        ParcoursABC parcours_temp = data.getParcourses().get(id+1);
+        for(Monument monument: parcours_temp.getMonuments()){
+            listDataHeader.add(monument.getName());
+            List<String> resume = new ArrayList<>();
+            resume.add("Description:\n"+monument.getDescription());
+            resume.add("Accessibilités:\n"+monument.getAccessibiliteString());
+            resume.add("Horaires:\n"+monument.getHorairesString());
+            listDataChild.put(monument.getName(), resume);
         }
-        //for (int i = 0; i < listParcours.size(); i++) {
-        //    Parcours parcours = listParcours.get(i);
-        //    listDataHeader.add(parcours.getName());
-        //    List<String> description = new ArrayList<String>();
-        //    description.add(parcours.getDescription());
-        //    listDataChild.put(parcours.getName(), description );
-        //}
+        /*for (int i = 0; i < listLieux.size(); i++) {
+            List<String> resume = new ArrayList<>();
+            listDataHeader.add(listLieux.get(i).getName());
+            resume.add()
+            listDataChild.put(listLieux.get(i).getName(), prepareResume(listLieux.get(i)));
+        }*/
     }
+
+    private List<String> prepareInformationHeader(){
+        List<String> headers = new ArrayList<>();
+        headers.add("Description");
+        headers.add("Accessibilités");
+        headers.add("Horaires");
+
+        return headers;
+    }
+
+    private HashMap<String, List<String>> prepareInformationChild(int groupID, int monumentID){
+        Data data = Data.getInstance(getApplicationContext());
+        ParcoursABC parcours_temp = data.getParcourses().get(groupID + 1);
+        ArrayList<Monument> monuments = parcours_temp.getMonuments();
+        Monument monument = monuments.get(monumentID);
+
+        HashMap<String, List<String>> informations = new HashMap<>();
+        List<String> descriptions = new ArrayList<>();
+        descriptions.add(monument.getDescription());
+        List<String> accessibilités = new ArrayList<>();
+        accessibilités.add(monument.getAccessibiliteString());
+        List<String> horaires = new ArrayList<>();
+        horaires.add(monument.getHorairesString());
+
+        informations.put("Description", descriptions);
+        informations.put("Accessibilités", accessibilités);
+        informations.put("Horaires", horaires);
+
+        return informations;
+    }
+
+    private List<String> prepareResume(Lieu lieu){
+        List<Information> informations = lieu.getInformations();
+        List<String> resume = new ArrayList<>();
+
+        for (int i = 0 ; i < informations.size() ; i++) {
+            Information info = informations.get(i);
+            String desc = new String();
+
+            desc = info.getTypeInfo().concat("\n\n" + info.getInformation());
+            resume.add(desc);
+        }
+
+        System.out.println(resume);
+        return resume;
+    }
+
 
     public void prepareData() {
         Parcours chateauEtHistoire = new Parcours("Château et histoire",
@@ -176,6 +269,8 @@ public class ParcoursActivity extends Activity implements
         listParcours.add(chateauEtHistoire);
         listParcours.add(jardinEtSalade);
         listParcours.add(musiqueDuKing);
+
+
     }
 
     @Override
@@ -186,7 +281,10 @@ public class ParcoursActivity extends Activity implements
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("error", "This Language is not supported");
             } else {
-                convertTextToSpeech("Parcours");
+                Bundle b = getIntent().getExtras();
+                int id = b.getInt("id");
+                String nameParcours = b.getString("nameParcours");
+                convertTextToSpeech(nameParcours);
             }
         } else {
             Log.e("error", "Initilization Failed!");
@@ -204,4 +302,3 @@ public class ParcoursActivity extends Activity implements
     }
 
 }
-

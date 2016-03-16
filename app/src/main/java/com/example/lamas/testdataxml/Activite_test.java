@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.list_activities.ParcoursActivity;
+
 public class Activite_test extends Activity {
 
     private Button bouton;
