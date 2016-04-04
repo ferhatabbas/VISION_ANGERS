@@ -2,177 +2,155 @@
 "Monuments":[
   {
     "Id": 1,
-    "Name": "Faculté de droit",
+    "Name": "Château d'Angers",
     "Lat": 45.3782892,
     "Lng": -71.9314862,
-    "Desc": "Fondation de la Faculté de droit en 1954, grâce entre autres à Me Albert Leblanc, qui sera le premier doyen de cette Faculté. La première cohorte compte 18 étudiants. Les ressources financières sont alors relativement limitées. Les cours sont offerts bénévolement par des praticiens de la région jusqu'en 1961 et se donnent pendant quelques années dans les locaux du Palais de Justice, alors situé rue Wellington nord.",
-    "Informations": "1957 Les 13 premiers diplômés de la Faculté arrivent sur le marché du travail. ",
+    "Desc": "Au cœur d'Angers, Ville d'Art et d'Histoire, se dresse l’incroyable forteresse aux 17 tours. Elle abrite la célèbre tenture de l'Apocalypse, tapisserie médiévale unique au monde.",
+    "Informations": "Découvrez l'une des forteresses médiévales les mieux conservées de France ! Colosse de calcaire et d'ardoise, le château d'Angers multiplie les superlatifs : ½ kilomètre de rempart, 17 tours, 20 000 m2 de superficie Son histoire est riche, des premières traces d'occupation humaine attestées vers 4000 avant notre ère aux travaux du XXI e siècle, en passant par la construction de l’enceinte par le jeune Saint Louis au XIII e siècle ou encore des bâtiments résidentiels des ducs d’Anjou à la fin du Moyen Age. ",
     "Accessibilites": [
       {
         "Accessibilite": "Guide audio"
       },
       {
-        "Accessibilite": "Accessibles aux personnes handicapés moteur."
+        "Accessibilite": "Documentation en braille."
+      },
+      {
+        "Accessibilite": "Documentation en caractères agrandis."
+      },
+      {
+        "Accessibilite": "Documentation en thermogonflé."
+      },
+      {
+        "Accessibilite": "Visite tactile."
+      },
+      {
+        "Accessibilite": "Ascenseur."
       }
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:30-16:00"
+        "Horaire": "Du 05 Septembre 2015 au 30 Avril 2016: Ouvert tous les jours, de 10h00 à 17h30."
       },
       {
-        "Horaire": "mardi 08:00-12:00 13:30-16:00"
+        "Horaire": "Du 02 Mai au 04 Septembre 2016: Ouvert tous les jours, de 09h30 à 18h30."
       },
       {
-        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+        "Horaire": "Du 05 Septembre au 31 Décembre 2016: Ouvert tous les jours, de 10h00 à 17h30. "
       }
     ]
   },
   {
     "Id": 2,
-    "Name": "Faculté des lettres et sciences humaines",
+    "Name": "Cathédrale Saint-Maurice",
     "Lat": 45.3795022,
     "Lng": -71.931661,
-    "Desc": "La Faculté des lettres et sciences humaines offre 14 programmes de formations initiales, dont quatre suivant le régime coopératif, pouvant mener à des carrières en politique, en géomatique, en musique, en psychologie, en communication et en marketing, en littérature, en travail social, en traduction, en histoire, et bien d’autres.",
-    "Informations": "super naze leur site",
+    "Desc": "La Cathédrale St Maurice, commencée au milieu du XIIè siècle et terminée vers 1250, est le premier édifice à présenter les caractéristiques du style gothique angevin: voûtes bombées comportant des ogives, d'abord massives dans la nef, puis laissant place à de fines nervures dans le transept et le choeur.",
+    "Informations": "La cathédrale permet en outre d'admirer un bel ensemble de vitraux des XIIè, XIIIè et XVè siècles.",
     "Accessibilites": [
+      {
+        "Accessibilite": "Non-disponible"
+      }
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mardi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+        "Horaire": "Du 01 Janvier au 31 Décembre 2016: Ouvert tous les jours, de 08h30 à 19h00."
       }
     ]
   }
 ,
   {
     "Id": 3,
-    "Name": "Clinique de Médecine et Sport",
+    "Name": "Collégiale Saint-Martin",
     "Lat": 45.3765122,
     "Lng": -71.9299439,
-    "Desc": "Clinique médicale ouverte à tous, professionnels spécialisés dans les problèmes d'articulations et de muscles, de tendons, de ligaments et des os.",
+    "Desc": "20 ans de travaux pour 20 siècles d'histoire angevine : le Département de Maine-et-Loire a ressuscité la collégiale Saint-Martin, l'un des monuments caroligiens les mieux conservés de France. Entre expositions permanentes (histoire de l'édifice, monde des morts...) et temporaires, faites un voyage inoubliable à travers le temps",
     "Informations": "La clinique est située au deuxième étage du pavillon Univestrie, à l'entrée du stade intérieur.",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "Cheminements extérieurs repérables tactilement"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "Documentation en braille."
       },
       {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "Documentation en caractères agrandis."
+      },
+      {
+        "Accessibilite": "Documentation en thermogonflé."
+      },
+      {
+        "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+      },
+      {
+        "Accessibilite": "Système d’audiodescription"
+      },
+      {
+        "Accessibilite": "Ascenseur avec annonce sonore des étages"
+      },
+      {
+        "Accessibilite": "Ascenseur avec boutons d’appel repérables"
+      },
+      {
+        "Accessibilite": "Cartels lisibles"
       }
+
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:30-18:00"
+        "Horaire": "Du 02 Janvier au 31 Mai 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 13h00 à 18h00"
       },
       {
-        "Horaire": "mardi 08:00-12:00 13:30-18:00"
+        "Horaire": "Du 01 Juin au 30 Septembre 2016: Ouvert tous les jours, de 10h00 à 19h00."
       },
       {
-        "Horaire": "mercredi 08:00-12:00 13:30-18:00"
-      },
-      {
-        "Horaire": "jeudi 08:00-12:00 13:30-18:00"
-      },
-      {
-        "Horaire": "vendredi 08:00-12:00 13:30-18:00"
+        "Horaire": "Du 01 Octobre au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 13h00 à 18h00."
       }
     ]
   }
 ,
   {
     "Id": 4,
-    "Name": "Faculté des sciences",
+    "Name": "les chanoines, la cathédrale et son quartier",
     "Lat": 45.3799777,
     "Lng": -71.9266425,
-    "Desc": "La Faculté des sciences est la seul fac cool et importante de l'université.",
-    "Informations": "chuck norris",
+    "Desc": "Blottie entre le château et la cathédrale la ville médiévale d’Angers, la Cité, a été pendant  plusieurs siècles le lieu d’habitation des chanoines de la cathédrale saint Maurice. Au cours de cette visite nous allons découvrir comment ces religieux vivaient dans ce quartier fermé «  la cité canoniale ».",
+    "Informations": "sous réservation seulement.",
     "Accessibilites": [
 
   {
-    "Accessibilite": "pour tous"
-  },
-  {
-    "Accessibilite": "don't stop believing"
+    "Accessibilite": "Non-Disponible"
   }
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mardi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+        "Horaire": "Le 25 Juin 2016: de 15h00 à 16h30"
       }
     ]
   }
 ,
   {
     "Id": 5,
-    "Name": "Centre de services du Campus principal",
+    "Name": "Les maisons à pans de bois",
     "Lat": 45.37943,
     "Lng": -71.9275856,
-    "Desc": "Le centre administratif de l'université.",
-    "Informations": "More than a feeling",
+    "Desc": "A travers les rues d’Angers, vous irez à la recherche de ces témoins du Moyen-Age et de la Renaissance, des plus somptueuses demeures aux plus modestes façades.",
+    "Informations": "sous réservation seulement.",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
-      },
-      {
-        "Accessibilite": "handicap motor"
-      },
-      {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "Non-Disponible"
       }
+
     ],
     "Horaires": [
       {
-        "Horaire": "lundi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mardi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "mercredi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "jeudi 08:00-12:00 13:30-16:00"
-      },
-      {
-        "Horaire": "vendredi 08:00-12:00 13:30-16:00"
+        "Horaire": "Le 07 Mai 2016 : de 15h00 à 16h30"
       }
     ]
   }
 ,
   {
     "Id": 6,
-    "Name": "Cafétéria - Faculté De Sciences",
+    "Name": "Galerie David d'Angers",
     "Lat": 45.379975,
     "Lng": -71.9253012,
     "Desc": "Service de délicieux mets qui font la renommée gastronomique de Sherbrooke",
