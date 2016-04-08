@@ -5,11 +5,14 @@ package com.example.lamas.testdataxml;
  */
 public class Constants {
 
+  public static final Boolean allow_mock_location = false;
+
   /* nom du fichier DATA*/
   public static final String FILE_PATH = "Data";
 
-  /*les balises des monuments */
+  public static final int MIN_ACCURACY = 21;
 
+  /*les balises des monuments */
   public static final String BALISE_MONUMENTS= "Monuments";
   public static final String ID_MONUMENT = "Id";
   public static final String NOM_MONUMENT = "Name";

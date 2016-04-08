@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.lamas.testdataxml">
 
+    <uses-permission android:name="android.permission.ACCESS_MOCK_LOCATION" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,10 +13,6 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".POIDetails"
-            android:label="@string/title_activity_poidetails"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".Configuration2"

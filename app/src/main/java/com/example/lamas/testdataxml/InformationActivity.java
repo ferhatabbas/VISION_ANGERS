@@ -18,7 +18,7 @@ public class InformationActivity extends Activity implements
         TextToSpeech.OnInitListener {
 
     private TextToSpeech textToSpeech;
-    private Data data;
+    public Data data;
 
     LieuxAdapter lieuxAdapter;
     ExpandableListView expListView;
@@ -39,7 +39,7 @@ public class InformationActivity extends Activity implements
 
         Bundle b = getIntent().getExtras();
         int id = b.getInt("id");
-        Data data = Data.getInstance(getApplicationContext());
+        data = Data.getInstance(getApplicationContext());
         Monument monument = data.getMonuments().get(id);
         listDataHeader.add("Description");
         listDataHeader.add("Accessibilité");
@@ -124,5 +124,7 @@ public class InformationActivity extends Activity implements
         //}
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
+
+
 
 }

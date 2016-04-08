@@ -11,4 +11,7 @@
     <string name="title_activity_configuration6">Configuration6</string>
     <string name="title_activity_activite_test">Activite_test</string>
     <string name="title_activity_information">InformationActivity</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
