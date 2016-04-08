@@ -1,6 +1,8 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.data;
 
 import android.content.Context;
+
+import com.example.lamas.testdataxml.Constants;
 
 import org.json.JSONArray;
 import org.json.JSONException;

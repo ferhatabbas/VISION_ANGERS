@@ -1,4 +1,4 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.data;
 
 import android.graphics.Color;
 import android.graphics.Typeface;

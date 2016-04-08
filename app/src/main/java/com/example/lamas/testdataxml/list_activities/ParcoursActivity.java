@@ -1,4 +1,4 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.list_activities;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -6,6 +6,14 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.ExpandableListView;
+
+import com.example.lamas.testdataxml.R;
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Information;
+import com.example.lamas.testdataxml.data.Lieu;
+import com.example.lamas.testdataxml.data.Monument;
+import com.example.lamas.testdataxml.data.Parcours;
+import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -94,8 +102,7 @@ public class ParcoursActivity extends Activity implements
             List<String> description = new ArrayList<String>();
             description.add(entry.getValue().getDescription()+"\n\n"+
                     "Durée "+entry.getValue().getDuree()+" min\n\n"+
-                    "Évaluation "+entry.getValue().getEval().name()+"\n\n"+
-                     monuments);
+                    "Évaluation "+entry.getValue().getEval().name());
             listDataChild.put(entry.getValue().getName(), description);
         }
         //for (int i = 0; i < listParcours.size(); i++) {

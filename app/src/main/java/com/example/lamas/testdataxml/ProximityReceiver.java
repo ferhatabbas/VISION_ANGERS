@@ -12,7 +12,7 @@ import android.os.Build;
 import android.provider.Settings;
 import android.widget.Toast;
 
-import java.security.Provider;
+import com.example.lamas.testdataxml.list_activities.InformationActivity;
 
 /**
  * Created by Maxence on 16-02-09.

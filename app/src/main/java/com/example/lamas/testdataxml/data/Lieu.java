@@ -1,4 +1,6 @@
-package com.example.lamas.testdataxml;
+package com.example.lamas.testdataxml.data;
+
+import com.example.lamas.testdataxml.data.Information;
 
 import java.util.ArrayList;
 import java.util.List;
