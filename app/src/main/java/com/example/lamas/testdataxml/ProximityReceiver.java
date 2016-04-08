@@ -25,8 +25,8 @@ public class ProximityReceiver extends BroadcastReceiver {
         // Key for determining whether user is leaving or entering
         String key = LocationManager.KEY_PROXIMITY_ENTERING;
         String name = intent.getStringExtra("name");
-        Toast.makeText(context, "Welcome to my Area: "+name, Toast.LENGTH_SHORT).show();
-        int id_poi = intent.getIntExtra("id", 0);
+        //Toast.makeText(context, "Welcome to my Area: "+name, Toast.LENGTH_SHORT).show();
+        int id_poi = intent.getIntExtra("id", -1 );
         NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         Notification.Builder notification = new Notification.Builder(context);
         notification.setSmallIcon(R.drawable.direction_arrow);
@@ -49,7 +49,7 @@ public class ProximityReceiver extends BroadcastReceiver {
             //Toast.makeText(context, "Welcome to my Area: "+name, Toast.LENGTH_SHORT).show();
         }else{
             //Other custom Notification
-            Toast.makeText(context, "Thank you for visiting "+name, Toast.LENGTH_SHORT).show();
+            //Toast.makeText(context, "Thank you for visiting "+name, Toast.LENGTH_SHORT).show();
         }
     }
 

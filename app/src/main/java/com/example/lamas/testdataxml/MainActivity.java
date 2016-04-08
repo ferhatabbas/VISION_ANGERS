@@ -2,20 +2,24 @@ package com.example.lamas.testdataxml;
 
 import android.Manifest;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
-import android.location.LocationProvider;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
+import android.os.Message;
+import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
-import android.widget.Toast;
+import android.util.Log;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
@@ -26,38 +30,79 @@ import org.osmdroid.bonuspack.overlays.Polygon;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import java.util.Locale;
 import java.util.Map;
 
 
-/**
- * This is the implementation of OSMBonusPack tutorials.
- * Sections of code can be commented/uncommented depending on the progress in the tutorials.
- *
- * @author M.Kergall
- * @see <a href="https://github.com/MKergall/osmbonuspack">OSMBonusPack on GitHub</a>
- */
-public class MainActivity extends Activity {
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener{
 
-    MapView map;
+    private MapView map;
+    private TextToSpeech textToSpeech;
     private float radius = 50;
     private LocationManager locationManager;
+    private HandlerThread handlerThread;
+    private Handler checkGPShandler, safetyChackHandler;
+    private Handler mainHandler = new Handler(){
+        public void handleMessage(Message msg){
+            if (msg.what == MSG_SHOW_GPS_ALERT){
+                waitForGPSDialog.show();
+                convertTextToSpeech("Recherche d'un signal GPS");
+                poorAccuracyCounter++;
+                if(poorAccuracyCounter==5){
+
+                }
+            }
+            else if(msg.what == MSG_DISMISS_GPS_ALERT){
+                waitForGPSDialog.dismiss();
+                convertTextToSpeech("Signal GPS trouvé, reprise de l'itinéraire");
+            }
+            else if(msg.what == MSG_SHOW_LOST_ALERT){
+                safetyCheckDialog.show();
+                convertTextToSpeech("Êtes-vous perdu? Tous se passe bien? ");
+            }
+        }
+    };
+    private volatile long lastUpdateTimestamp;
+    private volatile long lastCheckGPSTimestamp = System.currentTimeMillis();
+    private volatile long delay;
+    private int poorAccuracyCounter=0;
     private MyLocationListener mylistener;
-    private String provider;
-    private Criteria criteria;
+    private volatile Location myLocation;
+    private Location myPreviousLocation;
+    private int samePreviousLocationCounter =0;
     private Marker instantMarker;
     private Polygon instantAccuracy;
     private IMapController mapController;
     private Data data;
     private IntentFilter mIntentFilter;
     private ProximityReceiver proximityReceiver;
-    private boolean receiverIsRegistered = false;
-    String ACTION_FILTER = "com.example.PROXIMITY_ALERT";
+    private volatile boolean alertsAreActivated = false;
+    private AlertDialog waitForGPSDialog;
+    private AlertDialog safetyCheckDialog;
+    private MockLocation mock;
+    String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
+    private static int MSG_SHOW_GPS_ALERT = 0;
+    private static int MSG_DISMISS_GPS_ALERT = 1;
+    private static int MSG_SHOW_LOST_ALERT = 2;
+
 
     @Override
     protected void onResume(){
         super.onResume();
-        //proximityReceiver = new ProximityReceiver();
-        //registerReceiver(proximityReceiver, mIntentFilter);
+    }
+
+    @Override
+    protected void onDestroy(){
+        super.onDestroy();
+        checkGPShandler.removeCallbacks(checkGPS);
+        safetyChackHandler.removeCallbacks(checkLost);
+        handlerThread.quit();
+        if(alertsAreActivated){
+            removeProximityAlerts();
+            //alertsAreActivated = false;
+        }
+        unregisterReceiver(proximityReceiver);
+        textToSpeech.shutdown();
     }
 
     @Override
@@ -73,10 +118,32 @@ public class MainActivity extends Activity {
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     0);
         }
+        textToSpeech = new TextToSpeech(this, this);
+        AlertDialog.Builder alertBuilder= new AlertDialog.Builder(this);
+        alertBuilder.setMessage("En attente d'une meilleure réception GPS ...");
+        waitForGPSDialog = alertBuilder.create();
+
+        alertBuilder= new AlertDialog.Builder(this);
+        alertBuilder.setMessage("Vous semblez perdu. Est-que tout va bien ?");
+        alertBuilder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface arg0, int arg1) {
+                safetyCheckDialog.dismiss();
+            }
+        });
+
+        alertBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        safetyCheckDialog = alertBuilder.create();
 
         //i'm registering my Receiver First
         mIntentFilter = new IntentFilter(ACTION_FILTER);
         proximityReceiver = new ProximityReceiver();
+        registerReceiver(proximityReceiver, mIntentFilter);
 
         //configuration of the map
         setContentView(R.layout.activity_main);
@@ -97,38 +164,49 @@ public class MainActivity extends Activity {
             temp.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             temp.setTitle(entry.getValue().getName());
             map.getOverlays().add(temp);
-            Polygon circle = createCircle(geo, Color.RED, radius);
-            map.getOverlays().add(circle);
+            map.getOverlays().add(createCircle(geo, Color.RED, radius));
 
         }
 
         //Enabled GPS
+        if (Constants.allow_mock_location) {
+            mock = new MockLocation(LocationManager.GPS_PROVIDER, this);
+        }
+        waitForGPSDialog.show();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        criteria = new Criteria();
-        criteria.setAccuracy(Criteria.ACCURACY_COARSE);   //default
-        criteria.setCostAllowed(false);
-        provider = locationManager.getBestProvider(criteria, false);
-
-        //Location location = locationManager.getLastKnownLocation(provider);
         mylistener = new MyLocationListener();
-        /*if (location != null) {
-            mylistener.onLocationChanged(location);
-        } else {
-            // leads to the settings because there is no last known location
-            Intent intent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
-            startActivity(intent);
-        }*/
         // location updates: at least 1 meter and 200millsecs change
-        locationManager.requestLocationUpdates(provider, 200, 1, mylistener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, mylistener);
 
-        //Add proximity alerts
+        //Create thread
+        handlerThread = new HandlerThread("myWorker", HandlerThread.MAX_PRIORITY);
+        handlerThread.start();
+        checkGPShandler = new Handler(handlerThread.getLooper());
+        safetyChackHandler = new Handler(handlerThread.getLooper());
+        checkGPS.run();
+        checkLost.run();
+
+
+    }
+
+
+    public void activateProximityAlerts(){
         for(Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()){
             Intent temp_intent= new Intent(ACTION_FILTER);
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
-            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getKey(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, -1, temp_pi);
-            //data.getMonumentsWithproximityAlerts().add(entry.getValue());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, 100000000, temp_pi);
+        }
+    }
+
+    public void removeProximityAlerts(){
+        for(Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()){
+            Intent temp_intent= new Intent(ACTION_FILTER);
+            temp_intent.putExtra("name", entry.getValue().getName());
+            temp_intent.putExtra("id", entry.getValue().getId());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            locationManager.removeProximityAlert(temp_pi);
         }
     }
 
@@ -141,12 +219,42 @@ public class MainActivity extends Activity {
         return circle;
     }
 
+    public Marker getInstantMarker() {
+        return instantMarker;
+    }
+
+    public long getLastUpdateTimestamp() {
+        return lastUpdateTimestamp;
+    }
+
+    @Override
+    public void onInit(int status) {
+        if (status == TextToSpeech.SUCCESS) {
+            int result = textToSpeech.setLanguage(Locale.CANADA_FRENCH);
+            if (result == TextToSpeech.LANG_MISSING_DATA
+                    || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                Log.e("error", "This Language is not supported");
+            }
+            else{
+                convertTextToSpeech("En attente du signal GPS");
+            }
+        } else {
+            Log.e("error", "Initilization Failed!");
+        }
+    }
+
+    private void convertTextToSpeech(String text) {
+        textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
+
     private class MyLocationListener implements LocationListener {
 
         @Override
         public void onLocationChanged(Location location) {
-            Toast.makeText(MainActivity.this, "Changement de position avec précision de "+location.getAccuracy(),
-            				Toast.LENGTH_SHORT).show();
+            //long duration = System.currentTimeMillis()-lastUpdateTimestamp;
+            //Toast.makeText(MainActivity.this, "Délais "+duration, Toast.LENGTH_SHORT).show();
+            myLocation = location;
+            lastUpdateTimestamp = System.currentTimeMillis();
             if(instantMarker == null){
                 instantMarker = new Marker(map);
             }
@@ -156,28 +264,6 @@ public class MainActivity extends Activity {
 
             GeoPoint instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
             if(location.hasAccuracy()){
-                if(location.getAccuracy() > 21){
-                    if(receiverIsRegistered) {
-                        Toast.makeText(MainActivity.this, "Désenregistrement du receiver!",
-                                Toast.LENGTH_SHORT).show();
-                        unregisterReceiver(proximityReceiver);
-                        receiverIsRegistered = false;
-                    }
-                }
-                else{
-                    if(!receiverIsRegistered){
-                        Toast.makeText(MainActivity.this, "Enregistrement du receiver !",
-                                Toast.LENGTH_SHORT).show();
-                        registerReceiver(proximityReceiver, mIntentFilter);
-                        receiverIsRegistered = true;
-                    }
-
-                }
-                //else {
-                //    if(proximityReceiver!=null){
-                //        registerReceiver(proximityReceiver, mIntentFilter);
-                //    }
-                //}
                 if(instantAccuracy==null){
                     instantAccuracy = new Polygon(getApplicationContext());
                 }
@@ -201,31 +287,76 @@ public class MainActivity extends Activity {
 
         @Override
         public void onStatusChanged(String provider, int status, Bundle extras) {
-            Toast.makeText(MainActivity.this, provider + "'s status changed to "+status +"!",
-                    Toast.LENGTH_SHORT).show();
-            if(status!= LocationProvider.AVAILABLE){
-                unregisterReceiver(proximityReceiver);
-            }
-            else {
-                if(proximityReceiver!=null){
-                    registerReceiver(proximityReceiver, mIntentFilter);
-                }
-            }
+
         }
 
         @Override
         public void onProviderEnabled(String provider) {
-            Toast.makeText(MainActivity.this, "Provider " + provider + " enabled!",
-                    Toast.LENGTH_SHORT).show();
+
         }
 
         @Override
         public void onProviderDisabled(String provider) {
-            Toast.makeText(MainActivity.this, "Provider " + provider + " disabled!",
-                    Toast.LENGTH_SHORT).show();
-            unregisterReceiver(proximityReceiver);
+
         }
+
     }
+
+    public void pushNewLocation(double lon, double lat, float accuracy){
+        mock.pushLocation(lon, lat, accuracy);
+    }
+
+    public AlertDialog getWaitForGPSDialog() {
+        return waitForGPSDialog;
+    }
+
+    public AlertDialog getSafetyCheckDialog() {
+        return safetyCheckDialog;
+    }
+
+    private Runnable checkGPS = new Runnable() {
+        @Override
+        public void run() {
+            delay = System.currentTimeMillis() - lastCheckGPSTimestamp;
+            lastCheckGPSTimestamp = System.currentTimeMillis();
+            if(myLocation!=null && myLocation.getAccuracy() <= Constants.MIN_ACCURACY){
+                if(!alertsAreActivated){
+                    activateProximityAlerts();
+                    alertsAreActivated = true;
+                    mainHandler.sendEmptyMessage(MSG_DISMISS_GPS_ALERT);
+                }
+            }
+            else{
+                if(alertsAreActivated){
+                    removeProximityAlerts();
+                    alertsAreActivated = false;
+                    mainHandler.sendEmptyMessage(MSG_SHOW_GPS_ALERT);
+                }
+            }
+            mainHandler.sendEmptyMessage(MSG_DISMISS_GPS_ALERT);
+            checkGPShandler.postDelayed(checkGPS, 3000);
+        }
+    };
+
+    private Runnable checkLost = new Runnable() {
+        @Override
+        public void run() {
+            if(myLocation!=null) {
+                if (samePreviousLocationCounter == 0) {
+                    myPreviousLocation = myLocation;
+                    samePreviousLocationCounter++;
+                } else {
+                    if (myLocation.distanceTo(myPreviousLocation) < 10.0) {
+                        samePreviousLocationCounter++;
+                        if (samePreviousLocationCounter == 5) {
+                            mainHandler.sendEmptyMessage(MSG_SHOW_LOST_ALERT);
+                        }
+                    }
+                }
+            }
+            safetyChackHandler.postDelayed(checkLost, 3000);
+        }
+    };
 
 }
 
