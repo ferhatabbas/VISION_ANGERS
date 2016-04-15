@@ -8,6 +8,10 @@ import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Monument;
+import com.example.lamas.testdataxml.list_activities.LieuxAdapter;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;

@@ -3,6 +3,8 @@ package com.example.lamas.testdataxml;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -17,6 +19,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
 import android.os.Message;
+import android.os.PowerManager;
+import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
@@ -49,22 +53,23 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 convertTextToSpeech("Recherche d'un signal GPS");
                 poorAccuracyCounter++;
                 if(poorAccuracyCounter==5){
-
+                    notificationManager.notify(Constants.CHECK_GPS_NOTIFICATION_ID, notificationGPSCheck);
+                    poorAccuracyCounter = 0;
                 }
             }
             else if(msg.what == MSG_DISMISS_GPS_ALERT){
                 waitForGPSDialog.dismiss();
                 convertTextToSpeech("Signal GPS trouvé, reprise de l'itinéraire");
+                notificationManager.cancelAll();
             }
             else if(msg.what == MSG_SHOW_LOST_ALERT){
                 safetyCheckDialog.show();
                 convertTextToSpeech("Êtes-vous perdu? Tous se passe bien? ");
+                notificationManager.notify(Constants.SAFETYCHECK_NOTIFICATION_ID, notificationSafetyCheck);
             }
         }
     };
-    private volatile long lastUpdateTimestamp;
     private volatile long lastCheckGPSTimestamp = System.currentTimeMillis();
-    private volatile long delay;
     private int poorAccuracyCounter=0;
     private MyLocationListener mylistener;
     private volatile Location myLocation;
@@ -77,8 +82,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private IntentFilter mIntentFilter;
     private ProximityReceiver proximityReceiver;
     private volatile boolean alertsAreActivated = false;
-    private AlertDialog waitForGPSDialog;
-    private AlertDialog safetyCheckDialog;
+    private AlertDialog waitForGPSDialog, safetyCheckDialog;
+    private Notification notificationGPSCheck, notificationSafetyCheck;
+    private NotificationManager notificationManager;
     private MockLocation mock;
     String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
     private static int MSG_SHOW_GPS_ALERT = 0;
@@ -118,7 +124,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     new String[]{Manifest.permission.ACCESS_COARSE_LOCATION},
                     0);
         }
+
+        // Initialize textToSpeech
         textToSpeech = new TextToSpeech(this, this);
+
+        // Build all dialog alerts required
         AlertDialog.Builder alertBuilder= new AlertDialog.Builder(this);
         alertBuilder.setMessage("En attente d'une meilleure réception GPS ...");
         waitForGPSDialog = alertBuilder.create();
@@ -135,12 +145,27 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         alertBuilder.setNegativeButton("Non", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+                Intent intent = new Intent(Intent.ACTION_DIAL);
+                startActivity(intent);
             }
         });
         safetyCheckDialog = alertBuilder.create();
 
-        //i'm registering my Receiver First
+        // Build all notifications required
+        notificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+        Notification.Builder notification = new Notification.Builder(getApplicationContext());
+        notification.setSmallIcon(R.drawable.navto_small);
+        notification.setContentTitle("Aucun signal GPS disponible!");
+        notification.setContentText("Aucun signal GPS n'est disponible pour le moment, en attente d'un signal valide.");
+        notification.setSound(Settings.System.DEFAULT_NOTIFICATION_URI);
+        notificationGPSCheck = notification.build();
+
+        notification.setSmallIcon(R.drawable.person);
+        notification.setContentTitle("Vous semblez perdu. Est-que tout va bien ?");
+        notification.setContentText("Vous semblez perdu. Est-que tout va bien ?");
+        notificationSafetyCheck = notification.build();
+
+        // Registering Receiver First
         mIntentFilter = new IntentFilter(ACTION_FILTER);
         proximityReceiver = new ProximityReceiver();
         registerReceiver(proximityReceiver, mIntentFilter);
@@ -163,9 +188,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             mapController.setCenter(geo);
             temp.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             temp.setTitle(entry.getValue().getName());
-            map.getOverlays().add(temp);
-            map.getOverlays().add(createCircle(geo, Color.RED, radius));
 
+            if(Constants.allow_mock_location){
+                map.getOverlays().add(temp);
+                map.getOverlays().add(createCircle(geo, Color.RED, radius));
+            }
         }
 
         //Enabled GPS
@@ -175,8 +202,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         waitForGPSDialog.show();
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         mylistener = new MyLocationListener();
-        // location updates: at least 1 meter and 200millsecs change
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 5000, 0, mylistener);
+        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, Constants.REQUEST_LOCATION_MANAGER_TIME, 0, mylistener);
 
         //Create thread
         handlerThread = new HandlerThread("myWorker", HandlerThread.MAX_PRIORITY);
@@ -196,7 +222,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, 100000000, temp_pi);
+            locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
         }
     }
 
@@ -223,10 +249,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return instantMarker;
     }
 
-    public long getLastUpdateTimestamp() {
-        return lastUpdateTimestamp;
-    }
-
     @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
@@ -243,6 +265,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    @Override
+    public void onLowMemory(){
+        PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
+        pm.reboot(null);
+    }
+
     private void convertTextToSpeech(String text) {
         textToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
@@ -254,7 +282,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             //long duration = System.currentTimeMillis()-lastUpdateTimestamp;
             //Toast.makeText(MainActivity.this, "Délais "+duration, Toast.LENGTH_SHORT).show();
             myLocation = location;
-            lastUpdateTimestamp = System.currentTimeMillis();
+            lastCheckGPSTimestamp = System.currentTimeMillis();
             if(instantMarker == null){
                 instantMarker = new Marker(map);
             }
@@ -278,7 +306,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
             instantMarker.setPosition(instantGeopoint);
             instantMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-            instantMarker.setTitle("I'm here!");
+            instantMarker.setTitle("Vous êtes ici.");
             instantMarker.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
             map.getOverlays().add(instantMarker);
             mapController.setCenter(instantGeopoint);
@@ -317,9 +345,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Runnable checkGPS = new Runnable() {
         @Override
         public void run() {
-            delay = System.currentTimeMillis() - lastCheckGPSTimestamp;
-            lastCheckGPSTimestamp = System.currentTimeMillis();
-            if(myLocation!=null && myLocation.getAccuracy() <= Constants.MIN_ACCURACY){
+            if(myLocation!=null && (myLocation.getAccuracy() <= Constants.MIN_ACCURACY)
+                    && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.WAIT_FOR_GPS_TIMEOUT+200)){
                 if(!alertsAreActivated){
                     activateProximityAlerts();
                     alertsAreActivated = true;
@@ -333,8 +360,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     mainHandler.sendEmptyMessage(MSG_SHOW_GPS_ALERT);
                 }
             }
-            mainHandler.sendEmptyMessage(MSG_DISMISS_GPS_ALERT);
-            checkGPShandler.postDelayed(checkGPS, 3000);
+            checkGPShandler.postDelayed(checkGPS, Constants.WAIT_FOR_GPS_TIMEOUT);
         }
     };
 
@@ -354,7 +380,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     }
                 }
             }
-            safetyChackHandler.postDelayed(checkLost, 3000);
+            safetyChackHandler.postDelayed(checkLost, Constants.SAFETY_CHECK_TIMEOUT);
         }
     };
 
