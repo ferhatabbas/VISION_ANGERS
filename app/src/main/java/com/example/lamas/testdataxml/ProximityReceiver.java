@@ -43,7 +43,7 @@ public class ProximityReceiver extends BroadcastReceiver {
             next_activity.putExtra("id", id_poi);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, next_activity, 0);
             notification.setContentIntent(pendingIntent);
-            notificationManager.notify(1, notification.build());
+            notificationManager.notify(Constants.POI_NOTIFICATION_ID, notification.build());
             context.startActivity(next_activity);
                     //notificationManager.cancel(1);
             //Toast.makeText(context, "Welcome to my Area: "+name, Toast.LENGTH_SHORT).show();
