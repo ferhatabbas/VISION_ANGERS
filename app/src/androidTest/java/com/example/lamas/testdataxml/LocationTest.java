@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.lamas.testdataxml.data.Data;
+
 import java.util.ArrayList;
 
 
@@ -99,17 +101,6 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         assertEquals(activity.getInstantMarker().getPosition().getLongitude(), longitude);
     }
 
-    public void testMockLocation_speed() throws InterruptedException {
-        double latitude = 45.35, longitude = 45.25;
-        MainActivity activity = getActivity();
-        for(int i=0; i<20;i++){
-            long timestamp = System.currentTimeMillis();
-            activity.pushNewLocation(latitude, longitude, 10.0f);
-            Thread.sleep(5000);
-            long diff = activity.getLastUpdateTimestamp() - timestamp;
-            System.out.println("Temps :"+diff);
-        }
-    }
 
     public void test_long_course() throws InterruptedException {
         MainActivity activity = getActivity();

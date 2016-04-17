@@ -71,6 +71,10 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".list_activities.LieuxActivity" />
         </activity>
+        <activity
+            android:name=".MainActivityTest"
+            android:label="@string/title_activity_main_activity_test"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
