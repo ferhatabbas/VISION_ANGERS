@@ -15,6 +15,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.HandlerThread;
@@ -27,6 +28,8 @@ import android.util.Log;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
+import com.example.lamas.testdataxml.data.Parcours;
+import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import org.osmdroid.api.IMapController;
 import org.osmdroid.bonuspack.overlays.Marker;
@@ -38,7 +41,7 @@ import java.util.Locale;
 import java.util.Map;
 
 
-public class MainActivity extends Activity implements TextToSpeech.OnInitListener{
+public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 
     private MapView map;
     private TextToSpeech textToSpeech;
@@ -46,23 +49,21 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private LocationManager locationManager;
     private HandlerThread handlerThread;
     private Handler checkGPShandler, safetyChackHandler;
-    private Handler mainHandler = new Handler(){
-        public void handleMessage(Message msg){
-            if (msg.what == MSG_SHOW_GPS_ALERT){
+    private Handler mainHandler = new Handler() {
+        public void handleMessage(Message msg) {
+            if (msg.what == MSG_SHOW_GPS_ALERT) {
                 waitForGPSDialog.show();
                 convertTextToSpeech("Recherche d'un signal GPS");
                 poorAccuracyCounter++;
-                if(poorAccuracyCounter==5){
+                if (poorAccuracyCounter == 5) {
                     notificationManager.notify(Constants.CHECK_GPS_NOTIFICATION_ID, notificationGPSCheck);
                     poorAccuracyCounter = 0;
                 }
-            }
-            else if(msg.what == MSG_DISMISS_GPS_ALERT){
+            } else if (msg.what == MSG_DISMISS_GPS_ALERT) {
                 waitForGPSDialog.dismiss();
                 convertTextToSpeech("Signal GPS trouvé, reprise de l'itinéraire");
                 notificationManager.cancelAll();
-            }
-            else if(msg.what == MSG_SHOW_LOST_ALERT){
+            } else if (msg.what == MSG_SHOW_LOST_ALERT) {
                 safetyCheckDialog.show();
                 convertTextToSpeech("Êtes-vous perdu? Tous se passe bien? ");
                 notificationManager.notify(Constants.SAFETYCHECK_NOTIFICATION_ID, notificationSafetyCheck);
@@ -70,11 +71,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     };
     private volatile long lastCheckGPSTimestamp = System.currentTimeMillis();
-    private int poorAccuracyCounter=0;
+    private int poorAccuracyCounter = 0;
     private MyLocationListener mylistener;
     private volatile Location myLocation;
     private Location myPreviousLocation;
-    private int samePreviousLocationCounter =0;
+    private int samePreviousLocationCounter = 0;
     private Marker instantMarker;
     private Polygon instantAccuracy;
     private IMapController mapController;
@@ -90,20 +91,32 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static int MSG_SHOW_GPS_ALERT = 0;
     private static int MSG_DISMISS_GPS_ALERT = 1;
     private static int MSG_SHOW_LOST_ALERT = 2;
+    private ParcoursABC parcours;
+    private Monument monument;
+    private static int pos;
+    private int indexparcours = 1;
 
 
     @Override
-    protected void onResume(){
+    protected void onResume() {
+
         super.onResume();
+        if (data.getParameters().isGooglemaps()) {
+            parcours = data.getParcourses().get(indexparcours);
+            monument = parcours.getMonuments().get(pos);
+            pos++;
+            googleMapMode(monument.getLatitude(), monument.getLongitude());
+
+        }
     }
 
     @Override
-    protected void onDestroy(){
+    protected void onDestroy() {
         super.onDestroy();
         checkGPShandler.removeCallbacks(checkGPS);
         safetyChackHandler.removeCallbacks(checkLost);
         handlerThread.quit();
-        if(alertsAreActivated){
+        if (alertsAreActivated) {
             removeProximityAlerts();
             //alertsAreActivated = false;
         }
@@ -116,7 +129,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         //Introduction
         super.onCreate(savedInstanceState);
-
+        pos = 0;
         //Check if the user have coarse location permission
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -129,11 +142,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         textToSpeech = new TextToSpeech(this, this);
 
         // Build all dialog alerts required
-        AlertDialog.Builder alertBuilder= new AlertDialog.Builder(this);
+        AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setMessage("En attente d'une meilleure réception GPS ...");
         waitForGPSDialog = alertBuilder.create();
 
-        alertBuilder= new AlertDialog.Builder(this);
+        alertBuilder = new AlertDialog.Builder(this);
         alertBuilder.setMessage("Vous semblez perdu. Est-que tout va bien ?");
         alertBuilder.setPositiveButton("Oui", new DialogInterface.OnClickListener() {
             @Override
@@ -189,7 +202,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             temp.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
             temp.setTitle(entry.getValue().getName());
 
-            if(Constants.allow_mock_location){
+            if (Constants.allow_mock_location) {
                 map.getOverlays().add(temp);
                 map.getOverlays().add(createCircle(geo, Color.RED, radius));
             }
@@ -212,26 +225,62 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         checkGPS.run();
         checkLost.run();
 
+        // verifier si google map sera utilisé ou pas
+        if (data.getParameters().isGooglemaps()) {
+            parcours = data.getParcourses().get(indexparcours);
+            monument = parcours.getMonuments().get(pos);
+            pos++;
+            googleMapMode(monument.getLatitude(), monument.getLongitude());
+
+        }
 
     }
 
+    public void googleMapMode(double lat, double lng) {
+        Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lng + "&mode=w");
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
-    public void activateProximityAlerts(){
-        for(Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()){
-            Intent temp_intent= new Intent(ACTION_FILTER);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        mapIntent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);
+        startActivity(mapIntent);
+    }
+
+    public void activateProximityAlerts() {
+        for (Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()) {
+            Intent temp_intent = new Intent(ACTION_FILTER);
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
         }
     }
 
-    public void removeProximityAlerts(){
-        for(Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()){
-            Intent temp_intent= new Intent(ACTION_FILTER);
+    public void removeProximityAlerts() {
+        for (Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()) {
+            Intent temp_intent = new Intent(ACTION_FILTER);
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                // TODO: Consider calling
+                //    ActivityCompat#requestPermissions
+                // here to request the missing permissions, and then overriding
+                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                //                                          int[] grantResults)
+                // to handle the case where the user grants the permission. See the documentation
+                // for ActivityCompat#requestPermissions for more details.
+                return;
+            }
             locationManager.removeProximityAlert(temp_pi);
         }
     }
