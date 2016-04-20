@@ -13,6 +13,7 @@ public class Parameters {
     private int couleurBackground = -1;
     private int couleurTexte = -16777216;
     private Typeface typeface = null;
+    private static boolean googlemaps;
 
 
     public Typeface getTypeface() {
@@ -48,7 +49,13 @@ public class Parameters {
     public void setCouleurTexte(int couleurTexte) {
         this.couleurTexte = couleurTexte;
     }
+    public boolean isGooglemaps() {
+        return googlemaps;
+    }
 
+    public void setGooglemaps(boolean googlemaps) {
+        this.googlemaps = googlemaps;
+    }
 
 
 
