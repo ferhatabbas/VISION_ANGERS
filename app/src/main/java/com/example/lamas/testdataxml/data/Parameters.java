@@ -13,7 +13,7 @@ public class Parameters {
     private int couleurBackground = -1;
     private int couleurTexte = -16777216;
     private Typeface typeface = null;
-    private boolean googlemaps= true;
+    private static boolean googlemaps;
 
 
     public Typeface getTypeface() {

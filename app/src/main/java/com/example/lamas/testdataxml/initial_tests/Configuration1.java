@@ -11,43 +11,46 @@ import android.widget.Button;
 
 import com.example.lamas.testdataxml.Activite_test;
 import com.example.lamas.testdataxml.R;
+import com.example.lamas.testdataxml.data.Data;
 
 import java.util.Locale;
 
 public class Configuration1 extends Activity implements TextToSpeech.OnInitListener {
 
     private TextToSpeech textToSpeech;
-    private Button bNonVoyant;
-    private Button bMalVoyant;
+    private Button BAssister;
+    private Button BLibre;
+    private Data data;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.content_configuration1);
-        bNonVoyant = (Button) findViewById(R.id.button1);
-        bMalVoyant = (Button) findViewById(R.id.button2);
-
+        BAssister = (Button) findViewById(R.id.button1);
+        BLibre = (Button) findViewById(R.id.button2);
+        data=Data.getInstance(getApplicationContext());
         textToSpeech = new TextToSpeech(this, this);
 
-        bNonVoyant.setOnClickListener(new View.OnClickListener() {
+        BAssister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                String toSpeak = bNonVoyant.getText().toString();
+                String toSpeak = BAssister.getText().toString();
                 convertTextToSpeech(toSpeak);
-
-                Intent secondeActivite = new Intent(Configuration1.this, Activite_test.class);
+                data.getParameters().setGooglemaps(true);
+                Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
                 startActivity(secondeActivite);
             }
 
         });
 
-        bMalVoyant.setOnClickListener(new View.OnClickListener() {
+        BLibre.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                String toSpeak = bMalVoyant.getText().toString();
+                String toSpeak = BLibre.getText().toString();
                 convertTextToSpeech(toSpeak);
                 if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
+                data.getParameters().setGooglemaps(false);
                     Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
                 startActivity(secondeActivite);
             }
@@ -64,7 +67,7 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("error", "This Language is not supported");
             } else {
-                convertTextToSpeech("Êtes-vous non-voyant ou malvoyant?");
+                convertTextToSpeech("Voulez-vous une navigation assistée ou libre?");
             }
         } else {
             Log.e("error", "Initilization Failed!");
@@ -84,7 +87,7 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     public void onResume() {
         super.onResume();
         if(textToSpeech != null){
-            convertTextToSpeech("Êtes-vous non-voyant ou malvoyant?");
+            convertTextToSpeech("Voulez-vous une navigation assistée ou libre?");
         }
     }
     @Override

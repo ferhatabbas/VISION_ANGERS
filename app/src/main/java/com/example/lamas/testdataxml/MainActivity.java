@@ -94,7 +94,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private ParcoursABC parcours;
     private Monument monument;
     private static int pos;
-    private int indexparcours = 1;
+    private int indexparcours = 4;
 
 
     @Override
@@ -251,16 +251,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
         }
     }
@@ -271,16 +261,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             temp_intent.putExtra("name", entry.getValue().getName());
             temp_intent.putExtra("id", entry.getValue().getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                // TODO: Consider calling
-                //    ActivityCompat#requestPermissions
-                // here to request the missing permissions, and then overriding
-                //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                //                                          int[] grantResults)
-                // to handle the case where the user grants the permission. See the documentation
-                // for ActivityCompat#requestPermissions for more details.
-                return;
-            }
             locationManager.removeProximityAlert(temp_pi);
         }
     }

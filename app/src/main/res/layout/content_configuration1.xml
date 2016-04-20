@@ -9,7 +9,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Êtes-vous non-voyant ou malvoyant?"
+        android:text="Voulez-vous une navigation assistée ou libre ?"
         android:id="@+id/textView"
         android:layout_weight="0.20"
         android:textSize="60dp"
@@ -18,7 +18,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Non-voyant"
+        android:text="Assistée"
         android:id="@+id/button1"
         android:layout_weight="0.20"
         android:textSize="30dp" />
@@ -26,7 +26,7 @@
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Malvoyant"
+        android:text="Libre"
         android:id="@+id/button2"
         android:layout_weight="0.20"
         android:textSize="30dp" />
