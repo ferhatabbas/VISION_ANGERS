@@ -76,13 +76,52 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         activity.finish();
     }
 
+    public void test_list() throws InterruptedException {
+        MainActivityTest activity = getActivity();
+        int tab[] = new int [100000];
+        for(int i=0; i<100000; i++){
+            tab[i] = i;
+        }
+
+        int sum = 0;
+        //Test 1
+
+        long before, delay = 0;
+        for (int j = 0; j < 1000; j++){
+            before = System.nanoTime();
+            for(int i=0; i < 100000; i++){
+                sum += tab[i];
+            }
+            delay += System.nanoTime() - before;
+        }
+        double averagetime = delay / 1000;
+        activity.write("Test 1 :" + averagetime + "\n");
+        System.out.print("Test 1 :" + averagetime + " "+sum+"\n");
+
+        //Test 3
+        sum = 0;
+        delay = 0;
+        for (int j = 0; j < 1000; j++){
+            before = System.nanoTime();
+            for(int i : tab){
+                sum += i;
+            }
+            delay += System.nanoTime() - before;
+        }
+        averagetime = delay / 1000;
+        activity.write("Test 3 :" + averagetime + "\n");
+        System.out.print("Test 3 :" + averagetime + " "+sum+"\n");
+        Thread.sleep(10000);
+        activity.finish();
+    }
+
     public void test_access_time() throws InterruptedException {
         MainActivityTest activity = getActivity();
         long temp=0, before, delay=0;
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
             temp = var;
-            //temp += 1;
+            temp += 1;
             delay += System.nanoTime() - before;
         }
         double averagetime = delay / 1000;
@@ -93,7 +132,7 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
             temp = getVar();
-            //temp += 1;
+            temp += 1;
             delay += System.nanoTime() - before;
         }
         averagetime = delay / 1000;
@@ -104,7 +143,7 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
             temp = var2;
-            //temp += 1;
+            temp += 1;
             delay += System.nanoTime() - before;
         }
         averagetime = delay / 1000;
@@ -115,7 +154,7 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
             temp = var3;
-            //temp += 1;
+            temp += 1;
             delay += System.nanoTime() - before;
         }
         averagetime = delay / 1000;
@@ -126,7 +165,7 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
             temp = getVar4();
-            //temp += 1;
+            temp += 1;
             delay += System.nanoTime() - before;
         }
         averagetime = delay / 1000;
