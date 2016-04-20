@@ -1,15 +1,18 @@
 package com.example.lamas.testdataxml;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
+import com.example.lamas.testdataxml.initial_tests.Configuration2;
 import com.example.lamas.testdataxml.list_activities.LieuxAdapter;
 
 import java.util.ArrayList;
@@ -23,7 +26,7 @@ public class InformationActivity extends Activity implements
 
     private TextToSpeech textToSpeech;
     public Data data;
-
+    private Button bContinue;
     LieuxAdapter lieuxAdapter;
     ExpandableListView expListView;
     List<String> listDataHeader = new ArrayList<>();
@@ -33,6 +36,7 @@ public class InformationActivity extends Activity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_information);
+        bContinue = (Button) findViewById(R.id.button);
 
         textToSpeech = new TextToSpeech(this, this);
 
@@ -87,6 +91,23 @@ public class InformationActivity extends Activity implements
             }
         });
 
+        if(data.getParameters().isGooglemaps() == false){
+            bContinue.setVisibility(View.INVISIBLE);
+
+        }else if(data.getParameters().isGooglemaps() == true){
+            bContinue.setVisibility(View.VISIBLE);
+            bContinue.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View arg0) {
+                    String toSpeak = bContinue.getText().toString();
+                    convertTextToSpeech(toSpeak);
+                    Intent secondeActivite = new Intent(InformationActivity.this, MainActivity.class);
+                    startActivity(secondeActivite);
+                }
+
+            });
+
+        }
     }
 
     @Override

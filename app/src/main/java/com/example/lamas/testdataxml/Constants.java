@@ -5,7 +5,7 @@ package com.example.lamas.testdataxml;
  */
 public class Constants {
 
-  public static final Boolean allow_mock_location = true;
+  public static final Boolean allow_mock_location = false;
 
   /* nom du fichier DATA*/
   public static final String FILE_PATH = "DataTest";
