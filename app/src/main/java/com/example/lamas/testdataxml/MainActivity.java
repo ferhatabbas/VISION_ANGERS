@@ -28,7 +28,6 @@ import android.util.Log;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
-import com.example.lamas.testdataxml.data.Parcours;
 import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import org.osmdroid.api.IMapController;
@@ -37,8 +36,8 @@ import org.osmdroid.bonuspack.overlays.Polygon;
 import org.osmdroid.util.GeoPoint;
 import org.osmdroid.views.MapView;
 
+import java.util.ArrayList;
 import java.util.Locale;
-import java.util.Map;
 
 
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
@@ -72,6 +71,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     };
     private volatile long lastCheckGPSTimestamp = System.currentTimeMillis();
     private int poorAccuracyCounter = 0;
+    private GeoPoint instantGeopoint;
     private MyLocationListener mylistener;
     private volatile Location myLocation;
     private Location myPreviousLocation;
@@ -93,8 +93,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private static int MSG_SHOW_LOST_ALERT = 2;
     private ParcoursABC parcours;
     private Monument monument;
-    private static int pos;
-    private int indexparcours = 4;
+    private int currentPOI = 0;
+    private int idParcours = 1;
 
 
     @Override
@@ -102,9 +102,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         super.onResume();
         if (data.getParameters().isGooglemaps()) {
-            parcours = data.getParcourses().get(indexparcours);
-            monument = parcours.getMonuments().get(pos);
-            pos++;
+            parcours = data.getParcourses().get(idParcours);
+            monument = parcours.getMonuments().get(currentPOI);
+            currentPOI++;
             googleMapMode(monument.getLatitude(), monument.getLongitude());
 
         }
@@ -129,7 +129,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         //Introduction
         super.onCreate(savedInstanceState);
-        pos = 0;
+
+        // Retrieve course id
+        if(!Constants.ALLOW_MOCK_LOCATION){
+            Bundle b = getIntent().getExtras();
+            idParcours = b.getInt("id");
+        }
         //Check if the user have coarse location permission
         if (ActivityCompat.checkSelfPermission(
                 this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -194,22 +199,22 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         //Add data
         data = Data.getInstance(getApplicationContext());
-        for (Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()) {
+        for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
             Marker temp = new Marker(map);
-            GeoPoint geo = new GeoPoint(entry.getValue().getLatitude(), entry.getValue().getLongitude());
+            GeoPoint geo = new GeoPoint(entry.getLatitude(), entry.getLongitude());
             temp.setPosition(geo);
             mapController.setCenter(geo);
             temp.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-            temp.setTitle(entry.getValue().getName());
+            temp.setTitle(entry.getName());
 
-            if (Constants.allow_mock_location) {
+            if (Constants.DEBUG_MODE) {
                 map.getOverlays().add(temp);
                 map.getOverlays().add(createCircle(geo, Color.RED, radius));
             }
         }
 
         //Enabled GPS
-        if (Constants.allow_mock_location) {
+        if (Constants.ALLOW_MOCK_LOCATION) {
             mock = new MockLocation(LocationManager.GPS_PROVIDER, this);
         }
         waitForGPSDialog.show();
@@ -227,9 +232,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         // verifier si google map sera utilisé ou pas
         if (data.getParameters().isGooglemaps()) {
-            parcours = data.getParcourses().get(indexparcours);
-            monument = parcours.getMonuments().get(pos);
-            pos++;
+            parcours = data.getParcourses().get(idParcours);
+            monument = parcours.getMonuments().get(currentPOI);
+            currentPOI++;
             googleMapMode(monument.getLatitude(), monument.getLongitude());
 
         }
@@ -246,23 +251,43 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
     public void activateProximityAlerts() {
-        for (Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()) {
+        ArrayList<Monument> monuments = data.getParcourses().get(idParcours).getMonuments();
+        int size = monuments.size();
+        for(int i=0; i<size; i++){
+            Monument temp = monuments.get(i);
             Intent temp_intent = new Intent(ACTION_FILTER);
-            temp_intent.putExtra("name", entry.getValue().getName());
-            temp_intent.putExtra("id", entry.getValue().getId());
-            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.addProximityAlert(entry.getValue().getLatitude(), entry.getValue().getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
+            temp_intent.putExtra("name", temp.getName());
+            temp_intent.putExtra("id", temp.getId());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), temp.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            locationManager.addProximityAlert(temp.getLatitude(), temp.getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
         }
+        /*for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
+            Intent temp_intent = new Intent(ACTION_FILTER);
+            temp_intent.putExtra("name", entry.getName());
+            temp_intent.putExtra("id", entry.getId());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            locationManager.addProximityAlert(entry.getLatitude(), entry.getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
+        }*/
     }
 
     public void removeProximityAlerts() {
-        for (Map.Entry<Integer, Monument> entry : data.getMonuments().entrySet()) {
+        ArrayList<Monument> monuments = data.getParcourses().get(idParcours).getMonuments();
+        int size = monuments.size();
+        for(int i=0; i<size; i++){
+            Monument temp = monuments.get(i);
             Intent temp_intent = new Intent(ACTION_FILTER);
-            temp_intent.putExtra("name", entry.getValue().getName());
-            temp_intent.putExtra("id", entry.getValue().getId());
-            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getValue().getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            temp_intent.putExtra("name", temp.getName());
+            temp_intent.putExtra("id", temp.getId());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), temp.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
             locationManager.removeProximityAlert(temp_pi);
         }
+        /*for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
+            Intent temp_intent = new Intent(ACTION_FILTER);
+            temp_intent.putExtra("name", entry.getName());
+            temp_intent.putExtra("id", entry.getId());
+            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
+            locationManager.removeProximityAlert(temp_pi);
+        }*/
     }
 
     private Polygon createCircle(GeoPoint geopoint, int color, float radius){
@@ -319,16 +344,23 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 map.getOverlays().remove(instantMarker);
             }
 
-            GeoPoint instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+            if(instantGeopoint == null){
+                instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+            }
+            else{
+                instantGeopoint.setLatitudeE6( (int) (location.getLatitude() * 1E6));
+                instantGeopoint.setLongitudeE6((int) (location.getLongitude() * 1E6));
+            }
+
             if(location.hasAccuracy()){
                 if(instantAccuracy==null){
-                    instantAccuracy = new Polygon(getApplicationContext());
+                    instantAccuracy = createCircle(instantGeopoint, Color.BLUE, location.getAccuracy());;
                 }
                 else {
                     map.getOverlays().remove(instantAccuracy);
                 }
 
-                instantAccuracy = createCircle(instantGeopoint, Color.BLUE, location.getAccuracy());
+                instantAccuracy.setPoints(Polygon.pointsAsCircle(instantGeopoint, location.getAccuracy()));
                 map.getOverlays().add(instantAccuracy);
 
             }

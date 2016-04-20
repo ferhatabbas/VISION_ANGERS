@@ -101,6 +101,7 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
             Log.e("error", "Initilization Failed!");
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
@@ -109,6 +110,15 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
 
         }
     }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(textToSpeech != null){
+            textToSpeech.stop();
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -119,7 +129,9 @@ public class Configuration3 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        textToSpeech.shutdown();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
     }
 
     private void convertTextToSpeech(String text) {

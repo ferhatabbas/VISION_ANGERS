@@ -160,6 +160,15 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
 
         }
     }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(textToSpeech != null){
+            textToSpeech.stop();
+        }
+    }
+
     @Override
     public void onResume() {
         super.onResume();
@@ -171,7 +180,9 @@ public class Configuration4 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        textToSpeech.shutdown();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
     }
 
     private void convertTextToSpeech(String text) {

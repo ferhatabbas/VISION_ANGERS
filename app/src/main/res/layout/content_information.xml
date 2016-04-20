@@ -30,13 +30,14 @@
         android:layout_below="@+id/nom_lieu" />
 
     <Button
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="New Button"
-        android:id="@+id/button"
+        android:text="Continuer la visite"
+        android:id="@+id/continueVisit"
+        android:textSize="20dp"
+        android:padding="35dp"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:enabled="false" />
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
 </RelativeLayout>
