@@ -40,10 +40,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".Activite_test"
-            android:label="@string/title_activity_activite_test"
-            android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".list_activities.ParcoursActivity"
             android:label="ParcoursActivity"
@@ -51,7 +48,7 @@
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.example.lamas.testdataxml.Activite_test" />
+                android:value=".initial_tests.Configuration5" />
         </activity>
         <activity
             android:name=".list_activities.LieuxActivity"

@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.test.ActivityInstrumentationTestCase2;
 
 import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.list_activities.InformationActivity;
 
 import java.util.ArrayList;
 
@@ -80,6 +81,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public void tearDown(){
         getActivity().finish();
+        getActivity().onDestroy();
     }
 
 
@@ -107,7 +109,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         Instrumentation.ActivityMonitor activityMonitor = new Instrumentation.ActivityMonitor(InformationActivity.class.getName(),
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
-        int wait_time_between_step = 5000;
+        int wait_time_between_step = 6000;
         float accuracy = 10.0f;
         for (Step step: long_course){
             activity.pushNewLocation(step.latitude, step.longitude, accuracy);
@@ -123,7 +125,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
         int i=0;
-        int wait_time_between_step = 5000;
+        int wait_time_between_step = 6000;
         float accuracy = 10.0f;
         for (Step step: long_course){
             if(step.is_POI){
@@ -142,7 +144,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         Instrumentation.ActivityMonitor activityMonitor = new Instrumentation.ActivityMonitor(InformationActivity.class.getName(),
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
-        int wait_time_between_step = 10000;
+        int wait_time_between_step = 6000;
         float accuracy = 10.0f;
         for (Step step : short_course) {
             activity.pushNewLocation(step.latitude, step.longitude, accuracy);
@@ -164,7 +166,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         Instrumentation.ActivityMonitor activityMonitor = new Instrumentation.ActivityMonitor(InformationActivity.class.getName(),
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
-        int wait_time_between_step = 4000;
+        int wait_time_between_step = 6000;
         float accuracy = 100.0f;
         for (Step step: long_course){
             activity.pushNewLocation(step.latitude, step.longitude, accuracy);
@@ -222,7 +224,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
 
     public void test_poor_GPS_reception_alert_reactivity_2() throws InterruptedException {
         MainActivity activity = getActivity();
-        int wait_time_between_step = 3000;
+        int wait_time_between_step = 6000;
         float accuracy = 10.0f;
         for(int i =0;i<4;i++){
             activity.pushNewLocation(long_course.get(i).latitude, long_course.get(i).longitude, accuracy);
@@ -230,17 +232,26 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
             assertFalse(activity.getWaitForGPSDialog().isShowing());
         }
         accuracy = 100.0f;
-        for(int i =4;i<8;i++){
+        for(int i =4;i<12;i++){
             activity.pushNewLocation(long_course.get(i).latitude, long_course.get(i).longitude, accuracy);
             Thread.sleep(wait_time_between_step);
             assertTrue(activity.getWaitForGPSDialog().isShowing());
         }
         accuracy = 10.0f;
-        for(int i =8;i<long_course.size();i++){
+        for(int i =12;i<long_course.size();i++){
             activity.pushNewLocation(long_course.get(i).latitude, long_course.get(i).longitude, accuracy);
             Thread.sleep(wait_time_between_step);
             assertFalse(activity.getWaitForGPSDialog().isShowing());
         }
+    }
+
+    public void test_late_GPS_reception_alert_reactivity() throws InterruptedException {
+        MainActivity activity = getActivity();
+        float accuracy = 10.0f;
+        activity.pushNewLocation(long_course.get(1).latitude, long_course.get(1).longitude, accuracy);
+        Thread.sleep(100000);
+        assertTrue(activity.getWaitForGPSDialog().isShowing());
+
     }
 
     public void test_safety_check() throws InterruptedException {

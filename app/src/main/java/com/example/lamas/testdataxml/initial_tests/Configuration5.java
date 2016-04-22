@@ -10,9 +10,9 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.lamas.testdataxml.Activite_test;
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.R;
+import com.example.lamas.testdataxml.list_activities.ParcoursActivity;
 
 import java.util.Locale;
 
@@ -29,6 +29,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
     private Typeface tfTrebuchet;
     private Typeface tfverdana;
     private Typeface tfHelvetica;
+    private Intent nextActivity;
 
     private Data data;
 
@@ -71,8 +72,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
         bPolice4.setTextColor(data.getParameters().getCouleurTexte());
 
         textToSpeech = new TextToSpeech(this, this);
-
-
+        nextActivity = new Intent(this, ParcoursActivity.class);
 
 
         //Police Arial
@@ -85,8 +85,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
                 String toSpeak = bPolice1.getText().toString();
                 convertTextToSpeech(toSpeak);
                 if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
-                Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
-                startActivity(secondeActivite);
+                startActivity(nextActivity);
             }
         });
 
@@ -99,8 +98,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
                 String toSpeak = bPolice2.getText().toString();
                 convertTextToSpeech(toSpeak);
                 if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
-                Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
-                startActivity(secondeActivite);
+                startActivity(nextActivity);
             }
         });
 
@@ -113,8 +111,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
                 String toSpeak = bPolice3.getText().toString();
                 convertTextToSpeech(toSpeak);
                 if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
-                Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
-                startActivity(secondeActivite);
+                startActivity(nextActivity);
             }
         });
 
@@ -127,8 +124,7 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
                 String toSpeak = bPolice4.getText().toString();
                 convertTextToSpeech(toSpeak);
                 if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
-                Intent secondeActivite = new Intent(Configuration5.this, Activite_test.class);
-                startActivity(secondeActivite);
+                startActivity(nextActivity);
             }
         });
     }
@@ -147,12 +143,21 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
             Log.e("error", "Initilization Failed!");
         }
     }
+
     @Override
     public void onPause() {
         super.onPause();
         if(textToSpeech != null ){
             textToSpeech.stop();
 
+        }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(textToSpeech != null){
+            textToSpeech.stop();
         }
     }
     @Override
@@ -165,7 +170,9 @@ public class Configuration5 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        textToSpeech.shutdown();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
     }
 
     private void convertTextToSpeech(String text) {

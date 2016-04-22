@@ -15,11 +15,13 @@ public class Monument  {
     private String name;
     private String description;
     private String informations;
+    private int radius;
     public ArrayList<String> accessibilite = new ArrayList<>();
     public ArrayList<String> horaires = new ArrayList<>();
 
-    public Monument(int id, double latitude, double longitude, String name, String description,String informations,ArrayList<String> accessibilite, ArrayList<String> horaires) {
+    public Monument(int id, int radius, double latitude, double longitude, String name, String description,String informations,ArrayList<String> accessibilite, ArrayList<String> horaires) {
         this.id = id;
+        this.radius = radius;
         this.latitude = latitude;
         this.longitude = longitude;
         this.name = name;
@@ -27,6 +29,10 @@ public class Monument  {
         this.informations = informations;
         this.accessibilite = accessibilite;
         this.horaires=horaires;
+    }
+
+    public int getRadius() {
+        return radius;
     }
 
     public String getInformations() {
@@ -49,11 +55,6 @@ public class Monument  {
         return result;
     }
 
-    public void setHoraires(ArrayList<String> horaires) {
-        this.horaires = horaires;
-    }
-
-
     public void setId(int id) {
         this.id = id;
     }
@@ -62,17 +63,10 @@ public class Monument  {
         return latitude;
     }
 
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
     public double getLongitude() {
         return longitude;
     }
 
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
 
     public String getName() {
         return name;
@@ -102,9 +96,6 @@ public class Monument  {
         return result;
     }
 
-    public void setAccessibilite(ArrayList<String> accessibilite) {
-        this.accessibilite = accessibilite;
-    }
 
     public int getId() {
         return this.id;

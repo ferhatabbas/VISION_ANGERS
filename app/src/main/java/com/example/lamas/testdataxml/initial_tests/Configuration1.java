@@ -9,7 +9,6 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
-import com.example.lamas.testdataxml.Activite_test;
 import com.example.lamas.testdataxml.R;
 import com.example.lamas.testdataxml.data.Data;
 
@@ -49,15 +48,16 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View arg0) {
                 String toSpeak = BLibre.getText().toString();
                 convertTextToSpeech(toSpeak);
-                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
+                if (textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 data.getParameters().setGooglemaps(false);
-                    Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
+                Intent secondeActivite = new Intent(Configuration1.this, Configuration2.class);
                 startActivity(secondeActivite);
             }
 
         });
 
     }
+
 
     @Override
     public void onInit(int status) {
@@ -77,10 +77,17 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onPause() {
         super.onPause();
-
-        if(textToSpeech != null && !textToSpeech.isSpeaking() ){
+        if(textToSpeech != null ){
             textToSpeech.stop();
 
+        }
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(textToSpeech != null){
+            textToSpeech.stop();
         }
     }
     @Override
@@ -93,7 +100,9 @@ public class Configuration1 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        textToSpeech.shutdown();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
     }
 
     private void convertTextToSpeech(String text) {

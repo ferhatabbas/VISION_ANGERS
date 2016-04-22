@@ -37,13 +37,22 @@ public class Configuration2 extends Activity implements TextToSpeech.OnInitListe
             public void onClick(View v) {
                 String toSpeak = bAccepter.getText().toString();
                 convertTextToSpeech(toSpeak);
-                if(textToSpeech.isSpeaking()) SystemClock.sleep(1000);
+                if (textToSpeech.isSpeaking()) SystemClock.sleep(1000);
                 Intent secondeActivite = new Intent(Configuration2.this, Configuration3.class);
                 startActivity(secondeActivite);
             }
         });
 
 
+    }
+
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        if(textToSpeech != null){
+            textToSpeech.stop();
+        }
     }
 
     @Override
@@ -80,7 +89,9 @@ public class Configuration2 extends Activity implements TextToSpeech.OnInitListe
     @Override
     public void onDestroy() {
         super.onDestroy();
-        textToSpeech.shutdown();
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
     }
 
     private void convertTextToSpeech(String text) {
