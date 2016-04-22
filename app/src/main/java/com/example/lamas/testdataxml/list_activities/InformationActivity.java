@@ -62,6 +62,9 @@ public class InformationActivity extends Activity implements
         txtListChild.setTextColor(data.getParameters().getCouleurTexte());
         txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
         txtListChild.setTypeface(data.getParameters().getTypeface());
+        bContinue.setBackgroundColor(data.getParameters().getCouleurBackground());
+        bContinue.setTextColor(data.getParameters().getCouleurTexte());
+        bContinue.setTypeface(data.getParameters().getTypeface());
 
         lieuxAdapter = new LieuxAdapter(getApplicationContext(), listDataHeader, listDataChild);
 

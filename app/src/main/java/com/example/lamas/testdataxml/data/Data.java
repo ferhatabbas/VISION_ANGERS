@@ -55,6 +55,7 @@ public class Data {
     public void recupererData(JSONObject obj) throws JSONException {
 
         int Id;
+        int radius;
         double lat;
         double lng;
         String name;
@@ -74,6 +75,7 @@ public class Data {
             ArrayList<String> Horaires =new ArrayList<>();
             JSONObject objs = Monuments.getJSONObject(i);
             Id =  objs.getInt(Constants.ID_MONUMENT);
+            radius = objs.getInt(Constants.RADIUS);
             lat = objs.getDouble(Constants.LATITUDE);
             lng = objs.getDouble(Constants.LONGITUDE);
             name = objs.getString(Constants.NOM_MONUMENT);
@@ -93,7 +95,7 @@ public class Data {
                     Horaires.add(itemObj.getString(Constants.HORAIRE));
                 }
             }
-            this.monuments.put(Id, new Monument(Id, lat, lng, name, desc, infos, Accessibilite, Horaires));
+            this.monuments.put(Id, new Monument(Id, radius, lat, lng, name, desc, infos, Accessibilite, Horaires));
         }
 
         for(int i=0 ; i< Parcours.length() ; i++) {

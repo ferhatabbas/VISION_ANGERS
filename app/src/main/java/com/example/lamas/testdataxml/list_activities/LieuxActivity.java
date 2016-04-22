@@ -30,11 +30,10 @@ public class LieuxActivity extends Activity implements
     private TextToSpeech textToSpeech;
     private Data data;
 
-    LieuxAdapter lieuxAdapter;
-    ExpandableListView expListView;
-    List<String> listDataHeader = new ArrayList<>();
-    HashMap<String, List<String>> listDataChild = new HashMap<>();
-    Button bNavigation;
+    private LieuxAdapter lieuxAdapter;
+    private ExpandableListView expListView;
+    private List<String> listDataHeader = new ArrayList<>();
+    private HashMap<String, List<String>> listDataChild = new HashMap<>();
     int id;
 
 
@@ -49,7 +48,7 @@ public class LieuxActivity extends Activity implements
         // get the listview
         expListView = (ExpandableListView) findViewById(R.id.expandableListView2);
 
-        bNavigation = (Button) findViewById(R.id.buttonNavigation);
+        Button bNavigation = (Button) findViewById(R.id.buttonNavigation);
 
         Bundle b = getIntent().getExtras();
         id = b.getInt("id")+1;
@@ -63,6 +62,9 @@ public class LieuxActivity extends Activity implements
         txtListChild.setTextColor(data.getParameters().getCouleurTexte());
         txtListChild.setBackgroundColor(data.getParameters().getCouleurBackground());
         txtListChild.setTypeface(data.getParameters().getTypeface());
+        bNavigation.setBackgroundColor(data.getParameters().getCouleurBackground());
+        bNavigation.setTextColor(data.getParameters().getCouleurTexte());
+        bNavigation.setTypeface(data.getParameters().getTypeface());
 
         // preparing list data
         prepareListData(id);

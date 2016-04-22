@@ -1,6 +1,5 @@
 package com.example.lamas.testdataxml;
 
-import android.annotation.TargetApi;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -8,9 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.location.LocationManager;
-import android.os.Build;
 import android.provider.Settings;
-import android.widget.Toast;
 
 import com.example.lamas.testdataxml.list_activities.InformationActivity;
 
@@ -18,7 +15,7 @@ import com.example.lamas.testdataxml.list_activities.InformationActivity;
  * Created by Maxence on 16-02-09.
  */
 public class ProximityReceiver extends BroadcastReceiver {
-    @TargetApi(Build.VERSION_CODES.HONEYCOMB)
+
     @Override
     public void onReceive(Context context, Intent intent) {
 
@@ -37,7 +34,6 @@ public class ProximityReceiver extends BroadcastReceiver {
         boolean state = intent.getBooleanExtra(key, false);
 
         if(state){
-                    // Call the Notification Service or anything else that you would like to do here
             Intent next_activity = new Intent(context, InformationActivity.class);
             next_activity.putExtra("id", id_poi);
             PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, next_activity, 0);

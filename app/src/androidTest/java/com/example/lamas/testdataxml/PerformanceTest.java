@@ -2,6 +2,9 @@ package com.example.lamas.testdataxml;
 
 import android.test.ActivityInstrumentationTestCase2;
 
+import com.example.lamas.testdataxml.data.Data;
+import com.example.lamas.testdataxml.data.Monument;
+
 import java.util.ArrayList;
 
 /**
@@ -12,6 +15,14 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
     public long var = 1000;
     public static long var2 = 1000;
     public static final long var3 = 1000;
+
+    public long getVar(){
+        return var;
+    }
+
+    public static long getVar4(){
+        return 1000;
+    }
 
     public PerformanceTest() {
         super(MainActivityTest.class);
@@ -176,11 +187,37 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         activity.finish();
     }
 
-    public long getVar(){
-        return var;
-    }
+    public void testSingletonVSnew(){
+        MainActivityTest activity = getActivity();
+        Data data = Data.getInstance(activity);
+        long before, delay = 0;
+        for(int j=0; j<1000; j++){
+            before = System.nanoTime();
+            Monument temp = data.getMonuments().get(1);
+            temp.getId();
+            delay += System.nanoTime() - before;
+        }
+        double averageTime = delay / 1000;
+        activity.write("Test 1 :" + averageTime + "\n");
+        System.out.print("Test 1 :" + averageTime +"\n");
 
-    public static long getVar4(){
-        return 1000;
+        int id = 1;
+        double latitude = 45.35, longitude = 45.35;
+        String name = "test",description = "test",informations="test";
+        ArrayList<String> accessibilite = new ArrayList<>();
+        ArrayList<String> horaires = new ArrayList<>();
+
+        delay = 0;
+        for(int j=0; j<1000; j++){
+            before = System.nanoTime();
+            Monument temp2 = new Monument(id, latitude, longitude,name,description,informations,accessibilite,horaires);
+            temp2.getId();
+            delay += System.nanoTime() - before;
+        }
+        averageTime = delay / 1000;
+        activity.write("Test 2 :" + averageTime + "\n");
+        System.out.print("Test 2 :" + averageTime +"\n");
+
     }
+    
 }

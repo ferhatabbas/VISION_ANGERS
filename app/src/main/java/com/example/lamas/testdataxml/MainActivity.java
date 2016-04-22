@@ -25,6 +25,7 @@ import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
@@ -43,8 +44,8 @@ import java.util.Locale;
 public class MainActivity extends Activity implements TextToSpeech.OnInitListener {
 
     private MapView map;
+    private Intent temp_intent = new Intent(ACTION_FILTER);
     private TextToSpeech textToSpeech;
-    private float radius = 50;
     private LocationManager locationManager;
     private HandlerThread handlerThread;
     private Handler checkGPShandler, safetyChackHandler;
@@ -87,7 +88,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Notification notificationGPSCheck, notificationSafetyCheck;
     private NotificationManager notificationManager;
     private MockLocation mock;
-    String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
+    private static final String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
     private static int MSG_SHOW_GPS_ALERT = 0;
     private static int MSG_DISMISS_GPS_ALERT = 1;
     private static int MSG_SHOW_LOST_ALERT = 2;
@@ -199,7 +200,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         //Add data
         data = Data.getInstance(getApplicationContext());
-        for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
+        ArrayList<Monument> monuments = data.getParcourses().get(idParcours).getMonuments();
+        int size = monuments.size();
+        Monument entry;
+        for(int i=0; i<size; i++){
+            entry = monuments.get(i);
             Marker temp = new Marker(map);
             GeoPoint geo = new GeoPoint(entry.getLatitude(), entry.getLongitude());
             temp.setPosition(geo);
@@ -209,9 +214,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
             if (Constants.DEBUG_MODE) {
                 map.getOverlays().add(temp);
-                map.getOverlays().add(createCircle(geo, Color.RED, radius));
+                map.getOverlays().add(createCircle(geo, Color.RED, entry.getRadius()));
             }
         }
+
 
         //Enabled GPS
         if (Constants.ALLOW_MOCK_LOCATION) {
@@ -255,19 +261,13 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int size = monuments.size();
         for(int i=0; i<size; i++){
             Monument temp = monuments.get(i);
-            Intent temp_intent = new Intent(ACTION_FILTER);
+            //Intent temp_intent = new Intent(ACTION_FILTER);
             temp_intent.putExtra("name", temp.getName());
             temp_intent.putExtra("id", temp.getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), temp.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.addProximityAlert(temp.getLatitude(), temp.getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
+            locationManager.addProximityAlert(temp.getLatitude(), temp.getLongitude(), temp.getRadius(), Integer.MAX_VALUE, temp_pi);
         }
-        /*for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
-            Intent temp_intent = new Intent(ACTION_FILTER);
-            temp_intent.putExtra("name", entry.getName());
-            temp_intent.putExtra("id", entry.getId());
-            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.addProximityAlert(entry.getLatitude(), entry.getLongitude(), radius, Integer.MAX_VALUE, temp_pi);
-        }*/
+
     }
 
     public void removeProximityAlerts() {
@@ -275,19 +275,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         int size = monuments.size();
         for(int i=0; i<size; i++){
             Monument temp = monuments.get(i);
-            Intent temp_intent = new Intent(ACTION_FILTER);
+            //Intent temp_intent = new Intent(ACTION_FILTER);
             temp_intent.putExtra("name", temp.getName());
             temp_intent.putExtra("id", temp.getId());
             PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), temp.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
             locationManager.removeProximityAlert(temp_pi);
         }
-        /*for (Monument entry : data.getParcourses().get(idParcours).getMonuments()) {
-            Intent temp_intent = new Intent(ACTION_FILTER);
-            temp_intent.putExtra("name", entry.getName());
-            temp_intent.putExtra("id", entry.getId());
-            PendingIntent temp_pi = PendingIntent.getBroadcast(getApplicationContext(), entry.getId(), temp_intent, PendingIntent.FLAG_CANCEL_CURRENT);
-            locationManager.removeProximityAlert(temp_pi);
-        }*/
     }
 
     private Polygon createCircle(GeoPoint geopoint, int color, float radius){
@@ -407,7 +400,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         @Override
         public void run() {
             if(myLocation!=null && (myLocation.getAccuracy() <= Constants.MIN_ACCURACY)
-                    && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.WAIT_FOR_GPS_TIMEOUT+200)){
+                    && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.REQUEST_LOCATION_MANAGER_TIME+1000)){
+                long temp = System.currentTimeMillis()-lastCheckGPSTimestamp;
+                Toast.makeText(MainActivity.this, "Délais " + temp, Toast.LENGTH_SHORT).show();
                 if(!alertsAreActivated){
                     activateProximityAlerts();
                     alertsAreActivated = true;
@@ -415,6 +410,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 }
             }
             else{
+                long temp = System.currentTimeMillis()-lastCheckGPSTimestamp;
+                Toast.makeText(MainActivity.this, "Délais " + temp, Toast.LENGTH_SHORT).show();
                 if(alertsAreActivated){
                     removeProximityAlerts();
                     alertsAreActivated = false;

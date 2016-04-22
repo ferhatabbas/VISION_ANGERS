@@ -12,7 +12,7 @@ public class Constants {
   public static final String FILE_PATH = "DataTest";
 
   public static final int MIN_ACCURACY = 11;
-  public static final int WAIT_FOR_GPS_TIMEOUT = 6100;
+  public static final int WAIT_FOR_GPS_TIMEOUT = 4500;
   public static final int SAFETY_CHECK_TIMEOUT = 600000;
   public static final int REQUEST_LOCATION_MANAGER_TIME = 5000;
 
@@ -23,6 +23,7 @@ public class Constants {
   /*les balises des monuments */
   public static final String BALISE_MONUMENTS= "Monuments";
   public static final String ID_MONUMENT = "Id";
+  public static final String RADIUS = "Radius";
   public static final String NOM_MONUMENT = "Name";
   public static final String LATITUDE = "Lat";
   public static final String LONGITUDE = "Lng";
