@@ -9,17 +9,13 @@ import android.widget.ExpandableListView;
 
 import com.example.lamas.testdataxml.R;
 import com.example.lamas.testdataxml.data.Data;
-import com.example.lamas.testdataxml.data.Information;
-import com.example.lamas.testdataxml.data.Lieu;
 import com.example.lamas.testdataxml.data.Monument;
-import com.example.lamas.testdataxml.data.Parcours;
 import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 
 public class ParcoursActivity extends Activity implements
         TextToSpeech.OnInitListener {
@@ -108,7 +104,7 @@ public class ParcoursActivity extends Activity implements
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("error", "This Language is not supported");
             } else {
-                convertTextToSpeech("Parcours");
+                convertTextToSpeech("Choisissez un parcours");
             }
         } else {
             Log.e("error", "Initilization Failed!");

@@ -48,8 +48,6 @@ public class InformationActivity extends Activity implements
         listDataHeader.add("Description");
         listDataHeader.add("Accessibilité");
         listDataHeader.add("Horaires");
-        //listDataHeader = b.getStringArrayList("headers");
-        //listDataChild = (HashMap<String, List<String>>) b.getSerializable("information");
         listDataChild.put("Description", new ArrayList<>(Arrays.asList(monument.getDescription())));
         listDataChild.put("Accessibilité", monument.getAccessibilite());
         listDataChild.put("Horaires", monument.getHoraires());
@@ -93,12 +91,13 @@ public class InformationActivity extends Activity implements
         bContinue.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                //String toSpeak = bContinue.getText().toString();
-                //convertTextToSpeech(toSpeak);
+                convertTextToSpeech(bContinue.getText().toString());
                 finish();
             }
 
         });
+
+        convertTextToSpeech("Vous êtes à "+monument.getName());
 
 
     }
@@ -110,8 +109,6 @@ public class InformationActivity extends Activity implements
             if (result == TextToSpeech.LANG_MISSING_DATA
                     || result == TextToSpeech.LANG_NOT_SUPPORTED) {
                 Log.e("error", "This Language is not supported");
-            } else {
-                convertTextToSpeech("Parcours");
             }
         } else {
             Log.e("error", "Initilization Failed!");

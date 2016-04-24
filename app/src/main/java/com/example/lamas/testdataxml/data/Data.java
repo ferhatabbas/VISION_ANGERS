@@ -54,56 +54,47 @@ public class Data {
 
     public void recupererData(JSONObject obj) throws JSONException {
 
-        int Id;
-        int radius;
-        double lat;
-        double lng;
-        String name;
-        String desc;
-        String infos;
-        long duree;
+        int id;
         Evaluation eval;
 
-        ArrayList<Monument> tempsMonum = new ArrayList<>();
+        ArrayList<String> accessibilites;
+        ArrayList<String> horaires;
+        ArrayList<Monument> monumentsParcours;
 
-        JSONArray Monuments = obj.getJSONArray(Constants.BALISE_MONUMENTS);
-        JSONArray Parcours = obj.getJSONArray(Constants.BALISE_PARCOURS);
+        JSONArray monuments = obj.getJSONArray(Constants.BALISE_MONUMENTS);
+        JSONArray parcours = obj.getJSONArray(Constants.BALISE_PARCOURS);
 
 
-        for(int i=0 ; i< Monuments.length() ; i++) {
-            ArrayList<String> Accessibilite =new ArrayList<>();
-            ArrayList<String> Horaires =new ArrayList<>();
-            JSONObject objs = Monuments.getJSONObject(i);
-            Id =  objs.getInt(Constants.ID_MONUMENT);
-            radius = objs.getInt(Constants.RADIUS);
-            lat = objs.getDouble(Constants.LATITUDE);
-            lng = objs.getDouble(Constants.LONGITUDE);
-            name = objs.getString(Constants.NOM_MONUMENT);
-            desc = objs.getString(Constants.DESCRIPTION_MONUMENT);
-            infos = objs.getString(Constants.INFORMATIONS_SUPPLEMENTAIRE);
-            if (objs.has(Constants.LIST_ACCESSIBILITES)) {
-                JSONArray jsonObjs = objs.getJSONArray(Constants.LIST_ACCESSIBILITES);
-                for (int j = 0; j < jsonObjs.length(); j++) {
-                    JSONObject itemObj = jsonObjs.getJSONObject(j);
-                    Accessibilite.add(itemObj.getString(Constants.UNE_ACCESSIBILITE));
+        for(int i=0 ; i< monuments.length() ; i++) {
+            accessibilites =new ArrayList<>();
+            horaires =new ArrayList<>();
+            JSONObject monument = monuments.getJSONObject(i);
+            id =  monument.getInt(Constants.ID_MONUMENT);
+
+            if (monument.has(Constants.LIST_ACCESSIBILITES)) {
+                JSONArray jsonAccessibilites = monument.getJSONArray(Constants.LIST_ACCESSIBILITES);
+                for (int j = 0; j < jsonAccessibilites.length(); j++) {
+                    accessibilites.add(jsonAccessibilites.getJSONObject(j).getString(Constants.UNE_ACCESSIBILITE));
                 }
             }
-            if (objs.has(Constants.HORAIRES)) {
-                JSONArray jsonObjs = objs.getJSONArray(Constants.HORAIRES);
+            if (monument.has(Constants.HORAIRES)) {
+                JSONArray jsonObjs = monument.getJSONArray(Constants.HORAIRES);
                 for (int j = 0; j < jsonObjs.length(); j++) {
-                    JSONObject itemObj = jsonObjs.getJSONObject(j);
-                    Horaires.add(itemObj.getString(Constants.HORAIRE));
+                    horaires.add(jsonObjs.getJSONObject(j).getString(Constants.HORAIRE));
                 }
             }
-            this.monuments.put(Id, new Monument(Id, radius, lat, lng, name, desc, infos, Accessibilite, Horaires));
+            this.monuments.put(id, new Monument(id, monument.getInt(Constants.RADIUS),
+                    monument.getDouble(Constants.LATITUDE),
+                    monument.getDouble(Constants.LONGITUDE),
+                    monument.getString(Constants.NOM_MONUMENT),
+                    monument.getString(Constants.DESCRIPTION_MONUMENT),
+                    monument.getString(Constants.INFORMATIONS_SUPPLEMENTAIRE),
+                    accessibilites, horaires));
         }
 
-        for(int i=0 ; i< Parcours.length() ; i++) {
-             JSONObject objs = Parcours.getJSONObject(i);
-             Id = objs.getInt(Constants.ID_PARCOURS);
-             name = objs.getString(Constants.NOM_PARCOURS);
-             duree = objs.getLong(Constants.DUREE);
-             desc = objs.getString(Constants.DESCRIPTION_PARCOURS);
+        for(int i=0 ; i< parcours.length() ; i++) {
+             JSONObject objs = parcours.getJSONObject(i);
+             id = objs.getInt(Constants.ID_PARCOURS);
             switch ( objs.getInt(Constants.EVALUATION)) {
                 case 1:
                     eval = Evaluation.PASBON;
@@ -125,16 +116,18 @@ public class Data {
                     break;
             }
 
+            monumentsParcours = new ArrayList<>();
             if (objs.has(Constants.LIST_MONUMENTS)) {
-                JSONArray jsonObjs = objs.getJSONArray(Constants.LIST_MONUMENTS);
-                tempsMonum = new ArrayList<>();
-                for (int j = 0; j < jsonObjs.length(); j++) {
-                    JSONObject itemObj = jsonObjs.getJSONObject(j);
-                    tempsMonum.add(monuments.get(itemObj.getInt(Constants.UN_MONUMENT)));
+                JSONArray monumentsArray = objs.getJSONArray(Constants.LIST_MONUMENTS);
+                for (int j = 0; j < monumentsArray.length(); j++) {
+                    JSONObject itemObj = monumentsArray.getJSONObject(j);
+                    monumentsParcours.add(this.monuments.get(itemObj.getInt(Constants.UN_MONUMENT)));
                 }
             }
 
-            parcourses.put(Id, new ParcoursABC(Id, name, duree, eval, desc, tempsMonum));
+            parcourses.put(id, new ParcoursABC(id, objs.getString(Constants.NOM_PARCOURS),
+                    objs.getLong(Constants.DUREE), eval,
+                    objs.getString(Constants.DESCRIPTION_PARCOURS), monumentsParcours));
         }
 
     }
