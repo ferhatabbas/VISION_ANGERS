@@ -13,10 +13,7 @@ import android.widget.TextView;
 import com.example.lamas.testdataxml.MainActivity;
 import com.example.lamas.testdataxml.R;
 import com.example.lamas.testdataxml.data.Data;
-import com.example.lamas.testdataxml.data.Information;
-import com.example.lamas.testdataxml.data.Lieu;
 import com.example.lamas.testdataxml.data.Monument;
-import com.example.lamas.testdataxml.data.Parcours;
 import com.example.lamas.testdataxml.data.ParcoursABC;
 
 import java.util.ArrayList;
