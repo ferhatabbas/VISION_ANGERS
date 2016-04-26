@@ -210,7 +210,7 @@ public class PerformanceTest extends ActivityInstrumentationTestCase2<MainActivi
         delay = 0;
         for(int j=0; j<1000; j++){
             before = System.nanoTime();
-            Monument temp2 = new Monument(id, latitude, longitude,name,description,informations,accessibilite,horaires);
+            Monument temp2 = new Monument(id, 50, latitude, longitude,name,description,informations,accessibilite,horaires);
             temp2.getId();
             delay += System.nanoTime() - before;
         }

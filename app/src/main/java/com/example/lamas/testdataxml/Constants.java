@@ -13,12 +13,14 @@ public class Constants {
 
   public static final int MIN_ACCURACY = 11;
   public static final int WAIT_FOR_GPS_TIMEOUT = 4500;
-  public static final int SAFETY_CHECK_TIMEOUT = 600000;
+  public static final int SAFETY_CHECK_TIMEOUT = 5000;
   public static final int REQUEST_LOCATION_MANAGER_TIME = 5000;
 
   public static final int POI_NOTIFICATION_ID = 0;
   public static final int CHECK_GPS_NOTIFICATION_ID = 1;
   public static final int SAFETYCHECK_NOTIFICATION_ID = 2;
+
+  public static final String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
 
   /*les balises des monuments */
   public static final String BALISE_MONUMENTS= "Monuments";
