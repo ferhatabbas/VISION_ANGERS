@@ -29,6 +29,7 @@ public class InformationActivity extends Activity implements
     private ExpandableListView expListView;
     private List<String> listDataHeader = new ArrayList<>();
     private HashMap<String, List<String>> listDataChild = new HashMap<>();
+    private Monument monument;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +45,7 @@ public class InformationActivity extends Activity implements
         Bundle b = getIntent().getExtras();
         int id = b.getInt("id");
         data = Data.getInstance(getApplicationContext());
-        Monument monument = data.getMonuments().get(id);
+        monument = data.getMonuments().get(id);
         listDataHeader.add("Description");
         listDataHeader.add("Accessibilité");
         listDataHeader.add("Horaires");
@@ -97,9 +98,14 @@ public class InformationActivity extends Activity implements
 
         });
 
-        convertTextToSpeech("Vous êtes à "+monument.getName());
 
 
+    }
+
+    @Override
+    protected void onResume(){
+        super.onResume();
+        convertTextToSpeech("Vous êtes à " + monument.getName());
     }
 
     @Override

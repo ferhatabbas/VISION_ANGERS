@@ -26,7 +26,6 @@ import android.provider.Settings;
 import android.speech.tts.TextToSpeech;
 import android.support.v4.app.ActivityCompat;
 import android.util.Log;
-import android.widget.Toast;
 
 import com.example.lamas.testdataxml.data.Data;
 import com.example.lamas.testdataxml.data.Monument;
@@ -75,38 +74,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private int currentPOI = 0;
     private int idParcours = 1;
 
-
-    @Override
-    protected void onResume() {
-
-        super.onResume();
-        if (data.getParameters().isGooglemaps()) {
-            parcours = data.getParcourses().get(idParcours);
-            monument = parcours.getMonuments().get(currentPOI);
-            currentPOI++;
-            googleMapMode(monument.getLatitude(), monument.getLongitude());
-
-        }
-    }
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        locationManager.removeUpdates(mylistener);
-        checkGPShandler.removeCallbacks(checkGPS);
-        safetyChackHandler.removeCallbacks(checkLost);
-        handlerThread.quit();
-        if (alertsAreActivated) {
-            removeProximityAlerts();
-            //alertsAreActivated = false;
-        }
-        unregisterReceiver(proximityReceiver);
-        unregisterReceiver(batteryChangeReceiver);
-        if(textToSpeech != null){
-            textToSpeech.shutdown();
-        }
-    }
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
@@ -114,7 +81,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         super.onCreate(savedInstanceState);
 
         // Retrieve course id
-        if(!Constants.ALLOW_MOCK_LOCATION){
+        if (!Constants.ALLOW_MOCK_LOCATION) {
             Bundle b = getIntent().getExtras();
             idParcours = b.getInt("id");
         }
@@ -189,7 +156,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         ArrayList<Monument> monuments = data.getParcourses().get(idParcours).getMonuments();
         int size = monuments.size();
         Monument entry;
-        for(int i=0; i<size; i++){
+        for (int i = 0; i < size; i++) {
             entry = monuments.get(i);
             Marker temp = new Marker(map);
             GeoPoint geo = new GeoPoint(entry.getLatitude(), entry.getLongitude());
@@ -219,8 +186,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         handlerThread.start();
         checkGPShandler = new Handler(handlerThread.getLooper());
         safetyChackHandler = new Handler(handlerThread.getLooper());
-        //checkGPS.run();
-        //checkLost.run();
+        checkGPS.run();
+        safetyCkeckRunnable.run();
 
         // verifier si google map sera utilisé ou pas
         if (data.getParameters().isGooglemaps()) {
@@ -230,10 +197,42 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             googleMapMode(monument.getLatitude(), monument.getLongitude());
 
         }
-
     }
 
-    public void googleMapMode(double lat, double lng) {
+
+    @Override
+    protected void onResume() {
+
+        super.onResume();
+        if (data.getParameters().isGooglemaps()) {
+            parcours = data.getParcourses().get(idParcours);
+            monument = parcours.getMonuments().get(currentPOI);
+            currentPOI++;
+            googleMapMode(monument.getLatitude(), monument.getLongitude());
+
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        locationManager.removeUpdates(mylistener);
+        checkGPShandler.removeCallbacks(checkGPS);
+        safetyChackHandler.removeCallbacks(safetyCkeckRunnable);
+        handlerThread.quit();
+        if (alertsAreActivated) {
+            removeProximityAlerts();
+            //alertsAreActivated = false;
+        }
+        unregisterReceiver(proximityReceiver);
+        unregisterReceiver(batteryChangeReceiver);
+        if(textToSpeech != null){
+            textToSpeech.shutdown();
+        }
+    }
+
+
+    private void googleMapMode(double lat, double lng) {
         Uri gmmIntentUri = Uri.parse("google.navigation:q=" + lat + "," + lng + "&mode=w");
         Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
 
@@ -242,7 +241,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         startActivity(mapIntent);
     }
 
-    public void activateProximityAlerts() {
+    private void activateProximityAlerts() {
         ArrayList<Monument> monuments = data.getParcourses().get(idParcours).getMonuments();
         int size = monuments.size();
         for(int i=0; i<size; i++){
@@ -255,6 +254,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     }
 
 
+    // for each new Location
     private void manage_proximity_alerts(Location location){
         if(location.getAccuracy() <= Constants.MIN_ACCURACY){
             if(!alertsAreActivated){
@@ -298,6 +298,37 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         return circle;
     }
 
+    private void initialize_position_layer(Location location){
+        instantMarker = new Marker(map);
+        instantMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
+        instantMarker.setTitle("Vous êtes ici.");
+        instantMarker.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
+        instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
+        if(location.hasAccuracy()){
+            instantAccuracy = createCircle(instantGeopoint, Color.BLUE, location.getAccuracy());
+        }
+    }
+
+    // For tests only
+    public void pushNewLocation(double lon, double lat, float accuracy){
+        mock.pushLocation(lon, lat, accuracy);
+    }
+
+    // For tests only
+    public AlertDialog getWaitForGPSDialog() {
+        return waitForGPSDialog;
+    }
+
+    // For tests only
+    public AlertDialog getSafetyCheckDialog() {
+        return safetyCheckDialog;
+    }
+
+    // For tests only
+    public Marker getInstantMarker() {
+        return instantMarker;
+    }
+
 
     @Override
     public void onInit(int status) {
@@ -315,6 +346,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     }
 
+    // Reboot the device if its memory is low
     @Override
     public void onLowMemory(){
         PowerManager pm = (PowerManager) getSystemService(Context.POWER_SERVICE);
@@ -329,8 +361,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
         @Override
         public void onLocationChanged(Location location) {
-            //long duration = System.currentTimeMillis()-lastUpdateTimestamp;
-            //Toast.makeText(MainActivity.this, "Délais "+duration, Toast.LENGTH_SHORT).show();
+            lastCheckGPSTimestamp = System.currentTimeMillis();
             if(myLocation == null){
                 initialize_position_layer(location);
             }
@@ -339,7 +370,6 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                 map.getOverlays().remove(instantAccuracy);
             }
             myLocation = location;
-            lastCheckGPSTimestamp = System.currentTimeMillis();
 
             instantGeopoint.setLatitudeE6( (int) (location.getLatitude() * 1E6));
             instantGeopoint.setLongitudeE6((int) (location.getLongitude() * 1E6));
@@ -373,33 +403,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
     }
 
-    private void initialize_position_layer(Location location){
-        instantMarker = new Marker(map);
-        instantMarker.setAnchor(Marker.ANCHOR_CENTER, Marker.ANCHOR_BOTTOM);
-        instantMarker.setTitle("Vous êtes ici.");
-        instantMarker.setIcon(getResources().getDrawable(R.drawable.direction_arrow));
-        instantGeopoint = new GeoPoint(location.getLatitude(), location.getLongitude());
-        if(location.hasAccuracy()){
-            instantAccuracy = createCircle(instantGeopoint, Color.BLUE, location.getAccuracy());
-        }
-    }
-
-    public void pushNewLocation(double lon, double lat, float accuracy){
-        mock.pushLocation(lon, lat, accuracy);
-    }
-
-    public AlertDialog getWaitForGPSDialog() {
-        return waitForGPSDialog;
-    }
-
-    public AlertDialog getSafetyCheckDialog() {
-        return safetyCheckDialog;
-    }
-
-    public Marker getInstantMarker() {
-        return instantMarker;
-    }
-
+    // Check if the GPS send a new Location every WAIT_FOR_GPS_TIMEOUT ms
     private Runnable checkGPS = new Runnable() {
         @Override
         public void run() {
@@ -418,7 +422,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     };
 
-    private Runnable checkLost = new Runnable() {
+
+    // Check if the user's behavior is correct
+    private Runnable safetyCkeckRunnable = new Runnable() {
 
         private Location lastLocation;
         private int sameLocationCount = 0;
@@ -440,10 +446,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     lastLocation = myLocation;
                 }
             }
-            safetyChackHandler.postDelayed(checkLost, Constants.SAFETY_CHECK_TIMEOUT);
+            safetyChackHandler.postDelayed(safetyCkeckRunnable, Constants.SAFETY_CHECK_TIMEOUT);
         }
     };
 
+    // Change REQUEST_LOCATION_MANAGER_TIME if the battery is low
     private BroadcastReceiver batteryChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
@@ -453,7 +460,9 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         }
     };
 
+    // Receives messages from the workerThread
     private static class MessagesHandler extends Handler{
+        // Avoiding memory leaks
         private final WeakReference<MainActivity> myClassWeakReference;
         public MessagesHandler(MainActivity myClassInstance) {
             myClassWeakReference = new WeakReference<>(myClassInstance);
