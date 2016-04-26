@@ -49,7 +49,7 @@ public class ApplicationTestDATA {
         context=mActivityRule.getActivity().getApplicationContext();
         data = Data.getInstance(context);
         assertNotNull(data);
-        monum= new Monument(2,45.3795022, -71.931661, "Faculté des lettres et sciences humaines", "La Faculté des lettres et sciences humaines offre 14 programmes de formations initiales, dont quatre suivant le régime coopératif, pouvant mener à des carrières en politique, en géomatique, en musique, en psychologie, en communication et en marketing, en littérature, en travail social, en traduction, en histoire, et bien d’autres.","super naze leur site",null, new ArrayList<String>() {{
+        monum= new Monument(2,50, 45.3795022, -71.931661, "Faculté des lettres et sciences humaines", "La Faculté des lettres et sciences humaines offre 14 programmes de formations initiales, dont quatre suivant le régime coopératif, pouvant mener à des carrières en politique, en géomatique, en musique, en psychologie, en communication et en marketing, en littérature, en travail social, en traduction, en histoire, et bien d’autres.","super naze leur site",null, new ArrayList<String>() {{
             add("lundi 08:00-12:00 13:30-16:00");
             add("mardi 08:00-12:00 13:30-16:00");
             add("mercredi 08:00-12:00 13:30-16:00");
