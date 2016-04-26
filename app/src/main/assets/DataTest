@@ -107,15 +107,15 @@
     "Radius": "50",
     "Lat": 45.3799777,
     "Lng": -71.9266425,
-    "Desc": "La Faculté des sciences est la seul fac cool et importante de l'université.",
+    "Desc": "La Faculté des sciences",
     "Informations": "chuck norris",
     "Accessibilites": [
 
   {
-    "Accessibilite": "pour tous"
+    "Accessibilite": "Rampe handicapés"
   },
   {
-    "Accessibilite": "don't stop believing"
+    "Accessibilite": "D'autres choses"
   }
     ],
     "Horaires": [
@@ -150,7 +150,7 @@
         "Accessibilite": "mal voyant"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "handicapé moteur"
       },
       {
         "Accessibilite": "non-voyant"
@@ -181,14 +181,14 @@
     "Radius": "50",
     "Lat": 45.379975,
     "Lng": -71.9253012,
-    "Desc": "c'est la ou les gens mangents.",
-    "Informations": "ne jamais prendre de spaghetti",
+    "Desc": "Le meilleur endroit pour se restaurer dans le campus",
+    "Informations": "Attention à certains plats quand même",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "mal-voyants"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "Accès facilité"
       },
       {
         "Accessibilite": "non-voyant"
@@ -219,17 +219,17 @@
     "Radius": "50",
     "Lat": 45.378236,
     "Lng": -71.926189,
-    "Desc": "l'usine a ingenieurs et d'alcoolic .",
-    "Informations": "",
+    "Desc": "Première faculté de l'Université de Sherbrooke",
+    "Informations": "Formation des futurs ingénieurs",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "mal-voyants"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "handicapé moteur"
       },
       {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "non-voyants"
       }
     ],
     "Horaires": [
@@ -257,17 +257,17 @@
     "Radius": "50",
     "Lat": 45.3768764,
     "Lng": -71.9254576,
-    "Desc": "Les riches sortent de là !",
-    "Informations": "super isolé ",
+    "Desc": "Autrement nommé fac d'admin",
+    "Informations": "Possibilité de MBA",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "mal-voyants"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "handicapés moteur"
       },
       {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "non-voyanta"
       }
     ],
     "Horaires": [
@@ -295,17 +295,17 @@
     "Radius": "50",
     "Lat": 45.3798074,
     "Lng": -71.9229192,
-    "Desc": "residence universitaire G",
-    "Informations": "super isolé mais cool ",
+    "Desc": "Résidence universitaire G",
+    "Informations": "Location par nuit disponible l'été",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "mal-voyants"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "handicapés moteur"
       },
       {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "non-voyants"
       }
     ],
     "Horaires": [
@@ -332,17 +332,17 @@
     "Radius": "50",
     "Lat": 45.380114,
     "Lng":  -71.928613,
-    "Desc": "residence universitaire G",
-    "Informations": "super isolé mais cool",
+    "Desc": "Résidence universitaire G",
+    "Informations": "Un peu vieux",
     "Accessibilites": [
       {
-        "Accessibilite": "mal voyant"
+        "Accessibilite": "mal-voyants"
       },
       {
-        "Accessibilite": "handicap motor"
+        "Accessibilite": "handicapés moteur"
       },
       {
-        "Accessibilite": "non-voyant"
+        "Accessibilite": "non-voyants"
       }
     ],
     "Horaires": [
