@@ -407,7 +407,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Runnable checkGPS = new Runnable() {
         @Override
         public void run() {
-            if(myLocation!=null && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.REQUEST_LOCATION_MANAGER_TIME+1000)
+            // add 500 to REQUEST_LOCATION_MANAGER_TIME for avoiding a lot of GPS_ALERTS
+            if(myLocation!=null && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.REQUEST_LOCATION_MANAGER_TIME+500)
                     &&(myLocation.getAccuracy() <= Constants.MIN_ACCURACY)){
                 if(waitForGPSDialog.isShowing())
                     mainHandler.sendEmptyMessage(Constants.MSG_DISMISS_GPS_ALERT);
@@ -457,6 +458,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             locationManager.removeUpdates(mylistener);
             locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
                     Constants.REQUEST_LOCATION_MANAGER_TIME*10, 0, mylistener);
+
+            // TODO: Change SAFETY_CHECK_TIMEOUT and WAIT_FOR_GPS_TIMEOUT
         }
     };
 

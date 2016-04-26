@@ -5,6 +5,7 @@
     "Name": "Château d'Angers",
     "Lat": 47.469932,
     "Lng": -0.5600704,
+    "Radius": "50",
     "Desc": "Au cœur d'Angers, Ville d'Art et d'Histoire, se dresse l’incroyable forteresse aux 17 tours. Elle abrite la célèbre tenture de l'Apocalypse, tapisserie médiévale unique au monde.",
     "Informations": "Découvrez l'une des forteresses médiévales les mieux conservées de France ! Colosse de calcaire et d'ardoise, le château d'Angers multiplie les superlatifs : ½ kilomètre de rempart, 17 tours, 20 000 m2 de superficie Son histoire est riche, des premières traces d'occupation humaine attestées vers 4000 avant notre ère aux travaux du XXI e siècle, en passant par la construction de l’enceinte par le jeune Saint Louis au XIII e siècle ou encore des bâtiments résidentiels des ducs d’Anjou à la fin du Moyen Age. ",
     "Accessibilites": [
@@ -42,6 +43,7 @@
   {
     "Id": 2,
     "Name": "Cathédrale Saint-Maurice",
+    "Radius": "50",
     "Lat": 47.4704808,
     "Lng": -0.5547814,
     "Desc": "La Cathédrale St Maurice, commencée au milieu du XIIè siècle et terminée vers 1250, est le premier édifice à présenter les caractéristiques du style gothique angevin: voûtes bombées comportant des ogives, d'abord massives dans la nef, puis laissant place à de fines nervures dans le transept et le choeur.",
@@ -61,6 +63,7 @@
   {
     "Id": 3,
     "Name": "Collégiale Saint-Martin",
+    "Radius": "50",
     "Lat": 47.4690631,
     "Lng": -0.5521156,
     "Desc": "20 ans de travaux pour 20 siècles d'histoire angevine : le Département de Maine-et-Loire a ressuscité la collégiale Saint-Martin, l'un des monuments caroligiens les mieux conservés de France. Entre expositions permanentes (histoire de l'édifice, monde des morts...) et temporaires, faites un voyage inoubliable à travers le temps",
@@ -110,6 +113,7 @@
 ,
   {
     "Id": 4,
+    "Radius": "50",
     "Name": "les chanoines, la cathédrale et son quartier",
     "Lat": 47.4697222,
     "Lng": -0.5578154,
@@ -130,6 +134,7 @@
 ,
   {
     "Id": 5,
+    "Radius": "50",
     "Name": "Les maisons à pans de bois",
     "Lat": 47.4696207,
     "Lng": -0.5606326,
@@ -150,6 +155,7 @@
 ,
   {
     "Id": 6,
+    "Radius": "50",
     "Name": "Galerie David d'Angers",
     "Lat": 47.4692974,
     "Lng": -0.5582418,
@@ -179,6 +185,7 @@
   {
     "Id": 7,
     "Name": "La Tenture de l'Apocalypse",
+    "Radius": "50",
     "Lat": 47.4700036,
     "Lng": -0.5621887,
     "Desc": "La tenture de l'Apocalypse, monumental décor à usage princier, a été commandée en 1373 par Louis Ier, duc d'Anjou. Elle illustre le texte de l'Apocalypse écrit par St Jean à la fin du Ier siècle de notre ère et reflète les troubles contemporains de sa création (Guerre de Cent Ans).",
@@ -221,6 +228,7 @@
 ,
   {
     "Id": 8,
+    "Radius": "50",
     "Name": "Jardin du Mail",
     "Lat": 47.4705495,
     "Lng": -0.5485959,
@@ -240,6 +248,7 @@
 ,
   {
     "Id": 9,
+    "Radius": "50",
     "Name": "Jardin des Plantes",
     "Lat": 47.4737845,
     "Lng": -0.5472323,
@@ -276,6 +285,7 @@
   },
   {
     "Id": 10,
+    "Radius": "50",
     "Name": "Terra Botanica",
     "Lat": 47.5010853,
     "Lng":  -0.5973851,
@@ -328,6 +338,7 @@
   },
   {
     "Id": 11,
+    "Radius": "50",
     "Name": "Musée des Beaux Arts",
     "Lat": 47.4691582,
     "Lng":  -0.5566482,
@@ -364,6 +375,7 @@
   },
   {
     "Id": 12,
+    "Radius": "50",
     "Name": "Musée du Génie",
     "Lat": 47.4558992,
     "Lng":  -0.5657279,
@@ -388,6 +400,7 @@
   },
   {
     "Id": 13,
+    "Radius": "50",
     "Name": "Musée Jean Lurçat et de la tapisserie contemporaine",
     "Lat": 47.4780446,
     "Lng":  -0.5589065,
@@ -427,6 +440,7 @@
   },
   {
     "Id": 14,
+    "Radius": "50",
     "Name": "Muséum des Sciences Naturelles",
     "Lat": 47.4735426,
     "Lng":  -0.5485527,

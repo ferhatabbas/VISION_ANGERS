@@ -108,11 +108,10 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         Instrumentation.ActivityMonitor activityMonitor = new Instrumentation.ActivityMonitor(InformationActivity.class.getName(),
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
-        int wait_time_between_step = 6000;
         float accuracy = 10.0f;
         for (Step step: long_course){
             activity.pushNewLocation(step.latitude, step.longitude, accuracy);
-            Thread.sleep(wait_time_between_step);
+            Thread.sleep(Constants.REQUEST_LOCATION_MANAGER_TIME + 1000);
         }
 
         assertEquals(activityMonitor.getHits(), 3);
@@ -124,14 +123,13 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
                 null, false);
         getInstrumentation().addMonitor(activityMonitor);
         int i=0;
-        int wait_time_between_step = Constants.REQUEST_LOCATION_MANAGER_TIME;
         float accuracy = 10.0f;
         for (Step step: long_course){
             if(step.is_POI){
                 i++;
             }
             activity.pushNewLocation(step.latitude, step.longitude, accuracy);
-            Thread.sleep(wait_time_between_step);
+            Thread.sleep(Constants.REQUEST_LOCATION_MANAGER_TIME);
             assertEquals(i, activityMonitor.getHits());
         }
 
@@ -245,7 +243,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
         MainActivity activity = getActivity();
         float accuracy = 10.0f;
         activity.pushNewLocation(long_course.get(1).latitude, long_course.get(1).longitude, accuracy);
-        Thread.sleep(10000);
+        Thread.sleep(Constants.WAIT_FOR_GPS_TIMEOUT + 500);
         assertTrue(activity.getWaitForGPSDialog().isShowing());
 
     }
@@ -256,7 +254,7 @@ public class LocationTest extends ActivityInstrumentationTestCase2<MainActivity>
 
         for(int i=0; i<7; i++){
             activity.pushNewLocation(step_one_lat, step_one_long, accuracy);
-            Thread.sleep(Constants.SAFETY_CHECK_TIMEOUT+1000);
+            Thread.sleep(Constants.SAFETY_CHECK_TIMEOUT);
         }
         assertTrue(activity.getSafetyCheckDialog().isShowing());
     }

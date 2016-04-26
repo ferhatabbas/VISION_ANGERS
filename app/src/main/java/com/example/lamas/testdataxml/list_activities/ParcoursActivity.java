@@ -55,20 +55,10 @@ public class ParcoursActivity extends Activity implements
         expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
             @Override
             public void onGroupExpand(int groupPosition) {
-                String toSpeak = listDataHeader.get(groupPosition).toString();
-                convertTextToSpeech(toSpeak);
-            }
-        });
-
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-                // TODO Auto-generated method stub
-                String toSpeak = listDataChild.get(listDataHeader.get(groupPosition)).get(
-                        childPosition).toString();
-                convertTextToSpeech(toSpeak);
-                return false;
+                String title = listDataHeader.get(groupPosition).toString();
+                String resume = listDataChild.get(listDataHeader.get(groupPosition)).toString();
+                resume = resume.substring(1,resume.length()-2);
+                convertTextToSpeech(title+"\n\n "+resume);
             }
         });
 
