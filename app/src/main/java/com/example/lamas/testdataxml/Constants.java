@@ -22,6 +22,10 @@ public class Constants {
 
   public static final String ACTION_FILTER = "com.example.lamas.testdataxml.ProximityReceiver";
 
+  public static int MSG_SHOW_GPS_ALERT = 0;
+  public static int MSG_DISMISS_GPS_ALERT = 1;
+  public static int MSG_SHOW_LOST_ALERT = 2;
+
   /*les balises des monuments */
   public static final String BALISE_MONUMENTS= "Monuments";
   public static final String ID_MONUMENT = "Id";

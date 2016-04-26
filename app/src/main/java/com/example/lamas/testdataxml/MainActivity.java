@@ -68,11 +68,10 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     private Notification notificationGPSCheck, notificationSafetyCheck;
     private NotificationManager notificationManager;
     private MockLocation mock;
-    private static int MSG_SHOW_GPS_ALERT = 0;
-    private static int MSG_DISMISS_GPS_ALERT = 1;
-    private static int MSG_SHOW_LOST_ALERT = 2;
     private ParcoursABC parcours;
     private Monument monument;
+
+    // Initializing for tests
     private int currentPOI = 0;
     private int idParcours = 1;
 
@@ -407,12 +406,12 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             if(myLocation!=null && (System.currentTimeMillis()-lastCheckGPSTimestamp <= Constants.REQUEST_LOCATION_MANAGER_TIME+1000)
                     &&(myLocation.getAccuracy() <= Constants.MIN_ACCURACY)){
                 if(waitForGPSDialog.isShowing())
-                    mainHandler.sendEmptyMessage(MSG_DISMISS_GPS_ALERT);
+                    mainHandler.sendEmptyMessage(Constants.MSG_DISMISS_GPS_ALERT);
             }
             else{
 
                 if(!waitForGPSDialog.isShowing())
-                    mainHandler.sendEmptyMessage(MSG_SHOW_GPS_ALERT);
+                    mainHandler.sendEmptyMessage(Constants.MSG_SHOW_GPS_ALERT);
 
             }
             checkGPShandler.postDelayed(checkGPS, Constants.WAIT_FOR_GPS_TIMEOUT);
@@ -434,7 +433,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                     if(myLocation.distanceTo(lastLocation) < 10.0){
                         sameLocationCount++;
                         if(sameLocationCount == 5){
-                            mainHandler.sendEmptyMessage(MSG_SHOW_LOST_ALERT);
+                            mainHandler.sendEmptyMessage(Constants.MSG_SHOW_LOST_ALERT);
                             sameLocationCount = 0;
                         }
                     }
@@ -464,7 +463,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         public void handleMessage(Message msg) {
             MainActivity myClass = myClassWeakReference.get();
             if (myClass != null) {
-                if (msg.what == MSG_SHOW_GPS_ALERT) {
+                if (msg.what == Constants.MSG_SHOW_GPS_ALERT) {
                     myClass.waitForGPSDialog.show();
                     myClass.convertTextToSpeech("Recherche d'un signal GPS");
                     myClass.poorAccuracyCounter++;
@@ -472,11 +471,11 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
                         myClass.notificationManager.notify(Constants.CHECK_GPS_NOTIFICATION_ID, myClass.notificationGPSCheck);
                         myClass.poorAccuracyCounter = 0;
                     }
-                } else if (msg.what == MSG_DISMISS_GPS_ALERT) {
+                } else if (msg.what == Constants.MSG_DISMISS_GPS_ALERT) {
                     myClass.waitForGPSDialog.dismiss();
                     myClass.convertTextToSpeech("Signal GPS trouvé, reprise de l'itinéraire");
                     myClass.notificationManager.cancelAll();
-                } else if (msg.what == MSG_SHOW_LOST_ALERT) {
+                } else if (msg.what == Constants.MSG_SHOW_LOST_ALERT) {
                     myClass.safetyCheckDialog.show();
                     myClass.convertTextToSpeech("Êtes-vous perdu? Tous se passe bien? ");
                     myClass.notificationManager.notify(Constants.SAFETYCHECK_NOTIFICATION_ID, myClass.notificationSafetyCheck);
