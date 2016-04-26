@@ -35,7 +35,6 @@ import static junit.framework.TestCase.*;
 @LargeTest
 public class ApplicationTestDATA {
     private Data data;
-    private Monument obj;
     private Context context;
     private Monument monum;
 
@@ -73,10 +72,6 @@ public class ApplicationTestDATA {
 
     @Test
     public void monumentExisteDansParcours(){
-        //  assertNotNull(monum);
-        //  assertFalse(data.getParcourses().get(1).getMonuments().equals(monum));
-        //  assertFalse(data.getParcourses().get(2).getMonuments().equals(monum));
-        //  assertFalse(data.getParcourses().get(3).getMonuments().equals(monum));
         assertFalse(data.getParcourses().get(4).getMonuments().equals(monum));
     }
 }

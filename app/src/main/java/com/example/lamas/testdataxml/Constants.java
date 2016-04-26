@@ -5,11 +5,11 @@ package com.example.lamas.testdataxml;
  */
 public class Constants {
 
-  public static final Boolean ALLOW_MOCK_LOCATION = true;
+  public static final Boolean ALLOW_MOCK_LOCATION = false;
   public static final Boolean DEBUG_MODE = true;
 
   /* nom du fichier DATA*/
-  public static final String FILE_PATH = "DataTest";
+  public static final String FILE_PATH = "Data";
 
   public static final int MIN_ACCURACY = 11;
   public static final int WAIT_FOR_GPS_TIMEOUT = 4500;
