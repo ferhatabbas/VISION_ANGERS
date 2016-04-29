@@ -103,12 +103,6 @@ public class InformationActivity extends Activity implements
     }
 
     @Override
-    protected void onResume(){
-        super.onResume();
-        convertTextToSpeech("Vous êtes à " + monument.getName());
-    }
-
-    @Override
     public void onInit(int status) {
         if (status == TextToSpeech.SUCCESS) {
             int result = textToSpeech.setLanguage(Locale.CANADA_FRENCH);
