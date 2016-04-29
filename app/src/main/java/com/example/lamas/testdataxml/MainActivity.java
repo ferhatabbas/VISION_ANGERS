@@ -139,8 +139,8 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
         registerReceiver(proximityReceiver, mIntentFilter);
 
         // Registering BatteryChangeReceiver
-        registerReceiver(batteryChangeReceiver, new IntentFilter(
-                Intent.ACTION_BATTERY_LOW));
+        //registerReceiver(batteryChangeReceiver, new IntentFilter(
+        //        Intent.ACTION_BATTERY_LOW));
 
         //configuration of the map
         setContentView(R.layout.activity_main);
@@ -225,7 +225,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
             //alertsAreActivated = false;
         }
         unregisterReceiver(proximityReceiver);
-        unregisterReceiver(batteryChangeReceiver);
+        //unregisterReceiver(batteryChangeReceiver);
         if(textToSpeech != null){
             textToSpeech.shutdown();
         }
@@ -452,7 +452,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
     };
 
     // Change REQUEST_LOCATION_MANAGER_TIME if the battery is low
-    private BroadcastReceiver batteryChangeReceiver = new BroadcastReceiver() {
+    /*private BroadcastReceiver batteryChangeReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             locationManager.removeUpdates(mylistener);
@@ -461,7 +461,7 @@ public class MainActivity extends Activity implements TextToSpeech.OnInitListene
 
             // TODO: Change SAFETY_CHECK_TIMEOUT and WAIT_FOR_GPS_TIMEOUT
         }
-    };
+    };*/
 
     // Receives messages from the workerThread
     private static class MessagesHandler extends Handler{

@@ -11,10 +11,10 @@ public class Constants {
   /* nom du fichier DATA*/
   public static final String FILE_PATH = "Data";
 
-  public static final int MIN_ACCURACY = 11;
-  public static final int WAIT_FOR_GPS_TIMEOUT = 4500;
-  public static final int SAFETY_CHECK_TIMEOUT = 5000;
-  public static final int REQUEST_LOCATION_MANAGER_TIME = 5000;
+  public static final int MIN_ACCURACY = 15;
+  public static final int WAIT_FOR_GPS_TIMEOUT = 25000;
+  public static final int SAFETY_CHECK_TIMEOUT = 300000;
+  public static final int REQUEST_LOCATION_MANAGER_TIME = 30000;
 
   public static final int POI_NOTIFICATION_ID = 0;
   public static final int CHECK_GPS_NOTIFICATION_ID = 1;
@@ -41,12 +41,13 @@ public class Constants {
   public static final String HORAIRE="Horaire";
 
     /* les balises des parcours*/
-    public static final String BALISE_PARCOURS= "Parcours";
-    public static final String DESCRIPTION_PARCOURS = "Description";
-    public static final String ID_PARCOURS = "Id";
-    public static final String NOM_PARCOURS = "Name";
-    public static final String DUREE = "Duree";
-    public static final String EVALUATION = "Evalutation";
-    public static final String LIST_MONUMENTS = "Monuments";
-    public static final String UN_MONUMENT = "Id_monument";
+
+  public static final String BALISE_PARCOURS= "Parcours";
+  public static final String DESCRIPTION_PARCOURS = "Description";
+  public static final String ID_PARCOURS = "Id";
+  public static final String NOM_PARCOURS = "Name";
+  public static final String DUREE = "Duree";
+  public static final String EVALUATION = "Evalutation";
+  public static final String LIST_MONUMENTS = "Monuments";
+  public static final String UN_MONUMENT = "Id_monument";
 }

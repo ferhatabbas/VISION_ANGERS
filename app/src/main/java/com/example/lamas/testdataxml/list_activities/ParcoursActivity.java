@@ -78,7 +78,7 @@ public class ParcoursActivity extends Activity implements
             }
             List<String> description = new ArrayList<String>();
             description.add(entry.getDescription()+"\n\n"+
-                    "Durée "+entry.getDuree()+" min\n\n"+
+                    "Durée "+entry.getDuree()+" minutes\n\n"+
                     "Évaluation "+entry.getEval().name());
             listDataChild.put(entry.getName(), description);
         }

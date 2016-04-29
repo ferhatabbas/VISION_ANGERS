@@ -3,13 +3,14 @@
     {
       "Id": 1,
       "Name": "Château d'Angers",
-      "Lat": 47.4699746,
-      "Lng": -0.5599999999999454,
-      "Desc": "Au cœur d'Angers, Ville d'Art et d'Histoire, se dresse l’incroyable forteresse aux 17 tours. Elle abrite la célèbre tenture de l'Apocalypse, tapisserie médiévale unique au monde.",
-      "Informations": "Découvrez l'une des forteresses médiévales les mieux conservées de France ! Colosse de calcaire et d'ardoise, le château d'Angers multiplie les superlatifs : ½ kilomètre de rempart, 17 tours, 20 000 m2 de superficie Son histoire est riche, des premières traces d'occupation humaine attestées vers 4000 avant notre ère aux travaux du XXI e siècle, en passant par la construction de l’enceinte par le jeune Saint Louis au XIII e siècle ou encore des bâtiments résidentiels des ducs d’Anjou à la fin du Moyen Age. ",
+      "Radius": "95",
+      "Lat": 47.469935,
+      "Lng": -0.559710,
+      "Desc": "Au cœur d'Angers, ville d'Art et d'Histoire, se dresse l’incroyable forteresse aux 17 tours. Elle abrite la célèbre tenture de l'Apocalypse, tapisserie médiévale unique au monde.",
+      "Informations": "Découvrez l'une des forteresses médiévales les mieux conservées de France ! Colosse de calcaire et d'ardoise, le château d'Angers multiplie les superlatifs : ½ kilomètre de rempart, 17 tours, 20 000 m2 de superficie. Son histoire est riche, des premières traces d'occupation humaine attestées vers 4000 avant notre ère aux travaux du 21e siècle, en passant par la construction de l’enceinte par le jeune Saint Louis au 13e siècle ou encore des bâtiments résidentiels des ducs d’Anjou à la fin du Moyen Âge. ",
       "Accessibilites": [
         {
-          "Accessibilite": "Guide audio"
+          "Accessibilite": "Guide audio."
         },
         {
           "Accessibilite": "Documentation en braille."
@@ -29,45 +30,47 @@
       ],
       "Horaires": [
         {
-          "Horaire": "Du 05 Septembre 2015 au 30 Avril 2016: Ouvert tous les jours, de 10h00 à 17h30."
+          "Horaire": "Du 5 septembre 2015 au 30 avril 2016: ouvert tous les jours, de 10:00 à 17:30."
         },
         {
-          "Horaire": "Du 02 Mai au 04 Septembre 2016: Ouvert tous les jours, de 09h30 à 18h30."
+          "Horaire": "Du 2 mai au 4 septembre 2016: ouvert tous les jours, de 9:30 à 18:30."
         },
         {
-          "Horaire": "Du 05 Septembre au 31 Décembre 2016: Ouvert tous les jours, de 10h00 à 17h30. "
+          "Horaire": "Du 5 septembre au 31 décembre 2016: ouvert tous les jours, de 10h00 à 17h30. "
         }
       ]
     },
     {
       "Id": 2,
-      "Name": "Cathédrale Saint-Maurice",
-      "Lat": 47.47048079999999,
-      "Lng": -0.5547814000000244,
-      "Desc": "La Cathédrale St Maurice, commencée au milieu du XIIè siècle et terminée vers 1250, est le premier édifice à présenter les caractéristiques du style gothique angevin: voûtes bombées comportant des ogives, d'abord massives dans la nef, puis laissant place à de fines nervures dans le transept et le choeur.",
-      "Informations": "La cathédrale permet en outre d'admirer un bel ensemble de vitraux des XIIè, XIIIè et XVè siècles.",
+      "Name": "Cathédrale St Maurice",
+      "Radius": "55",
+      "Lat": 47.470597,
+      "Lng": -0.554846,
+      "Desc": "La Cathédrale St Maurice, commencée au milieu du 12e siècle et terminée vers 1250, est le premier édifice à présenter les caractéristiques du style gothique angevin: voûtes bombées comportant des ogives, d'abord massives dans la nef, puis laissant place à de fines nervures dans le transept et le choeur.",
+      "Informations": "La cathédrale permet en outre d'admirer un bel ensemble de vitraux des 12e, 13e et 15e siècles.",
       "Accessibilites": [
         {
-          "Accessibilite": "Non-disponible"
+          "Accessibilite": "Non disponible."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 01 Janvier au 31 Décembre 2016: Ouvert tous les jours, de 08h30 à 19h00."
+          "Horaire": "Du 1 janvier au 31 décembre 2016: ouvert tous les jours, de 8h30 à 19h00."
         }
       ]
     }
   ,
     {
       "Id": 3,
-      "Name": "Collégiale Saint-Martin",
-      "Lat": 47.46906310000001,
-      "Lng": -0.5521155999999792,
-      "Desc": "20 ans de travaux pour 20 siècles d'histoire angevine : le Département de Maine-et-Loire a ressuscité la collégiale Saint-Martin, l'un des monuments caroligiens les mieux conservés de France. Entre expositions permanentes (histoire de l'édifice, monde des morts...) et temporaires, faites un voyage inoubliable à travers le temps",
+      "Name": "Collégiale St Martin",
+      "Radius": "35",
+      "Lat": 47.469146,
+      "Lng": -0.552255,
+      "Desc": "20 ans de travaux pour 20 siècles d'histoire angevine : le Département de Maine-et-Loire a ressuscité la collégiale St Martin, l'un des monuments carolingiens les mieux conservés de France. Entre expositions permanentes (histoire de l'édifice, monde des morts) et temporaires, faites un voyage inoubliable à travers le temps",
       "Informations": "La clinique est située au deuxième étage du pavillon Univestrie, à l'entrée du stade intérieur.",
       "Accessibilites": [
         {
-          "Accessibilite": "Cheminements extérieurs repérables tactilement"
+          "Accessibilite": "Chemins extérieurs repérables tactilement."
         },
         {
           "Accessibilite": "Documentation en braille."
@@ -79,71 +82,52 @@
           "Accessibilite": "Documentation en thermogonflé."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         },
         {
-          "Accessibilite": "Système d’audiodescription"
+          "Accessibilite": "Système d’audiodescription."
         },
         {
-          "Accessibilite": "Ascenseur avec annonce sonore des étages"
+          "Accessibilite": "Ascenseur avec annonce sonore des étages."
         },
         {
-          "Accessibilite": "Ascenseur avec boutons d’appel repérables"
+          "Accessibilite": "Ascenseur avec boutons d’appel repérables."
         },
         {
-          "Accessibilite": "Cartels lisibles"
+          "Accessibilite": "Cartes lisibles."
         }
 
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Janvier au 31 Mai 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 13h00 à 18h00"
+          "Horaire": "Du 2 janvier au 31 mai 2016: ouvert du mardi au dimanche, de 13:00 à 18:00."
         },
         {
-          "Horaire": "Du 01 Juin au 30 Septembre 2016: Ouvert tous les jours, de 10h00 à 19h00."
+          "Horaire": "Du 1 juin au 30 septembre 2016: ouvert tous les jours, de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 Octobre au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 13h00 à 18h00."
+          "Horaire": "Du 1 octobre au 31 décembre 2016: ouvert du mardi au dimanche, de 13:00 à 18:00."
         }
       ]
     }
   ,
     {
       "Id": 4,
-      "Name": "les chanoines, la cathédrale et son quartier",
-      "Lat": 47.4697222,
-      "Lng": -0.5578154,
-      "Desc": "Blottie entre le château et la cathédrale la ville médiévale d’Angers, la Cité, a été pendant  plusieurs siècles le lieu d’habitation des chanoines de la cathédrale saint Maurice. Au cours de cette visite nous allons découvrir comment ces religieux vivaient dans ce quartier fermé «  la cité canoniale ».",
+      "Name": "Les chanoines, la cathédrale et son quartier",
+      "Radius": "100",
+      "Lat": 47.470811,
+      "Lng": -0.557068,
+      "Desc": "Blottie entre le château et la cathédrale la ville médiévale d’Angers, la Cité, a été pendant  plusieurs siècles le lieu d’habitation des chanoines de la cathédrale St Maurice. Au cours de cette visite nous allons découvrir comment ces religieux vivaient dans ce quartier fermé «  la cité canoniale ».",
       "Informations": "sous réservation seulement.",
       "Accessibilites": [
 
         {
-          "Accessibilite": "Non-Disponible"
+          "Accessibilite": "Non disponible."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Le 25 Juin 2016: de 15h00 à 16h30"
-        }
-      ]
-    }
-  ,
-    {
-      "Id": 5,
-      "Name": "Les maisons à pans de bois",
-      "Lat": 47.4696207,
-      "Lng": -0.5606326,
-      "Desc": "A travers les rues d’Angers, vous irez à la recherche de ces témoins du Moyen-Age et de la Renaissance, des plus somptueuses demeures aux plus modestes façades.",
-      "Informations": "sous réservation seulement.",
-      "Accessibilites": [
-        {
-          "Accessibilite": "Non-Disponible"
-        }
-
-      ],
-      "Horaires": [
-        {
-          "Horaire": "Le 07 Mai 2016 : de 15h00 à 16h30"
+          "Horaire": "Réservation indispensable auprès de l'Office de Tourisme."
         }
       ]
     }
@@ -151,27 +135,28 @@
     {
       "Id": 6,
       "Name": "Galerie David d'Angers",
+      "Radius": "25",
       "Lat": 47.4692938,
       "Lng": -0.5560530999999855,
-      "Desc": "Depuis 1984, l’abbatiale Toussaint (13è siècle) restaurée accueille les oeuvres du sculpteur David d’Angers. En raison des dons multiples et réguliers de l’artiste à sa ville natale, la collection du musée est impressionnante : œuvres monumentales, commandes (Fronton du Panthéon), portraits en buste, médaillons.",
+      "Desc": "Depuis 1984, l’abbatiale Toussaint (13e siècle) restaurée accueille les oeuvres du sculpteur David d’Angers. En raison des dons multiples et réguliers de l’artiste à sa ville natale, la collection du musée est impressionnante : œuvres monumentales, commandes (Fronton du Panthéon), portraits en buste, médaillons.",
       "Informations": "David d'Angers né en 1788 mort en 1856, la genèse de l’œuvre est perceptible grâce aux esquisses dessinées, modelées en terre et moulages en plâtre.des rendez-vous réguliers sont proposés par la Direction des musées d'Angers : Parcours commentés, animations pour les enfants, théâtre, visites tactiles ",
       "Accessibilites": [
         {
-          "Accessibilite": "Documentation en thermogonflé"
+          "Accessibilite": "Documentation en thermogonflé."
         },
         {
-          "Accessibilite": "Cartels lisibles"
+          "Accessibilite": "Cartes lisibles."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Janvier au 30 Avril 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 18h00."
+          "Horaire": "Du 2 janvier au 30 avril 2016: ouvert du mardi au dimanche, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 02 Mai au 18 Septembre 2016: Ouvert tous les jours, de 10h00 à 18h00."
+          "Horaire": "Du 2 mai au 18 septembre 2016: ouvert tous les jours, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 20 Septembre au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 18h00."
+          "Horaire": "Du 20 septembre au 31 décembre 2016: ouvert du mardi au dimanche, de 10:00 à 18:00."
         }
       ]
     }
@@ -179,9 +164,10 @@
     {
       "Id": 7,
       "Name": "La Tenture de l'Apocalypse",
-      "Lat": 47.4700036,
-      "Lng": -0.5621887,
-      "Desc": "La tenture de l'Apocalypse, monumental décor à usage princier, a été commandée en 1373 par Louis Ier, duc d'Anjou. Elle illustre le texte de l'Apocalypse écrit par St Jean à la fin du Ier siècle de notre ère et reflète les troubles contemporains de sa création (Guerre de Cent Ans).",
+      "Radius": "95",
+      "Lat": 47.469935,
+      "Lng": -0.559710,
+      "Desc": "La tenture de l'Apocalypse, monumental décor à usage princier, a été commandée en 1373 par Louis 1er, duc d'Anjou. Elle illustre le texte de l'Apocalypse écrit par St Jean à la fin du Ier siècle de notre ère et reflète les troubles contemporains de sa création (guerre de Cent Ans).",
       "Informations": "Constituée à l'origine de 6 pièces et 74 scènes, d'une longueur exceptionnelle environ 100 m , elle est exposée dans un espace dont la muséographie a été conçue pour elle. Un film introductif à la tenture de l'Apocalypse permet de mieux appréhender cette oeuvre majeure de l'art médiéval.",
       "Accessibilites": [
         {
@@ -194,27 +180,27 @@
           "Accessibilite": "Documentation en thermogonflé."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         },
         {
-          "Accessibilite": "Audioguide avec éléments de description"
+          "Accessibilite": "Audioguide avec éléments de description."
         },
         {
-          "Accessibilite": "Audioguide avec éléments de guidage"
+          "Accessibilite": "Audioguide avec éléments de guidage."
         },
         {
-          "Accessibilite": "Visite tactile"
+          "Accessibilite": "Visite tactile."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 05 Septembre 2015 au 30 Avril 2016: Ouvert tous les jours, de 10h00 à 17h30."
+          "Horaire": "Du 5 septembre 2015 au 30 avril 2016: ouvert tous les jours, de 10:00 à 17:30."
         },
         {
-          "Horaire": "Du 02 Mai au 04 Septembre 2016: Ouvert tous les jours, de 09h30 à 18h30."
+          "Horaire": "Du 2 mai au 4 septembre 2016: ouvert tous les jours, de 9h30 à 18h30."
         },
         {
-          "Horaire": "Du 05 Septembre au 31 Décembre 2016: Ouvert tous les jours, de 10h00 à 17h30."
+          "Horaire": "Du 5 septembre au 31 décembre 2016: ouvert tous les jours, de 10:00 à 17:30."
         }
       ]
     }
@@ -222,10 +208,11 @@
     {
       "Id": 8,
       "Name": "Jardin du Mail",
-      "Lat": 47.4705459,
-      "Lng": -0.546407199999976,
-      "Desc": "Ce jardin est né vers le XVIIe siècle du Jeu de Mail. Au XVIIe siècle, le jardin abandonnera son aire de jeu au profit d'un espace planté d'ormeaux. La fontaine, oeuvre de Barbezat et le grand bassin, acquis vers 1855, constituent le pôle central où convergent des allées très géométriques. Dès 1859, on dessine le tracé du jardin à la Française en faisant appel à André Leroy. Aujourd'hui, les couloirs de verdure, les parterres de fleurs agrémentent le va et vient des enfants et des joueurs de boule. Il demeure un lieu incontournable où les angevins peuvent admirer plus de 40 000 plantes dans un tracé rectiligne et symétrique.",
-      "Informations": "Situé face à l'Hôtel de Ville, il doit son nom à l'ancien jeu de Mail dont l'origine remonte au début du XVIIe siècle. Le caractère tout à fait exceptionnel du fleurissement estival mérite le détour. Le jardin est accessible aux personnes à mobilité réduite.",
+      "Radius": "70",
+      "Lat": 47.470365,
+      "Lng": -0.545688,
+      "Desc": "Ce jardin est né vers le 17e siècle du Jeu de Mail. Au 17e siècle, le jardin abandonnera son aire de jeu au profit d'un espace planté d'ormeaux. La fontaine, oeuvre de Barbezat, et le grand bassin, acquis vers 1855, constituent le pôle central où convergent des allées très géométriques. Dès 1859, on dessine le tracé du jardin à la Française en faisant appel à André Leroy. Aujourd'hui, les couloirs de verdure, les parterres de fleurs agrémentent le va-et-vient des enfants et des joueurs de boule. Il demeure un lieu incontournable où les Angevins peuvent admirer plus de 40 000 plantes dans un tracé rectiligne et symétrique.",
+      "Informations": "Situé face à l'Hôtel de Ville, il doit son nom à l'ancien jeu de Mail dont l'origine remonte au début du 17e siècle. Le caractère tout à fait exceptionnel du fleurissement estival mérite le détour. Le jardin est accessible aux personnes à mobilité réduite.",
       "Accessibilites": [
         {
           "Accessibilite": "Le jardin est accessible aux personnes à mobilité réduite."
@@ -233,7 +220,7 @@
       ],
       "Horaires": [
         {
-          "Horaire": "Ouvert tous les jours du 01 Janvier au 31 Décembre 2016"
+          "Horaire": "Ouvert tous les jours du 1 janvier au 31 décembre 2016."
         }
       ]
     }
@@ -241,87 +228,89 @@
     {
       "Id": 9,
       "Name": "Jardin des Plantes",
-      "Lat": 47.4737809,
-      "Lng": -0.5450435999999854,
-      "Desc": "Le jardin actuel permet d'apprécier l'ambiance paysagère créée par Edouard André. Cet espace de 4 hectares laisse découvrir un jardin à l'anglaise datant de 1905. En effet, ses sentiers, ses cascades et ses statues lui confèrent une atmosphère très romantique. Il offre aussi au regard des promeneurs une très belle et ancienne collection d'arbres : Liriodendron (Tulipier de Virginie), un exemplaire exceptionnel de Zelkova (Orme de Sibérie) de 125 ans d'âge, l'érable canelle, le Pauwolnia...",
-      "Informations": "Créé fin XVIIIe siècle sous la forme d'un jardin botanique, il a été entièrement réaménagé en 1904-1905 par le paysagiste Edouard André. ",
+      "Radius": "150",
+      "Lat": 47.474828,
+      "Lng": -0.544390,
+      "Desc": "Le jardin actuel permet d'apprécier l'ambiance paysagère créée par Edouard André. Cet espace de 4 hectares laisse découvrir un jardin à l'anglaise datant de 1905. En effet, ses sentiers, ses cascades et ses statuts lui confèrent une atmosphère très romantique. Il offre aussi au regard des promeneurs une très belle et ancienne collection d'arbres : Liriodendron (Tulipier de Virginie), un exemplaire exceptionnel de Zelkova (Orme de Sibérie) de 125 ans d'âge, l'érable cannelle, le Pauwolnia...",
+      "Informations": "Créé fin 18e siècle sous la forme d'un jardin botanique, il a été entièrement réaménagé en 1904-1905 par le paysagiste Edouard André. ",
       "Accessibilites": [
         {
-          "Accessibilite": "mal voyant"
+          "Accessibilite": "mal voyant."
         },
         {
-          "Accessibilite": "handicap motor"
+          "Accessibilite": "handicap motor."
         },
         {
-          "Accessibilite": "non-voyant"
+          "Accessibilite": "non-voyant."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 01 au 30 Avril 2016: Ouvert tous les jours, de 08h00 à 19h30."
+          "Horaire": "Du 1 au 30 avril 2016: ouvert tous les jours, de 8:00 à 19:30."
         },
         {
-          "Horaire": "Du 01 Mai au 15 Septembre 2016: Ouvert tous les jours, de 8h00 à 20h00"
+          "Horaire": "Du 1 mai au 15 septembre 2016: ouvert tous les jours, de 8:00 à 20:00."
         },
         {
-          "Horaire": "Du 16 au 30 Septembre 2016: Ouvert tous les jours, de 08h00 à 19h30."
+          "Horaire": "Du 16 au 30 septembre 2016: ouvert tous les jours, de 8:00 à 19:30."
         },
         {
-          "Horaire": "Du 01 au 31 Octobre 2016: Ouvert tous les jours, de 08h00 à 19h00."
+          "Horaire": "Du 1 au 31 octobre 2016: ouvert tous les jours, de 8:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 Novembre au 31 Décembre 2016: Ouvert tous les jours, de 08h00 à 18h00."
+          "Horaire": "Du 1 novembre au 31 décembre 2016: ouvert tous les jours, de 8:00 à 18:00."
         }
       ]
     },
     {
       "Id": 10,
       "Name": "Terra Botanica",
-      "Lat": 47.50108170000001,
-      "Lng":  -0.5708667000000105,
+      "Radius": "250",
+      "Lat": 47.501306,
+      "Lng":  -0.569858,
       "Desc": "Terra Botanica est le premier parc à thème, unique en Europe dédié au végétal. Au coeur de ce site exceptionnel, parcourez le temps, variez les rythmes et vivez des sensations uniques en compagnie de personnages étonnants. Devenez chercheurs d’ambre, croisez le chemin des dinosaures, vivez un fabuleux périple d’une goutte d’eau dans le cinéma 4D, goûtez à la quiétude d’une promenade au fil de l’eau, prenez d’assaut la cime des arbres… Une journée inoubliable à vivre en famille ou entre amis !",
       "Informations": "Avec ses 275 000 végétaux venus des 6 continents, embarquez pour un voyage végétal inédit ! De Madagascar au Brésil, du Mexique au Japon en passant par la France et l’Anjou, évadez-vous à travers des décors exceptionnels, découvrez des fleurs phosphorescentes, carnivores, arpentez des allées de potagers et déambulez dans une jungle tropicale… Ce voyage surprenant n’attend plus que vous !",
       "Accessibilites": [
         {
-          "Accessibilite": "mal voyant"
+          "Accessibilite": "mal voyant."
         },
         {
-          "Accessibilite": "handicap motor"
+          "Accessibilite": "handicap motor."
         },
         {
-          "Accessibilite": "non-voyant"
+          "Accessibilite": "non-voyant."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 au 30 Avril 2016: Ouvert les Lundi, Mardi, Mercredi, Jeudi, Vendredi, de 10h00 à 18h00 et  les Samedi, Dimanche, de 10h00 à 19h00."
+          "Horaire": "Du 2 au 30 avril 2016: ouvert du lundi au vendredi, de 10:00 à 18:00 et les samedis et dimanches de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 au 04 Mai 2016: Ouvert les Lundi, Mardi, Mercredi, de 10h00 à 18h00."
+          "Horaire": "Du 1 au 31 mai 2016: ouvert les samedis et dimanches, de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 au 31 Mai 2016: Ouvert les Samedi, Dimanche, de 10h00 à 19h00."
+          "Horaire": "Du 1 au 4 mai 2016: ouvert les lundis, mardis, mercredis, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 05 au 06 Mai 2016: Ouvert les Jeudi, Vendredi, de 10h00 à 19h00."
+          "Horaire": "Du 5 au 6 mai 2016: ouvert les jeudis et vendredi, de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 09 au 13 Mai 2016: Ouvert les Lundi, Mardi, Mercredi, Jeudi, Vendredi, de 10h00 à 18h00."
+          "Horaire": "Du 9 au 13 mai 2016: ouvert du lundi au vendredi, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Le 16 Mai 2016: Ouvert de 10h00 à 19h00."
+          "Horaire": "Le 16 mai 2016: ouvert de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 17 au 31 Mai 2016: Ouvert les Lundi, Mardi, Mercredi, Jeudi, Vendredi, de 10h00 à 18h00."
+          "Horaire": "Du 17 au 31 mai 2016: ouvert du lundi au vendredi, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 01 au 30 Juin 2016: Ouvert les Lundi, Mardi, Mercredi, Jeudi, Vendredi, de 10h00 à 18h00 et les Samedi, Dimanche, de 10h00 à 19h00."
+          "Horaire": "Du 1 au 30 juin 2016: ouvert du lundi au vendredi, de 10:00 à 18:00 et les samedis et dimanches, de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 Juillet au 31 Août 2016: Ouvert tous les jours, de 10h00 à 19h00."
+          "Horaire": "Du 1 juillet au 31 août 2016: ouvert tous les jours, de 10:00 à 19:00."
         },
         {
-          "Horaire": "Du 01 Septembre au 02 Octobre 2016: Ouvert les Jeudi, Vendredi, de 10h00 à 18h00 et les Samedi, Dimanche, de 10h00 à 19h00."
+          "Horaire": "Du 1 septembre au 2 octobre 2016: ouvert les jeudis et vendredis, de 10:00 à 18:00 et les samedis et dimanches, de 10:00 à 19:00."
         }
 
       ]
@@ -329,123 +318,127 @@
     {
       "Id": 11,
       "Name": "Musée des Beaux Arts",
+      "Radius": "30",
       "Lat": 47.4691546,
       "Lng":  -0.5544595000000072,
-      "Desc": "Installé depuis 1796 dans l'hôtel particulier du logis Barrault (XVème siècle), fleuron de l'architecture civile gothique, le Musée des Beaux-Arts rénové offre 3000m² d'exposition selon deux parcours permanents : Beaux-Arts (350 peintures et sculptures du XIVème siècle à nos jours), et Histoire d'Angers (555 pièces archéologiques et objets d'art du néolithique à nos jours).",
+      "Desc": "Installé depuis 1796 dans l'hôtel particulier du logis Barrault (15e siècle), fleuron de l'architecture civile gothique, le Musée des Beaux-Arts rénové offre 3000m² d'exposition selon deux parcours permanents : Beaux-Arts (350 peintures et sculptures du 14e siècle à nos jours), et Histoire d'Angers (555 pièces archéologiques et objets d'art du néolithique à nos jours).",
       "Informations": "Issues de nombreux dons, legs, acquisitions ou dépôts, les oeuvres sont situées dans les salles historiques du Musée. 300 d'entre elles sont exposées sur les 1700 que compte le Musée des Beaux-Arts.",
       "Accessibilites": [
         {
-          "Accessibilite": "Audioguide avec éléments de description"
+          "Accessibilite": "Audioguide avec éléments de description."
         },
         {
           "Accessibilite": "Documentation en caractères agrandis."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         },
         {
-          "Accessibilite": "Ascenseur avec annonce sonore des étages"
+          "Accessibilite": "Ascenseur avec annonce sonore des étages."
         },
         {
-          "Accessibilite": "Ascenseur avec boutons d’appel repérables"
+          "Accessibilite": "Ascenseur avec boutons d’appel repérables."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Janvier au 30 Avril 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 18h00."
+          "Horaire": "Du 2 janvier au 30 avril 2016: ouvert du mardi au dimanche, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 02 Mai au 18 Septembre 2016: Ouvert tous les jours, de 10h00 à 18h00."
+          "Horaire": "Du 2 mai au 18 septembre 2016: ouvert tous les jours, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 20 Septembre au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 18h00."
+          "Horaire": "Du 20 septembre au 31 décembre 2016: ouvert du mardi au dimanche, de 10:00 à 18:00."
         }
       ]
     },
     {
       "Id": 12,
       "Name": "Musée du Génie",
-      "Lat": 47.4558692,
-      "Lng":  -0.5656685999999809,
+      "Radius": "30",
+      "Lat": 47.455869,
+      "Lng":  -0.565669,
       "Desc": "Contigu à l'école du génie, rue Eblé, le musée, dans ses espaces chronologiques et thématiques, retrace l'histoire de l'arme du génie tout en présentant les savoir-faire des sapeurs de l'Antiquité à nos jours. ",
       "Informations": "Cartes, gravures, peintures, armes, uniformes, maquettes guident le visiteur le long d'un parcours ponctué de films et d'écrans interactifs. Présence d'une boutique (librairie et objets promotionnels) et d'un distributeur de boissons chaudes.",
       "Accessibilites": [
         {
-          "Accessibilite": "Établissement de plain-pied"
+          "Accessibilite": "Établissement de plain-pied."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         },
         {
-          "Accessibilite": "Cartels lisibles"
+          "Accessibilite": "Cartes lisibles."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Mars au 18 Décembre 2016: Ouvert les Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 13h30 à 18h00."
+          "Horaire": "Du 2 mars au 18 décembre 2016: ouvert du mercredi au dimanche, de 13:30 à 18:00."
         }
       ]
     },
     {
       "Id": 13,
       "Name": "Musée Jean Lurçat et de la tapisserie contemporaine",
+      "Radius": "50",
       "Lat": 47.478041,
       "Lng":  -0.5567178000000013,
-      "Desc": " Les collections rassemblent des œuvres qui situent l’art textile dans l’histoire. L’accrochage, réparti en deux lieux, suit le fil de la tapisserie des années 1950 jusqu’aux démarches les plus contemporaines. L’Hôpital Saint-Jean, remarquable ensemble architectural du 12è siècle, abrite depuis 1968, dans l’ancienne salle des malades ,le Chant du Monde, de Jean Lurçat (1957-1966). Manifeste d’un artiste engagé, écho contemporain à la tenture de L’Apocalypse, cet ensemble de dix tapisseries constitue une vision épique, poétique, symbolique et humaniste du 20è siècle.",
+      "Desc": "Les collections rassemblent des œuvres qui situent l’art textile dans l’histoire. L’accrochage, réparti en deux lieux, suit le fil de la tapisserie des années 1950 jusqu’aux démarches les plus contemporaines. L’Hôpital St Jean, remarquable ensemble architectural du 12e siècle, abrite depuis 1968, dans l’ancienne salle des malades ,le Chant du Monde, de Jean Lurçat (1957-1966). Manifeste d’un artiste engagé, écho contemporain à la tenture de L’Apocalypse, cet ensemble de dix tapisseries constitue une vision épique, poétique, symbolique et humaniste du 20e siècle.",
       "Informations": "",
       "Accessibilites": [
         {
-          "Accessibilite": "Cheminements intérieurs repérables tactilement"
+          "Accessibilite": "Cheminements intérieurs repérables tactilement."
         },
         {
-          "Accessibilite": "Audioguide avec éléments de description"
+          "Accessibilite": "Audioguide avec éléments de description."
         },
         {
           "Accessibilite": "Documentation en caractères agrandis."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         },
         {
-          "Accessibilite": "Système d’audiodescription"
+          "Accessibilite": "Système d’audiodescription."
         },
         {
-          "Accessibilite": "Cartels lisibles"
+          "Accessibilite": "Cartes lisibles."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Janvier au 30 Avril 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 12h00 et de 14h00 à 18h00."
+          "Horaire": "Du 2 janvier au 30 avril 2016: ouvert du mardi au dimanche, de 10:00 à 12:00 et de 14:00 à 18:00."
         },
         {
-          "Horaire": "Du 02 Mai au 18 Septembre 2016: Ouvert tous les jours, de 10h00 à 18h00."
+          "Horaire": "Du 2 mai au 18 septembre 2016: ouvert tous les jours, de 10:00 à 18:00."
         },
         {
-          "Horaire": "Du 20 Septembre au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 10h00 à 12h00 et de 14h00 à 18h00."
+          "Horaire": "Du 20 septembre au 31 décembre 2016: Ouvert du mardi au dimanche, de 10:00 à 12:00 et de 14:00 à 18:00."
         }
       ]
     },
     {
       "Id": 14,
       "Name": "Muséum des Sciences Naturelles",
+      "Radius": "20",
       "Lat": 47.473539,
       "Lng":  -0.5463640000000396,
-      "Desc": "Situé en centre ville au sein de deux bâtiments historiques de charme reliés par un jardin à la française, le muséum vous invite à découvrir l'extraordinaire diversité des formes vivantes apparues sur terre au cours de centaines de millions d'années d'évolution.",
+      "Desc": "Situé en centre-ville au sein de deux bâtiments historiques de charme reliés par un jardin à la française, le muséum vous invite à découvrir l'extraordinaire diversité des formes vivantes apparues sur terre au cours de centaines de millions d'années d'évolution.",
       "Informations": "Il vous fera prendre conscience de la fragilité de la nature et du danger qui menace certaines espèces.",
       "Accessibilites": [
         {
-          "Accessibilite": "Audioguide avec éléments de description"
+          "Accessibilite": "Audioguide avec éléments de description."
         },
         {
           "Accessibilite": "Documentation en caractères agrandis."
         },
         {
-          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents"
+          "Accessibilite": "Obstacles à hauteur de visage neutralisés ou absents."
         }
       ],
       "Horaires": [
         {
-          "Horaire": "Du 02 Janvier au 31 Décembre 2016: Ouvert les Mardi, Mercredi, Jeudi, Vendredi, Samedi, Dimanche, de 14h00 à 18h00."
+          "Horaire": "Du 2 janvier au 31 décembre 2016: ouvert du mardi au dimanche, de 14:00 à 18:00."
         }
       ]
     }
@@ -453,8 +446,8 @@
   "Parcours":[
     {
       "Id": 1,
-      "Name": "Parcours Histoire d'Angers",
-      "Description": "Découverte des monuments historique de la ville d'angers",
+      "Name": "Histoire d'Angers",
+      "Description": "Découverte des monuments historiques de la ville d'Angers",
       "Duree": 45,
       "Evalutation" : 4,
       "Monuments": [
@@ -469,9 +462,6 @@
         },
         {
           "Id_monument": 4
-        },
-        {
-          "Id_monument": 5
         },
         {
           "Id_monument": 6
@@ -499,8 +489,8 @@
       ]
     }, {
       "Id": 3,
-      "Name": "Les Musée d'angers",
-      "Description": "Les meilleurs Musée et galerie d'art de la ville d'angers",
+      "Name": "Les musées d'Angers",
+      "Description": "Les meilleurs musées et galeries d'art de la ville d'Angers",
       "Duree": 30,
       "Evalutation" : 3,
       "Monuments": [
@@ -525,7 +515,7 @@
       ]
     }, {
       "Id": 4,
-      "Name": "les incontournables",
+      "Name": "Les incontournables",
       "Description": "Vous ne passez que quelques heures sur le territoire d’Angers Loire Valley et vous voulez découvrir ses lieux incontournables ? Pour vous aider, nous vous avons concocté un programme complet de ce qu’il faut absolument faire.",
       "Duree": 90,
       "Evalutation" : 5,
